@@ -10,7 +10,7 @@ export default class Hash extends Command {
   static flags = {
     help: flags.help({char: 'h'}),
     // -t , --type for hashing
-    type: flags.string({char: 't' , description: 'type of hash, default [SHA1]'}),
+    type: flags.string({char: 't' , description: 'type of hash [SHA1(default),MD5,SHA256,SHA512,RMD160]'}),
     string: flags.string({char: 's' , description: 'string to be hashed'}),
     file: flags.string({char: 'f' , description: 'file to be hashed'}),
   }
@@ -20,9 +20,16 @@ export default class Hash extends Command {
   async run() {
     const {args, flags} = this.parse(Hash)
 
-    const type = flags.type || 'sha1' //by default let it be sha1
+    const type: string = flags.type || 'sha1' //by default let it be sha1
 
-    this.log('arg:' + args.string)
+    // if -s is not passed we will take it from args
+
+    let str: string
+
+    if (flags.string)
+      str = flags.string
+    else
+      str = args.string
 
     let hash: Hashes
     switch (type.toUpperCase()) {
@@ -40,7 +47,7 @@ export default class Hash extends Command {
       hash = undefined
     }
 
-    let hashed: string = hash.hex(args.string)
+    let hashed: string = hash.hex(str)
     this.log(`[HASH]: ${hashed}`)
   }
 }
