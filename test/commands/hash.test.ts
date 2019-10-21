@@ -11,7 +11,7 @@ describe('hash', () => {
   // passing sha1 as option
   test
     .stdout()
-    .command(['hash', 'ashish' ,'-t','sha1'])
+    .command(['hash', 'ashish' , '-t', 'sha1'])
     .it("cdt hash 'ashish' -t 'sha1'", ctx => {
       expect(ctx.stdout).to.contain('428b6da53085b8fd7b37e9fb259c0c609bd09984')
     })
@@ -63,4 +63,23 @@ describe('hash', () => {
     .it("cdt hash --type rmd160 'ashish'", ctx => {
       expect(ctx.stdout).to.contain('a85a72b0a240abecdf27f127aa75fd8663d6d5be')
     })
+
+  //file input - file not found TODO: solve issue #4
+/*
+  test
+    .stderr()
+    .command(['hash', '-f', 'test/resources/filenotfound.txt'])
+    .it("cdt hash -f 'test/resources/filenotfound.txt'", ctx => {
+      expect(ctx.stderr).to.contain('Error: reading File')
+    })
+*/
+
+  //file input
+  test
+    .stdout()
+    .command(['hash', '-f', 'test/resources/test.txt'])
+    .it("cdt hash -f 'test/resources/test.txt'", ctx => {
+      expect(ctx.stdout).to.contain('97ee6255ffc855e79e2324d5495b6538e29034f9')
+    })
+
 })
