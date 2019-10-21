@@ -31,6 +31,10 @@ export default class Hash extends Command {
     else
       str = args.string
 
+    this.calculateHash(type, str)
+  }
+
+  private calculateHash(type: string, str: string) {
     let hash: Hashes
     switch (type.toUpperCase()) {
     case 'SHA1':
@@ -47,7 +51,12 @@ export default class Hash extends Command {
       hash = undefined
     }
 
-    let hashed: string = hash.hex(str)
-    this.log(`[HASH]: ${hashed}`)
+    if (hash) {
+      let hashed: string = hash.hex(str)
+      this.log(`[HASH]: ${hashed}`)
+    } else {
+      this.log('[ERROR]: invalid hash type')
+    }
+
   }
 }
