@@ -2,11 +2,10 @@
 
 set -ex
 
-PATH=/usr/local/share/.config/yarn/global/node_modules/.bin:$PATH
+PATH=/usr/local/share/.config/npm/global/node_modules/.bin:$PATH
 
 if [[ "$CIRCLE_BRANCH" != greenkeeper/* ]]; then
-  yarn
-  # yarn check
+  npm install
   exit 0
 fi
 
@@ -17,9 +16,9 @@ if [[ ! -z "$GIT_EMAIL" ]] & [[ ! -z "$GIT_USERNAME" ]]; then
 fi
 
 if [[ ! -x "$(command -v greenkeeper-lockfile-update)" ]]; then
-  yarn global add greenkeeper-lockfile@1
+  npm install -g greenkeeper-lockfile@1
 fi
 
 greenkeeper-lockfile-update
-yarn
+npm install
 greenkeeper-lockfile-upload
