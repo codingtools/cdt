@@ -25,11 +25,12 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install npm dependencies
+          command: npm install
       - run:
           name: Test
-          command: './node_modules/.bin/nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"'
+          command: npm test
       - run:
           name: Generate code coverage
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
