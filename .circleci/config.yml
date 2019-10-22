@@ -14,7 +14,7 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
-          name: Install npm wee
+          name: Install npm dependencies
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
@@ -46,6 +46,3 @@ workflows:
       - test:
           requires:
             - build
-          filters:
-            branches:
-              only: master
