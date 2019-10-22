@@ -25,9 +25,19 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
+      #      needed to add here also as both install and test are different docker instances and need to do same thing again in different instance
+      - run:
+          name: Update npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: Install npm dependencies
           command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
       - run:
           name: Test
           command: npm test
