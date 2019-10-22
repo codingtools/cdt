@@ -11,7 +11,7 @@ describe('hash', () => {
   // passing sha1 as option
   test
     .stdout()
-    .command(['hash', 'ashish' ,'-t','sha1'])
+    .command(['hash', 'ashish' , '-t', 'sha1'])
     .it("cdt hash 'ashish' -t 'sha1'", ctx => {
       expect(ctx.stdout).to.contain('428b6da53085b8fd7b37e9fb259c0c609bd09984')
     })
