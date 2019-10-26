@@ -1,25 +1,90 @@
 import {Command, flags} from '@oclif/command'
+import * as CryptoJS from 'crypto-js'
+
+import Utilities from '../utilities/Utilities'
 
 export default class Crypto extends Command {
-  static description = 'describe the command here'
-
+  static description = 'Encryption and Decryption functionality'
   static flags = {
     help: flags.help({char: 'h'}),
-    // flag with a value (-n, --name=VALUE)
-    name: flags.string({char: 'n', description: 'name to print'}),
-    // flag with no value (-f, --force)
-    force: flags.boolean({char: 'f'}),
-  }
 
-  static args = [{name: 'file'}]
+    encryption: flags.string({char: 'e', description: 'encryption type'}),
+    decryption: flags.string({char: 'd', description: 'decryption type'}),
+    string: flags.string({char: 's' , description: 'string to be encrypted/decrypted'}),
+    file: flags.string({char: 'f' , description: 'file to be encrypted/decrypted'}),
+    key: flags.string({char: 'k' , description: 'key for encryption/decryption'}),
+  }
 
   async run() {
     const {args, flags} = this.parse(Crypto)
 
-    const name = flags.name || 'world'
-    this.log(`hello ${name} from /Users/ashish/Desktop/cdt/src/commands/crypto.ts`)
-    if (args.file && flags.force) {
-      this.log(`you input --force and --file: ${args.file}`)
+    let enc = CryptoJS.DES.encrypt('Message', 'Secret Passphrase').ciphertext
+
+    this.log(enc)
+
+    // if -s or -f is not passed we will take it from args
+    let str = ''
+
+    const {key, decryption, string, file, encryption} = flags
+
+    if (string) //if -s given
+      str = string
+    else if (file) {
+      str = Utilities.getStringFromFile(this, file)
+    } else
+      str = args.string
+
+    if (!key) {
+      Utilities.logError(this, 'Key is not passed')
     }
+
+    if (encryption) {
+      if (decryption) // if both given
+        Utilities.logError(this, 'Both encryption and decryption methods passed')
+      this.Encrypt(str, encryption, key)
+    } else if (decryption) {
+      this.Decrypt(str, decryption, key)
+    } else {
+      Utilities.logError(this, 'Neither encryption or decryption methods passed')
+    }
+  }
+
+  private Encrypt(str: string, type: string, key: string | undefined) {
+    let crypto = this.getCryptoType(type)
+
+    if (crypto) {
+      // @ts-ignore
+      // let encrypted: string = crypto.encrypt(str, key, {
+      //   mode: CryptoJS.mode.CBC}).ciphertext.toString(CryptoJS.enc.Hex)
+      let encrypted: string = crypto.encrypt(str, key).ciphertext
+      this.log(`[${type.toUpperCase()}]: ${encrypted}`)
+    } else {
+      Utilities.logError(this, 'invalid hash type')
+    }
+  }
+
+  private Decrypt(str: string, type: string, key: string | undefined) {
+    let crypto = this.getCryptoType(type)
+
+    if (crypto) {
+      // @ts-ignore
+      let decrypted: string = crypto.decrypt(str, key)
+      this.log(`[${type.toUpperCase()}]: ${decrypted}`)
+    } else {
+      Utilities.logError(this, 'invalid hash type')
+    }
+  }
+
+  private getCryptoType(type: string) {
+    switch (type.toUpperCase()) {
+    case 'AES':
+      return CryptoJS.AES
+    case 'DES':
+      return CryptoJS.DES
+    default:
+      // tslint:disable-next-line:no-return-undefined
+      return undefined //returning because of check there
+    }
+
   }
 }

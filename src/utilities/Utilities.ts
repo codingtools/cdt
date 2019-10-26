@@ -2,10 +2,10 @@ import * as fs from 'fs'
 
 // tslint:disable-next-line:no-unnecessary-class
 export default class Utilities {
-  public static getStringFromFile = (object: any, filePath: string) => {
+  public static getStringFromFile(thisRef: any, filePath: string) {
     let fileStr = ''
     if (!fs.existsSync(filePath)) {
-      object.error('reading File') // this will output error and exit command
+      thisRef.error('reading File') // this will output error and exit command
     } else {
       fileStr = fs.readFileSync(filePath, 'utf8')
 
@@ -15,6 +15,9 @@ export default class Utilities {
       }
     }
     return fileStr
+  }
+  public static logError(thisRef: any, message: string) {
+    thisRef.log(`[ERROR]: ${message}`)
   }
 
 }
