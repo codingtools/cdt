@@ -5,7 +5,7 @@ export default class Utilities {
   public static getStringFromFile(thisRef: any, filePath: string) {
     let fileStr = ''
     if (!fs.existsSync(filePath)) {
-      thisRef.error('reading File') // this will output error and exit command
+      this.logError(thisRef, 'reading File') // this will output error and exit command
     } else {
       fileStr = fs.readFileSync(filePath, 'utf8')
 
@@ -16,8 +16,14 @@ export default class Utilities {
     }
     return fileStr
   }
+  public static logSuccess(thisRef: any, message: string) {
+    thisRef.log(` ›   Success: ${message}`)
+  }
+  public static logInfo(thisRef: any, message: string) {
+    thisRef.log(` ›   Info: ${message}`)
+  }
   public static logError(thisRef: any, message: string) {
-    thisRef.log(`[ERROR]: ${message}`)
+    thisRef.error(`${message}`)
   }
 
 }
