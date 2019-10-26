@@ -2,7 +2,7 @@ import {Command, flags} from '@oclif/command'
 // @ts-ignore
 import * as Hashes from 'jshashes'
 
-import * as Utilities from '../utilities/Utilities'
+import Utilities from '../utilities/Utilities'
 // TODO: all are Hexadecimal encoding for now, can also add b64
 
 export default class Hash extends Command {
