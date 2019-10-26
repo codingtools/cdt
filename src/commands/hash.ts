@@ -62,7 +62,7 @@ export default class Hash extends Command {
       let hashed: string = hash.hex(str)
       this.log(`[${type.toUpperCase()}]: ${hashed}`)
     } else {
-      this.log('[ERROR]: invalid hash type')
+      Utilities.logError(this, 'invalid hash type')
     }
   }
 
