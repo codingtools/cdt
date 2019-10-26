@@ -28,8 +28,25 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`cdt crypto [FILE]`](#cdt-crypto-file)
 * [`cdt hash [STRING]`](#cdt-hash-string)
 * [`cdt help [COMMAND]`](#cdt-help-command)
+
+## `cdt crypto [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ cdt crypto [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.0.1/src/commands/crypto.ts)_
 
 ## `cdt hash [STRING]`
 
