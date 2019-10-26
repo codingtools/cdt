@@ -1,8 +1,8 @@
 import {Command, flags} from '@oclif/command'
-import * as fs from 'fs'
 // @ts-ignore
 import * as Hashes from 'jshashes'
 
+import * as Utilities from '../utilities/Utilities'
 // TODO: all are Hexadecimal encoding for now, can also add b64
 
 export default class Hash extends Command {
@@ -29,7 +29,7 @@ export default class Hash extends Command {
     if (flags.string) //if -s given
       str = flags.string
     else if (flags.file) {
-      str = this.getStringFromFile(flags.file)
+      str = Utilities.getStringFromFile(this, flags.file)
     } else
     str = args.string
 
@@ -66,19 +66,4 @@ export default class Hash extends Command {
     }
   }
 
-  private getStringFromFile(filePath: string) {
-    let fileStr = ''
-    if (!fs.existsSync(filePath)) {
-      this.error('reading File') // this will output error and exit command
-    } else {
-      fileStr = fs.readFileSync(filePath, 'utf8')
-
-      // TODO: fix this Issue #3
-      if (fileStr.charAt(fileStr.length - 1) === '\n') {
-        fileStr = fileStr.substring(0, fileStr.length - 1)
-      }
-    }
-    return fileStr
-
-  }
 }
