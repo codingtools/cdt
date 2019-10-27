@@ -28,22 +28,26 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`cdt crypto [FILE]`](#cdt-crypto-file)
+* [`cdt crypto [STRING]`](#cdt-crypto-string)
 * [`cdt hash [STRING]`](#cdt-hash-string)
 * [`cdt help [COMMAND]`](#cdt-help-command)
 
-## `cdt crypto [FILE]`
+## `cdt crypto [STRING]`
 
-describe the command here
+Encryption and Decryption functionality
 
 ```
 USAGE
-  $ cdt crypto [FILE]
+  $ cdt crypto [STRING]
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  -d, --decryption=decryption  decryption type, Supported [AES, DES, 3DES, Rabbit, RC4, RC4Drop]
+  -e, --encryption=encryption  encryption type, Supported [AES, DES, 3DES, Rabbit, RC4, RC4Drop]
+  -f, --file=file              file to be encrypted/decrypted
+  -h, --help                   show CLI help
+  -k, --key=key                key for encryption/decryption
+  -m, --mode=mode              Block Mode, Supported [CBC, CFB, CTR, OFB, ECB]
+  -s, --string=string          string to be encrypted/decrypted
 ```
 
 _See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.0.1/src/commands/crypto.ts)_

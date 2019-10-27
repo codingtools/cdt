@@ -42,7 +42,7 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com//cdt",
+  "homepage": "https://github.com/codingtools/cdt",
   "keywords": [
     "cdt",
     "oclif"
