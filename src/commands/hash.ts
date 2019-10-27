@@ -23,24 +23,19 @@ export default class Hash extends Command {
     const {args, flags} = this.parse(Hash)
 
     // only 2 parameters required HASH_TYPE and INPUT_STRING
-    flags.type = Hash.getHashType(flags) //by default let it be sha1
-    args.string = Hash.getInputString(flags,args) // from either -s,-f or args
+    flags.type = this.getHashType(flags) //by default let it be sha1
+    args.string = this.getInputString(flags,args) // from either -s,-f or args
 
     this.calculateHash(flags, args)
   }
 
   private calculateHash(flags: any, args:any) {
-    const hashObject = Hash.getHashObject(flags)
-
-    if (hashObject) {
-      let hashed: string = hashObject.hex(args.string)
-      Logger.success(this, `[${flags.type.toUpperCase()}] ${hashed}`)
-    } else {
-      Logger.error(this, 'Invalid Or Unsupported hash type')
-    }
+    const hashObject = this.getHashObject(flags)
+    let hashed: string = hashObject.hex(args.string)
+    Logger.success(this, `[${flags.type.toUpperCase()}] ${hashed}`)
   }
 
-  private static getHashObject(flags: any){
+  private getHashObject(flags: any){
     switch (flags.type.toUpperCase()) {
       case 'SHA1':
         return new Hashes.SHA1()
@@ -53,15 +48,16 @@ export default class Hash extends Command {
       case 'RMD160':
         return new Hashes.RMD160()
       default:
-        return  undefined
+        Logger.error(this, 'Invalid Or Unsupported hash type')
+        return undefined // code never reach here
     }
   }
 
-  private static getHashType(flags: any) {
+  private  getHashType(flags: any) {
     return flags.type || 'sha1'
   }
 
-  static getInputString(flags: any, args:any) {
+  public getInputString(flags: any, args:any) {
     // if -s or -f is not passed we will take it from args
     let str=''
     if (flags.string) //if -s given
