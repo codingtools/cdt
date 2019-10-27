@@ -1,8 +1,9 @@
 import {Command, flags} from '@oclif/command'
-import * as fs from 'fs'
 // @ts-ignore
 import * as Hashes from 'jshashes'
 
+import Logger from '../utilities/logger'
+import Utilities from '../utilities/utilities'
 // TODO: all are Hexadecimal encoding for now, can also add b64
 
 export default class Hash extends Command {
@@ -18,67 +19,61 @@ export default class Hash extends Command {
 
   static args = [{name: 'string'}]
 
+  static getInputString(thisRef: any , flags: any, args: any) { //need to make it static so Crypto can use this
+    // if -s or -f is not passed we will take it from args
+    if (flags.string) //if -s given
+      return flags.string
+    else if (flags.file) {
+      Logger.info(thisRef, `reading file: ${flags.file}`)
+      return Utilities.getStringFromFile(thisRef, flags.file)
+    } else
+      return args.string
+  }
+
+  // only 2 parameters required HASH_TYPE and INPUT_STRING
   async run() {
     const {args, flags} = this.parse(Hash)
 
-    const type: string = flags.type || 'sha1' //by default let it be sha1
+    flags.type = this.getHashType(flags) //by default let it be sha1
+    args.string = Hash.getInputString(this, flags, args) // from either -s,-f or args
 
-    // if -s or -f is not passed we will take it from args
-    let str = ''
-
-    if (flags.string) //if -s given
-      str = flags.string
-    else if (flags.file) {
-      str = this.getStringFromFile(flags.file)
-    } else
-    str = args.string
-
-    this.calculateHash(type, str)
+    //check params after evaluating all
+    this.checkParameters(flags, args)
+    this.calculateHash(flags, args)
   }
 
-  private calculateHash(type: string, str: string) {
-    let hash: Hashes
-    switch (type.toUpperCase()) {
+  // to check required parameters passed or not
+  // tslint:disable-next-line:no-unused
+  private checkParameters(flags: any, args: any) {
+    if (args.string === undefined || args.string === '')
+      Logger.error(this, 'Input string is empty or undefined')
+
+  }
+
+  private calculateHash(flags: any, args: any) {
+    const hashObject = this.getHashObject(flags)
+    let hashed: string = hashObject.hex(args.string)
+    Logger.success(this, `[${flags.type.toUpperCase()}] ${hashed}`)
+  }
+
+  private getHashObject(flags: any) {
+    switch (flags.type.toUpperCase()) {
     case 'SHA1':
-      hash = new Hashes.SHA1()
-      break
+      return new Hashes.SHA1()
     case 'SHA256':
-      hash = new Hashes.SHA256()
-      break
+      return new Hashes.SHA256()
     case 'SHA512':
-      hash = new Hashes.SHA512()
-      break
+      return new Hashes.SHA512()
     case 'MD5':
-      hash = new Hashes.MD5()
-      break
+      return new Hashes.MD5()
     case 'RMD160':
-      hash = new Hashes.RMD160()
-      break
+      return new Hashes.RMD160()
     default:
-      hash = undefined
-    }
-
-    if (hash) {
-      let hashed: string = hash.hex(str)
-      this.log(`[${type.toUpperCase()}]: ${hashed}`)
-    } else {
-      this.log('[ERROR]: invalid hash type')
+      Logger.error(this, 'Invalid Or Unsupported hash type')
     }
   }
 
-  private getStringFromFile(filePath: string) {
-    let fileStr = ''
-    if (!fs.existsSync(filePath)) {
-      this.error('reading File') // this will output error and exit command
-    } else {
-      fileStr = fs.readFileSync(filePath, 'utf8')
-
-      // TODO: fix this Issue #3
-      if (fileStr.charAt(fileStr.length - 1) === '\n') {
-        fileStr = fileStr.substring(0, fileStr.length - 1)
-      }
-    }
-    return fileStr
-
+  private getHashType(flags: any) {
+    return flags.type || 'sha1'
   }
 }
