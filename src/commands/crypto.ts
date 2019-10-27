@@ -36,17 +36,17 @@ export default class Crypto extends Command {
       str = args.string
 
     if (!key) {
-      Logger.error('Key is not passed')
+      Logger.error(this,'Key is not passed')
     }
 
     if (encryption) {
       if (decryption) // if both given
-        Logger.error('Both encryption and decryption methods passed')
+        Logger.error(this,'Both encryption and decryption methods passed')
       this.Encrypt(str, encryption, key)
     } else if (decryption) {
       this.Decrypt(str, decryption, key)
     } else {
-      Logger.error('Neither encryption or decryption methods passed')
+      Logger.error(this,'Neither encryption or decryption methods passed')
     }
   }
 
@@ -60,7 +60,7 @@ export default class Crypto extends Command {
       let encrypted: string = crypto.encrypt(str, key).ciphertext
       this.log(`[${type.toUpperCase()}]: ${encrypted}`)
     } else {
-      Logger.error('invalid hash type')
+      Logger.error(this,'invalid hash type')
     }
   }
 
@@ -72,7 +72,7 @@ export default class Crypto extends Command {
       let decrypted: string = crypto.decrypt(str, key)
       this.log(`[${type.toUpperCase()}]: ${decrypted}`)
     } else {
-      Logger.error('invalid hash type')
+      Logger.error(this,'invalid hash type')
     }
   }
 

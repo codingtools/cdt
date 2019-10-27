@@ -30,7 +30,7 @@ export default class Hash extends Command {
     if (flags.string) //if -s given
       str = flags.string
     else if (flags.file) {
-      Logger.info(`reading file: ${flags.file}`)
+      Logger.info(this, `reading file: ${flags.file}`)
       str = Utilities.getStringFromFile(this, flags.file)
     } else
     str = args.string
@@ -62,9 +62,9 @@ export default class Hash extends Command {
 
     if (hash) {
       let hashed: string = hash.hex(str)
-      Logger.success(`[${type.toUpperCase()}] ${hashed}`)
+      Logger.success(this, `[${type.toUpperCase()}] ${hashed}`)
     } else {
-      Logger.error( 'invalid hash type')
+      Logger.error(this, 'Invalid Or Unsupported hash type')
     }
   }
 
