@@ -2,7 +2,6 @@
 import * as fs from 'fs'
 
 import Logger from './logger'
-
 // tslint:disable-next-line:no-unnecessary-class
 export default class Utilities {
   public static getStringFromFile(thisRef: any, filePath: string) {

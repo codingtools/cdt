@@ -1,6 +1,6 @@
 import {Command, flags} from '@oclif/command'
+import * as CryptoJS from 'crypto-js'
 // @ts-ignore
-import * as Hashes from 'jshashes'
 
 import Logger from '../utilities/logger'
 import Utilities from '../utilities/utilities'
@@ -12,7 +12,7 @@ export default class Hash extends Command {
   static flags = {
     help: flags.help({char: 'h'}),
     // -t , --type for hashing
-    type: flags.string({char: 't' , description: 'type of hash [SHA1(default),MD5,SHA256,SHA512,RMD160]'}),
+    type: flags.string({char: 't' , description: 'type of hash [SHA1(default), MD5, SHA256, SHA512, RMD160 or RIPEMD160]'}),
     string: flags.string({char: 's' , description: 'string to be hashed'}),
     file: flags.string({char: 'f' , description: 'file to be hashed'}),
   }
@@ -52,22 +52,41 @@ export default class Hash extends Command {
 
   private calculateHash(flags: any, args: any) {
     const hashObject = this.getHashObject(flags)
-    let hashed: string = hashObject.hex(args.string)
+    // @ts-ignore
+    let hashed: string = hashObject(args.string)
     Logger.success(this, `[${flags.type.toUpperCase()}] ${hashed}`)
   }
+
+  // import * as Hashes from 'jshashes'
+  // private getHashObjectBCK(flags: any) {
+  //   switch (flags.type.toUpperCase()) {
+  //   case 'SHA1':
+  //     return new Hashes.SHA1()
+  //   case 'SHA256':
+  //     return new Hashes.SHA256()
+  //   case 'SHA512':
+  //     return new Hashes.SHA512()
+  //   case 'MD5':
+  //     return new Hashes.MD5()
+  //   case 'RMD160':
+  //     return new Hashes.RMD160()
+  //   default:
+  //     Logger.error(this, 'Invalid Or Unsupported hash type')
+  //   }
+  // }
 
   private getHashObject(flags: any) {
     switch (flags.type.toUpperCase()) {
     case 'SHA1':
-      return new Hashes.SHA1()
+      return CryptoJS.SHA1
     case 'SHA256':
-      return new Hashes.SHA256()
+      return CryptoJS.SHA256
     case 'SHA512':
-      return new Hashes.SHA512()
+      return CryptoJS.SHA512
     case 'MD5':
-      return new Hashes.MD5()
-    case 'RMD160':
-      return new Hashes.RMD160()
+      return CryptoJS.MD5
+    case 'RMD160': case 'RIPEMD160':
+      return CryptoJS.RIPEMD160
     default:
       Logger.error(this, 'Invalid Or Unsupported hash type')
     }
