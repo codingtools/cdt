@@ -83,21 +83,20 @@ describe('hash', () => {
       expect(ctx.stdout).to.contain('a85a72b0a240abecdf27f127aa75fd8663d6d5be')
     })
 
-  //file input - file not found TODO: solve issue #4
-  test
-    .stdout()
-    .command(['hash', '-f', 'test/resources/filenotfound.txt'])
-    .exit(0)
-    .it("cdt hash -f 'test/resources/filenotfound.txt'", ctx => {
-      expect(ctx.stdout).to.contain('Could not find file')
-    })
-
   //file input
   test
     .stdout()
     .command(['hash', '-f', 'test/resources/test.txt'])
-    .it("cdt hash -f 'test/resources/test.txt'", ctx => {
+    .it("File Hashing -> cdt hash -f 'test/resources/test.txt'", ctx => {
       expect(ctx.stdout).to.contain('97ee6255ffc855e79e2324d5495b6538e29034f9')
     })
 
+  //file input - file not found
+  test
+    .stdout()
+    .command(['hash', '-f', 'test/resources/filenotfound.txt'])
+    .exit(0)
+    .it("If File not found ->cdt hash -f 'test/resources/filenotfound.txt'", ctx => {
+      expect(ctx.stdout).to.contain('Could not find file')
+    })
 })
