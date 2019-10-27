@@ -22,50 +22,55 @@ export default class Hash extends Command {
   async run() {
     const {args, flags} = this.parse(Hash)
 
-    const type: string = flags.type || 'sha1' //by default let it be sha1
+    // only 2 parameters required HASH_TYPE and INPUT_STRING
+    flags.type = Hash.getHashType(flags) //by default let it be sha1
+    flags.string = Hash.getInputString(flags,args) // from either -s,-f or args
 
+    this.calculateHash(flags)
+  }
+
+  private calculateHash(flags: any) {
+    const hashObject = Hash.getHashObject(flags)
+
+    if (hashObject) {
+      let hashed: string = hashObject.hex(flags.string)
+      Logger.success(this, `[${flags.type.toUpperCase()}] ${hashed}`)
+    } else {
+      Logger.error(this, 'Invalid Or Unsupported hash type')
+    }
+  }
+
+  private static getHashObject(flags: any){
+    switch (flags.type.toUpperCase()) {
+      case 'SHA1':
+        return new Hashes.SHA1()
+      case 'SHA256':
+        return new Hashes.SHA256()
+      case 'SHA512':
+        return new Hashes.SHA512()
+      case 'MD5':
+        return new Hashes.MD5()
+      case 'RMD160':
+        return new Hashes.RMD160()
+      default:
+        return  undefined
+    }
+  }
+
+  private static getHashType(flags: any) {
+    return flags.type || 'sha1'
+  }
+
+  private static getInputString(flags: any, args:any) {
     // if -s or -f is not passed we will take it from args
-    let str = ''
-
+    let str=''
     if (flags.string) //if -s given
       str = flags.string
     else if (flags.file) {
       Logger.info(this, `reading file: ${flags.file}`)
       str = Utilities.getStringFromFile(this, flags.file)
     } else
-    str = args.string
-
-    this.calculateHash(type, str)
+      str = args.string
+    return str;
   }
-
-  private calculateHash(type: string, str: string) {
-    let hash: Hashes
-    switch (type.toUpperCase()) {
-    case 'SHA1':
-      hash = new Hashes.SHA1()
-      break
-    case 'SHA256':
-      hash = new Hashes.SHA256()
-      break
-    case 'SHA512':
-      hash = new Hashes.SHA512()
-      break
-    case 'MD5':
-      hash = new Hashes.MD5()
-      break
-    case 'RMD160':
-      hash = new Hashes.RMD160()
-      break
-    default:
-      hash = undefined
-    }
-
-    if (hash) {
-      let hashed: string = hash.hex(str)
-      Logger.success(this, `[${type.toUpperCase()}] ${hashed}`)
-    } else {
-      Logger.error(this, 'Invalid Or Unsupported hash type')
-    }
-  }
-
 }
