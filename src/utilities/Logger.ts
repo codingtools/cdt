@@ -11,7 +11,7 @@ export default class Logger {
   }
   public static error(thisRef: any, message: string) {
     signale.error(`${message}`)
-    thisRef.exit() //added to exit command
+    thisRef.exit(0) //added to exit command
   }
 
   // public static logSuccess(thisRef: any, message: string) {

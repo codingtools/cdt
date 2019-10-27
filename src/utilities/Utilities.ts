@@ -5,7 +5,7 @@ export default class Utilities {
   public static getStringFromFile(thisRef: any, filePath: string) {
     let fileStr = ''
     if (!fs.existsSync(filePath)) {
-      Logger.error(thisRef,`Couldn't find: ${filePath}`) // this will output error and exit command
+      Logger.error(thisRef,`Could not find file: ${filePath}`) // this will output error and exit command
     } else {
       fileStr = fs.readFileSync(filePath, 'utf8')
 

@@ -19,14 +19,23 @@ export default class Hash extends Command {
 
   static args = [{name: 'string'}]
 
+  // only 2 parameters required HASH_TYPE and INPUT_STRING
   async run() {
     const {args, flags} = this.parse(Hash)
 
-    // only 2 parameters required HASH_TYPE and INPUT_STRING
     flags.type = this.getHashType(flags) //by default let it be sha1
-    args.string = this.getInputString(flags,args) // from either -s,-f or args
+    args.string = Hash.getInputString(this,flags,args) // from either -s,-f or args
 
+    //check params after evaluating all
+    this.checkParameters(flags, args)
     this.calculateHash(flags, args)
+  }
+
+  // to check required parameters passed or not
+  private checkParameters(flags: any, args: any) {
+    if(args.string == undefined || args.string =="" )
+      Logger.error(this, 'Input string is empty or undefined')
+
   }
 
   private calculateHash(flags: any, args:any) {
@@ -57,16 +66,14 @@ export default class Hash extends Command {
     return flags.type || 'sha1'
   }
 
-  public getInputString(flags: any, args:any) {
+   static getInputString(thisRef: any ,flags: any, args:any) { //need to make it static so Crypto can use this
     // if -s or -f is not passed we will take it from args
-    let str=''
     if (flags.string) //if -s given
-      str = flags.string
+      return flags.string
     else if (flags.file) {
-      Logger.info(this, `reading file: ${flags.file}`)
-      str = Utilities.getStringFromFile(this, flags.file)
+      Logger.info(thisRef, `reading file: ${flags.file}`)
+      return Utilities.getStringFromFile(thisRef, flags.file)
     } else
-      str = args.string
-    return str;
+      return args.string
   }
 }
