@@ -2,8 +2,8 @@ import {Command, flags} from '@oclif/command'
 // @ts-ignore
 import * as Hashes from 'jshashes'
 
-import Utilities from '../utilities/Utilities'
 import Logger from '../utilities/Logger'
+import Utilities from '../utilities/Utilities'
 // TODO: all are Hexadecimal encoding for now, can also add b64
 
 export default class Hash extends Command {
@@ -19,54 +19,7 @@ export default class Hash extends Command {
 
   static args = [{name: 'string'}]
 
-  // only 2 parameters required HASH_TYPE and INPUT_STRING
-  async run() {
-    const {args, flags} = this.parse(Hash)
-
-    flags.type = this.getHashType(flags) //by default let it be sha1
-    args.string = Hash.getInputString(this,flags,args) // from either -s,-f or args
-
-    //check params after evaluating all
-    this.checkParameters(flags, args)
-    this.calculateHash(flags, args)
-  }
-
-  // to check required parameters passed or not
-  private checkParameters(flags: any, args: any) {
-    if(args.string == undefined || args.string =="" )
-      Logger.error(this, 'Input string is empty or undefined')
-
-  }
-
-  private calculateHash(flags: any, args:any) {
-    const hashObject = this.getHashObject(flags)
-    let hashed: string = hashObject.hex(args.string)
-    Logger.success(this, `[${flags.type.toUpperCase()}] ${hashed}`)
-  }
-
-  private getHashObject(flags: any){
-    switch (flags.type.toUpperCase()) {
-      case 'SHA1':
-        return new Hashes.SHA1()
-      case 'SHA256':
-        return new Hashes.SHA256()
-      case 'SHA512':
-        return new Hashes.SHA512()
-      case 'MD5':
-        return new Hashes.MD5()
-      case 'RMD160':
-        return new Hashes.RMD160()
-      default:
-        Logger.error(this, 'Invalid Or Unsupported hash type')
-        return undefined // code never reach here
-    }
-  }
-
-  private  getHashType(flags: any) {
-    return flags.type || 'sha1'
-  }
-
-   static getInputString(thisRef: any ,flags: any, args:any) { //need to make it static so Crypto can use this
+  static getInputString(thisRef: any , flags: any, args: any) { //need to make it static so Crypto can use this
     // if -s or -f is not passed we will take it from args
     if (flags.string) //if -s given
       return flags.string
@@ -75,5 +28,52 @@ export default class Hash extends Command {
       return Utilities.getStringFromFile(thisRef, flags.file)
     } else
       return args.string
+  }
+
+  // only 2 parameters required HASH_TYPE and INPUT_STRING
+  async run() {
+    const {args, flags} = this.parse(Hash)
+
+    flags.type = this.getHashType(flags) //by default let it be sha1
+    args.string = Hash.getInputString(this, flags, args) // from either -s,-f or args
+
+    //check params after evaluating all
+    this.checkParameters(flags, args)
+    this.calculateHash(flags, args)
+  }
+
+  // to check required parameters passed or not
+  // tslint:disable-next-line:no-unused
+  private checkParameters(flags: any, args: any) {
+    if (args.string === undefined || args.string === '')
+      Logger.error(this, 'Input string is empty or undefined')
+
+  }
+
+  private calculateHash(flags: any, args: any) {
+    const hashObject = this.getHashObject(flags)
+    let hashed: string = hashObject.hex(args.string)
+    Logger.success(this, `[${flags.type.toUpperCase()}] ${hashed}`)
+  }
+
+  private getHashObject(flags: any) {
+    switch (flags.type.toUpperCase()) {
+    case 'SHA1':
+      return new Hashes.SHA1()
+    case 'SHA256':
+      return new Hashes.SHA256()
+    case 'SHA512':
+      return new Hashes.SHA512()
+    case 'MD5':
+      return new Hashes.MD5()
+    case 'RMD160':
+      return new Hashes.RMD160()
+    default:
+      Logger.error(this, 'Invalid Or Unsupported hash type')
+    }
+  }
+
+  private getHashType(flags: any) {
+    return flags.type || 'sha1'
   }
 }

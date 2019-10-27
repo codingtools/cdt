@@ -1,11 +1,14 @@
+// tslint:disable-next-line:file-name-casing
 import * as fs from 'fs'
+
 import Logger from './Logger'
 
+// tslint:disable-next-line:no-unnecessary-class
 export default class Utilities {
   public static getStringFromFile(thisRef: any, filePath: string) {
     let fileStr = ''
     if (!fs.existsSync(filePath)) {
-      Logger.error(thisRef,`Could not find file: ${filePath}`) // this will output error and exit command
+      Logger.error(thisRef, `Could not find file: ${filePath}`) // this will output error and exit command
     } else {
       fileStr = fs.readFileSync(filePath, 'utf8')
 

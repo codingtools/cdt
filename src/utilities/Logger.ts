@@ -1,11 +1,14 @@
+// tslint:disable-next-line:file-name-casing
 import * as signale from 'signale'
 
+// tslint:disable-next-line:no-unnecessary-class
 export default class Logger {
-
   // uses signale for logging withoug thisRef
+  // tslint:disable-next-line:no-unused
   public static success(thisRef: any, message: string) {
     signale.success(`${message}`)
   }
+  // tslint:disable-next-line:no-unused
   public static info(thisRef: any, message: string) {
     signale.info(`${message}`)
   }
