@@ -1,7 +1,7 @@
 // tslint:disable-next-line:file-name-casing
 import * as fs from 'fs'
 
-import Logger from './Logger'
+import Logger from './logger'
 
 // tslint:disable-next-line:no-unnecessary-class
 export default class Utilities {

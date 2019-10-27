@@ -1,7 +1,7 @@
 import {Command, flags} from '@oclif/command'
 import * as CryptoJS from 'crypto-js'
 
-import Logger from '../utilities/Logger'
+import Logger from '../utilities/logger'
 
 import Hash from './hash'
 
