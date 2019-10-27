@@ -1,15 +1,11 @@
 import {Command, flags} from '@oclif/command'
 import * as CryptoJS from 'crypto-js'
-import {JsonFormatter} from 'tslint/lib/formatters'
-
-import Utilities from '../utilities/Utilities'
 import Logger from '../utilities/Logger'
 import Hash from './hash'
 
 export default class Crypto extends Command {
   static ENCRYPTION = 'encryption'
   static DECRYPTION = 'decryption'
-
   static description = 'Encryption and Decryption functionality'
   static flags = {
     help: flags.help({char: 'h'}),
@@ -23,7 +19,6 @@ export default class Crypto extends Command {
   }
 
   static args = [{name: 'string'}]
-
   //need INPUT_STRING, TYPE_OF_CRYPTO , KEY, MODE
   async run() {
     const {args, flags} = this.parse(Crypto)
@@ -33,35 +28,25 @@ export default class Crypto extends Command {
 
     this.checkParameters(flags,args)
     flags.encryption  ? this.Encrypt(flags, args) : this.Decrypt(flags, args)
-
   }
 
   private Encrypt(flags: any, args:any) {
-
     let crypto = this.getCryptoType(args.type)
-
     Logger.info(this,`Encryption: ${flags.encryption.toUpperCase()}`)
-
     // @ts-ignore // as crypto will never be undefined and reach here
     let encrypted: string = crypto.encrypt(args.string, flags.key, {
       mode: this.getCryptoMode(this,flags)
     }).toString()
-
-     //always add input to args
-
     Logger.success(this,`${encrypted}`)
   }
 
   private Decrypt(flags: any, args: any) {
     let crypto = this.getCryptoType(args.type)
-
     Logger.info(this,`Decryption: ${flags.decryption.toUpperCase()}`)
-
     // @ts-ignore // as crypto will never be undefined and reach here
     let decrypted: string = crypto.decrypt(args.string, flags.key, {
       mode: this.getCryptoMode(this,flags)
     }).toString(CryptoJS.enc.Utf8)
-
     Logger.success(this,`${decrypted}`)
   }
 
@@ -83,7 +68,6 @@ export default class Crypto extends Command {
         Logger.error(this,'Invalid or Unsupported Encryption/Decryption type')
         return undefined // will never reach here
     }
-
   }
 
   // to check required parameters passed or not
