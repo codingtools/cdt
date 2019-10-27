@@ -3,6 +3,7 @@ import {Command, flags} from '@oclif/command'
 import * as Hashes from 'jshashes'
 
 import Utilities from '../utilities/Utilities'
+import Logger from '../utilities/Logger'
 // TODO: all are Hexadecimal encoding for now, can also add b64
 
 export default class Hash extends Command {
@@ -29,7 +30,7 @@ export default class Hash extends Command {
     if (flags.string) //if -s given
       str = flags.string
     else if (flags.file) {
-      Utilities.logInfo(`reading file: ${flags.file}`)
+      Logger.info(`reading file: ${flags.file}`)
       str = Utilities.getStringFromFile(this, flags.file)
     } else
     str = args.string
@@ -61,9 +62,9 @@ export default class Hash extends Command {
 
     if (hash) {
       let hashed: string = hash.hex(str)
-      Utilities.logSuccess(`[${type.toUpperCase()}] ${hashed}`)
+      Logger.success(`[${type.toUpperCase()}] ${hashed}`)
     } else {
-      Utilities.logError( 'invalid hash type')
+      Logger.error( 'invalid hash type')
     }
   }
 

@@ -2,6 +2,7 @@ import {Command, flags} from '@oclif/command'
 import * as CryptoJS from 'crypto-js'
 
 import Utilities from '../utilities/Utilities'
+import Logger from '../utilities/Logger'
 
 export default class Crypto extends Command {
   static description = 'Encryption and Decryption functionality'
@@ -35,17 +36,17 @@ export default class Crypto extends Command {
       str = args.string
 
     if (!key) {
-      Utilities.logError('Key is not passed')
+      Logger.error('Key is not passed')
     }
 
     if (encryption) {
       if (decryption) // if both given
-        Utilities.logError('Both encryption and decryption methods passed')
+        Logger.error('Both encryption and decryption methods passed')
       this.Encrypt(str, encryption, key)
     } else if (decryption) {
       this.Decrypt(str, decryption, key)
     } else {
-      Utilities.logError('Neither encryption or decryption methods passed')
+      Logger.error('Neither encryption or decryption methods passed')
     }
   }
 
@@ -59,7 +60,7 @@ export default class Crypto extends Command {
       let encrypted: string = crypto.encrypt(str, key).ciphertext
       this.log(`[${type.toUpperCase()}]: ${encrypted}`)
     } else {
-      Utilities.logError('invalid hash type')
+      Logger.error('invalid hash type')
     }
   }
 
@@ -71,7 +72,7 @@ export default class Crypto extends Command {
       let decrypted: string = crypto.decrypt(str, key)
       this.log(`[${type.toUpperCase()}]: ${decrypted}`)
     } else {
-      Utilities.logError('invalid hash type')
+      Logger.error('invalid hash type')
     }
   }
 

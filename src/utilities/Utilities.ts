@@ -1,11 +1,11 @@
 import * as fs from 'fs'
-import * as signale from 'signale'
+import Logger from './Logger'
 
 export default class Utilities {
   public static getStringFromFile(thisRef: any, filePath: string) {
     let fileStr = ''
     if (!fs.existsSync(filePath)) {
-      this.logError('reading File') // this will output error and exit command
+      Logger.error('reading File') // this will output error and exit command
     } else {
       fileStr = fs.readFileSync(filePath, 'utf8')
 
@@ -16,26 +16,4 @@ export default class Utilities {
     }
     return fileStr
   }
-
-  // uses signale for logging withoug thisRef
-  public static logSuccess( message: string) {
-    signale.success(`${message}`)
-  }
-  public static logInfo(message: string) {
-    signale.info(`${message}`)
-  }
-  public static logError(message: string) {
-    signale.error(`${message}`)
-  }
-
-  // public static logSuccess(thisRef: any, message: string) {
-  //   thisRef.log(` ›   Success: ${message}`)
-  // }
-  // public static logInfo(thisRef: any, message: string) {
-  //   thisRef.log(` ›   Info: ${message}`)
-  // }
-  // public static logError(thisRef: any, message: string) {
-  //   thisRef.error(`${message}`)
-  // }
-
 }
