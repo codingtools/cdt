@@ -1,11 +1,11 @@
 import * as fs from 'fs'
+import * as signale from 'signale'
 
-// tslint:disable-next-line:no-unnecessary-class
 export default class Utilities {
   public static getStringFromFile(thisRef: any, filePath: string) {
     let fileStr = ''
     if (!fs.existsSync(filePath)) {
-      this.logError(thisRef, 'reading File') // this will output error and exit command
+      this.logError('reading File') // this will output error and exit command
     } else {
       fileStr = fs.readFileSync(filePath, 'utf8')
 
@@ -16,14 +16,26 @@ export default class Utilities {
     }
     return fileStr
   }
-  public static logSuccess(thisRef: any, message: string) {
-    thisRef.log(` ›   Success: ${message}`)
+
+  // uses signale for logging withoug thisRef
+  public static logSuccess( message: string) {
+    signale.success(`${message}`)
   }
-  public static logInfo(thisRef: any, message: string) {
-    thisRef.log(` ›   Info: ${message}`)
+  public static logInfo(message: string) {
+    signale.info(`${message}`)
   }
-  public static logError(thisRef: any, message: string) {
-    thisRef.error(`${message}`)
+  public static logError(message: string) {
+    signale.error(`${message}`)
   }
+
+  // public static logSuccess(thisRef: any, message: string) {
+  //   thisRef.log(` ›   Success: ${message}`)
+  // }
+  // public static logInfo(thisRef: any, message: string) {
+  //   thisRef.log(` ›   Info: ${message}`)
+  // }
+  // public static logError(thisRef: any, message: string) {
+  //   thisRef.error(`${message}`)
+  // }
 
 }
