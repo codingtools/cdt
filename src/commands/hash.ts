@@ -24,16 +24,16 @@ export default class Hash extends Command {
 
     // only 2 parameters required HASH_TYPE and INPUT_STRING
     flags.type = Hash.getHashType(flags) //by default let it be sha1
-    flags.string = Hash.getInputString(flags,args) // from either -s,-f or args
+    args.string = Hash.getInputString(flags,args) // from either -s,-f or args
 
-    this.calculateHash(flags)
+    this.calculateHash(flags, args)
   }
 
-  private calculateHash(flags: any) {
+  private calculateHash(flags: any, args:any) {
     const hashObject = Hash.getHashObject(flags)
 
     if (hashObject) {
-      let hashed: string = hashObject.hex(flags.string)
+      let hashed: string = hashObject.hex(args.string)
       Logger.success(this, `[${flags.type.toUpperCase()}] ${hashed}`)
     } else {
       Logger.error(this, 'Invalid Or Unsupported hash type')
@@ -61,7 +61,7 @@ export default class Hash extends Command {
     return flags.type || 'sha1'
   }
 
-  private static getInputString(flags: any, args:any) {
+  static getInputString(flags: any, args:any) {
     // if -s or -f is not passed we will take it from args
     let str=''
     if (flags.string) //if -s given
