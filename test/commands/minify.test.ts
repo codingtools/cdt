@@ -32,4 +32,18 @@ describe('minify', () => {
       expect(ctx.stdout).to.contain('console.log("lorem ipsum");let x=10;x<10?console.log("x is less than: "+x):x>10?console.log("x is more than: "+x):console.log("x is equals to: "+x);')
     })
 
+  test
+    .stdout()
+    .command(['minify', '-f', 'test/resources/test.html'])
+    .it('Minify HTML', ctx => {
+      expect(ctx.stdout).to.contain('<title>TEST</title><h1>heading</h1><p>lorem ipsum 1<p>lorem ipsum 2<p>lorem ipsum 3')
+    })
+
+  test
+    .stdout()
+    .command(['minify', '-f', 'test/resources/test.css'])
+    .it('Minify CSS', ctx => {
+      expect(ctx.stdout).to.contain('body{margin:25px;background-color:#f0f0f0;font-family:arial,sans-serif;font-size:14px}h1{font-size:35px;font-weight:400;margin-top:5px}.someclass{color:red}#someid{color:green}')
+    })
+
 })
