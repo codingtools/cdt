@@ -1,5 +1,7 @@
 import {Command, flags} from '@oclif/command'
 
+const MinifyJs = require('minify')
+
 import Logger from '../utilities/logger'
 import Utilities from '../utilities/utilities'
 
@@ -26,8 +28,11 @@ export default class Minify extends Command {
     args.string = this.getFileString(args)
     flags.type = this.getFileType(flags, args)
 
-    // this.checkParameters(flags, args)
+    Logger.info(this, `reading file: ${args.file}`)
+    Logger.info(this, `file type: ${flags.type}`)
 
+    this.checkParameters(flags, args)
+    this.minifyString(flags, args)
   }
 
   // this will get file type either from flags.type or file extension ( if flag is not given)
@@ -36,9 +41,8 @@ export default class Minify extends Command {
       return this.getFileTypeFromExtension(flags.type)
 
     let fileExtensionRegex = /\w+\.([a-z]+)/
-
-    args.s
-
+    let extension = args.file.match(fileExtensionRegex)[1]
+    return this.getFileTypeFromExtension(extension)
   }
 
   private getFileTypeFromExtension(extension: string) {
@@ -68,7 +72,33 @@ export default class Minify extends Command {
     Logger.error(this, 'File path not passed')
   }
 
-  // private checkParameters(flags: unknown, args: { [p: string]: any }) {
-  //   if(validFileType)
-  // }
+  // tslint:disable-next-line:no-unused
+  private checkParameters(flags: unknown, args: { [p: string]: any }) {
+    if (args.file === undefined || args.file === '')
+      Logger.error(this, 'File path is empty')
+    // others already checked
+  }
+
+  //TODO: add image compression also
+  //TODO: add error handling also
+  private minifyString(flags: any, args: any) {
+    Logger.progressStart(this, 'minifying...')
+
+    let output = ''
+    // setTimeout(() => { //TODO: can add spinner for bigger files using promise
+    switch (flags.type) {
+    case Minify.JS:
+      output = MinifyJs.js(args.string); break
+    case Minify.CSS:
+      output = MinifyJs.css(args.string); break
+    case Minify.HTML:
+      output = MinifyJs.html(args.string); break
+    default:
+      Logger.error(this, 'Invalid Minifier Type')
+    }
+    Logger.progressStop(this, 'minified')
+    // }, 1000)
+    Logger.success(this, `\n${output}`)
+
+  }
 }
