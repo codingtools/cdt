@@ -31,6 +31,7 @@ USAGE
 * [`cdt crypto [STRING]`](#cdt-crypto-string)
 * [`cdt hash [STRING]`](#cdt-hash-string)
 * [`cdt help [COMMAND]`](#cdt-help-command)
+* [`cdt minify [FILE]`](#cdt-minify-file)
 
 ## `cdt crypto [STRING]`
 
@@ -64,7 +65,7 @@ OPTIONS
   -f, --file=file      file to be hashed
   -h, --help           show CLI help
   -s, --string=string  string to be hashed
-  -t, --type=type      type of hash [SHA1(default),MD5,SHA256,SHA512,RMD160]
+  -t, --type=type      type of hash [SHA1(default), MD5, SHA256, SHA512, RMD160 or RIPEMD160]
 ```
 
 _See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.0.1/src/commands/hash.ts)_
@@ -85,4 +86,20 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.1/src/commands/help.ts)_
+
+## `cdt minify [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ cdt minify [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.0.1/src/commands/minify.ts)_
 <!-- commandsstop -->

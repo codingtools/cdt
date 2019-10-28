@@ -8,7 +8,7 @@ import Hash from './hash'
 export default class Crypto extends Command {
   static ENCRYPTION = 'encryption'
   static DECRYPTION = 'decryption'
-  static description = 'Encryption and Decryption functionality'
+  static description = 'Encryption and Decryption functionality for File/String'
   static flags = {
     help: flags.help({char: 'h'}),
 
