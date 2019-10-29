@@ -1,12 +1,16 @@
 cdt
 ===
 
-Command Line tools for CODERs
+CLI for Developers
 
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/cdt.svg)](https://npmjs.org/package/cdt)
-[![Downloads/week](https://img.shields.io/npm/dw/cdt.svg)](https://npmjs.org/package/cdt)
-[![License](https://img.shields.io/npm/l/cdt.svg)](https://github.com//cdt/blob/master/package.json) [![Greenkeeper badge](https://badges.greenkeeper.io/codingtools/cdt.svg)](https://greenkeeper.io/)
+[![CircleCI](https://circleci.com/gh/codingtools/cdt/tree/release%2Frelease-v0.1.svg?style=shield)](https://circleci.com/gh/codingtools/cdt/tree/release%2Frelease-v0.1)
+[![Version](https://img.shields.io/npm/v/@codingtools/cdt)](https://npmjs.org/package/@codingtools/cdt)
+[![License](https://img.shields.io/npm/l/@codingtools/cdt)](https://github.com/codingtools/cdt/blob/master/package.json) 
+[![Greenkeeper badge](https://badges.greenkeeper.io/codingtools/cdt.svg)](https://greenkeeper.io/)
+![GitHub contributors](https://img.shields.io/github/contributors/codingtools/cdt)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/codingtools/cdt)
+<!--  ![Node](https://img.shields.io/node/v/@codingtools/cdt) -->
+<!-- [![Downloads](https://img.shields.io/npm/dm/@codingtools/cdt)](https://npmjs.org/package/@codingtools/cdt) -->
 
 <!-- toc -->
 * [Usage](#usage)
@@ -15,11 +19,11 @@ Command Line tools for CODERs
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g cdt
+$ npm install -g @codingtools/cdt
 $ cdt COMMAND
 running command...
 $ cdt (-v|--version|version)
-cdt/0.0.1 darwin-x64 node-v12.9.0
+@codingtools/cdt/0.1.1 darwin-x64 node-v12.9.0
 $ cdt --help [COMMAND]
 USAGE
   $ cdt COMMAND
@@ -31,10 +35,11 @@ USAGE
 * [`cdt crypto [STRING]`](#cdt-crypto-string)
 * [`cdt hash [STRING]`](#cdt-hash-string)
 * [`cdt help [COMMAND]`](#cdt-help-command)
+* [`cdt minify [FILE]`](#cdt-minify-file)
 
 ## `cdt crypto [STRING]`
 
-Encryption and Decryption functionality
+Encryption and Decryption functionality for File/String
 
 ```
 USAGE
@@ -50,11 +55,11 @@ OPTIONS
   -s, --string=string          string to be encrypted/decrypted
 ```
 
-_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.0.1/src/commands/crypto.ts)_
+_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.1.1/src/commands/crypto.ts)_
 
 ## `cdt hash [STRING]`
 
-create hash for a string/file
+Hashing functionality for a string/file
 
 ```
 USAGE
@@ -64,10 +69,10 @@ OPTIONS
   -f, --file=file      file to be hashed
   -h, --help           show CLI help
   -s, --string=string  string to be hashed
-  -t, --type=type      type of hash [SHA1(default),MD5,SHA256,SHA512,RMD160]
+  -t, --type=type      type of hash [SHA1(default), MD5, SHA256, SHA512, RMD160 or RIPEMD160]
 ```
 
-_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.0.1/src/commands/hash.ts)_
+_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.1.1/src/commands/hash.ts)_
 
 ## `cdt help [COMMAND]`
 
@@ -85,4 +90,20 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.1/src/commands/help.ts)_
+
+## `cdt minify [FILE]`
+
+File Minifier
+
+```
+USAGE
+  $ cdt minify [FILE]
+
+OPTIONS
+  -f, --file=file  file to be minified
+  -h, --help       show CLI help
+  -t, --type=type  type of file to be minified, it will try to find type with extension
+```
+
+_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.1.1/src/commands/minify.ts)_
 <!-- commandsstop -->

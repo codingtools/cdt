@@ -1,8 +1,11 @@
 // tslint:disable-next-line:file-name-casing
+import * as Ora from 'ora'
 import * as signale from 'signale'
 
 // tslint:disable-next-line:no-unnecessary-class
 export default class Logger {
+  static spinner: any
+
   // uses signale for logging withoug thisRef
   // tslint:disable-next-line:no-unused
   public static success(thisRef: any, message: string) {
@@ -15,6 +18,17 @@ export default class Logger {
   public static error(thisRef: any, message: string) {
     signale.error(`${message}`)
     thisRef.exit(0) //added to exit command
+  }
+  // tslint:disable-next-line:no-unused
+  public static progressStart(thisRef: any, message: string) {
+    // signale.watch(`${message}`)
+    Logger.spinner = Ora(message)
+    Logger.spinner.start()
+  }
+
+  // tslint:disable-next-line:no-unused
+  public static progressStop(thisRef: any, message: string) {
+    Logger.spinner.succeed(message)
   }
 
   // public static logSuccess(thisRef: any, message: string) {

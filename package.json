@@ -1,12 +1,14 @@
 {
-  "name": "cdt",
+  "name": "@codingtools/cdt",
   "description": "Command Line tools for CODERs",
-  "version": "0.0.1",
-  "author": "ashish @ashishpatel0720",
+  "version": "0.1.1",
+  "author": "Ashish Patel @ashishpatel0720",
   "bin": {
     "cdt": "./bin/run"
   },
-  "bugs": "https://github.com//cdt/issues",
+  "bugs": {
+    "url": "https://github.com/codingtools/cdt/issues"
+  },
   "dependencies": {
     "@oclif/command": "^1.5.19",
     "@oclif/config": "^1.13.3",
@@ -15,7 +17,9 @@
     "@types/signale": "^1.2.1",
     "crypto-js": "^3.1.9-1",
     "jshashes": "^1.0.7",
+    "minify": "^4.1.3",
     "nyc": "^14.1.1",
+    "ora": "^4.0.2",
     "signale": "^1.4.0",
     "tslib": "^1.10.0"
   },
@@ -56,13 +60,20 @@
       "@oclif/plugin-help"
     ]
   },
-  "repository": "codingtools/cdt",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codingtools/cdt.git"
+  },
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "tslint -p test -t stylish",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "test": "./node_modules/.bin/nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md"
   },
-  "types": "lib/index.d.ts"
+  "types": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  }
 }

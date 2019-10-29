@@ -7,7 +7,7 @@ import Utilities from '../utilities/utilities'
 // TODO: all are Hexadecimal encoding for now, can also add b64
 
 export default class Hash extends Command {
-  static description = 'create hash for a string/file'
+  static description = 'Hashing functionality for a string/file'
 
   static flags = {
     help: flags.help({char: 'h'}),
