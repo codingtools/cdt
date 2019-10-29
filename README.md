@@ -3,10 +3,12 @@ cdt
 
 Command Line tools for CODERs
 
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/cdt.svg)](https://npmjs.org/package/cdt)
-[![Downloads/week](https://img.shields.io/npm/dw/cdt.svg)](https://npmjs.org/package/cdt)
-[![License](https://img.shields.io/npm/l/cdt.svg)](https://github.com//cdt/blob/master/package.json) [![Greenkeeper badge](https://badges.greenkeeper.io/codingtools/cdt.svg)](https://greenkeeper.io/)
+[![Version](https://img.shields.io/npm/v/@codingtools/cdt.svg)](https://npmjs.org/package/@codingtools/cdt)
+[![Downloads/week](https://img.shields.io/npm/dw/@codingtools/cdt.svg)](https://npmjs.org/package/@codingtools/cdt)
+[![License](https://img.shields.io/npm/l/@codingtools/cdt.svg)](https://github.com/codingtools/cdt/blob/master/package.json) 
+[![Greenkeeper badge](https://badges.greenkeeper.io/codingtools/cdt.svg)](https://greenkeeper.io/)
+[![CircleCI](https://circleci.com/gh/codingtools/cdt/tree/master.svg?style=shield)](https://circleci.com/gh/codingtools/cdt/tree/release/release-v0.1)
+[![Downloads/week](https://img.shields.io/npm/dw/@codingtools/cdt/command.svg)](https://npmjs.org/package/@codingtools/cdt/command)
 
 <!-- toc -->
 * [Usage](#usage)

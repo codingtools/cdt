@@ -1,12 +1,12 @@
 {
   "name": "cdt",
   "description": "Command Line tools for CODERs",
-  "version": "0.0.1",
-  "author": "ashish @ashishpatel0720",
+  "version": "0.1.0",
+  "author": "Ashish Patel @ashishpatel0720",
   "bin": {
     "cdt": "./bin/run"
   },
-  "bugs": "https://github.com//cdt/issues",
+  "bugs": "https://github.com/codingtools/cdt/issues",
   "dependencies": {
     "@oclif/command": "^1.5.19",
     "@oclif/config": "^1.13.3",
