@@ -1,6 +1,6 @@
 {
   "name": "@codingtools/cdt",
-  "description": "Command Line tools for CODERs",
+  "description": "CLI for Developers",
   "version": "0.1.2",
   "author": "Ashish Patel @ashishpatel0720",
   "bin": {
