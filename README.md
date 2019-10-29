@@ -1,4 +1,4 @@
-cdt
+@codingtools/cdt
 ===
 
 CLI for Developers
@@ -7,8 +7,8 @@ CLI for Developers
 [![Version](https://img.shields.io/npm/v/@codingtools/cdt)](https://npmjs.org/package/@codingtools/cdt)
 [![License](https://img.shields.io/npm/l/@codingtools/cdt)](https://github.com/codingtools/cdt/blob/master/package.json) 
 [![Greenkeeper badge](https://badges.greenkeeper.io/codingtools/cdt.svg)](https://greenkeeper.io/)
-![GitHub contributors](https://img.shields.io/github/contributors/codingtools/cdt)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/codingtools/cdt)
+[![GitHub contributors](https://img.shields.io/github/contributors/codingtools/cdt)](https://github.com/codingtools/cdt/graphs/contributors)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/codingtools/cdt)](https://github.com/codingtools/cdt/graphs/commit-activity)
 <!--  ![Node](https://img.shields.io/node/v/@codingtools/cdt) -->
 <!-- [![Downloads](https://img.shields.io/npm/dm/@codingtools/cdt)](https://npmjs.org/package/@codingtools/cdt) -->
 
