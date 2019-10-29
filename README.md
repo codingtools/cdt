@@ -17,11 +17,11 @@ Command Line tools for CODERs
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g cdt
+$ npm install -g @codingtools/cdt
 $ cdt COMMAND
 running command...
 $ cdt (-v|--version|version)
-cdt/0.1.1 darwin-x64 node-v12.9.0
+@codingtools/cdt/0.1.1 darwin-x64 node-v12.9.0
 $ cdt --help [COMMAND]
 USAGE
   $ cdt COMMAND
