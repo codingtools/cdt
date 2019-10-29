@@ -32,7 +32,47 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`cdt crypto [STRING]`](#cdt-crypto-string)
+* [`cdt hash [STRING]`](#cdt-hash-string)
 * [`cdt help [COMMAND]`](#cdt-help-command)
+* [`cdt minify [FILE]`](#cdt-minify-file)
+
+## `cdt crypto [STRING]`
+
+Encryption and Decryption functionality for File/String
+
+```
+USAGE
+  $ cdt crypto [STRING]
+
+OPTIONS
+  -d, --decryption=decryption  decryption type, Supported [AES, DES, 3DES, Rabbit, RC4, RC4Drop]
+  -e, --encryption=encryption  encryption type, Supported [AES, DES, 3DES, Rabbit, RC4, RC4Drop]
+  -f, --file=file              file to be encrypted/decrypted
+  -h, --help                   show CLI help
+  -k, --key=key                key for encryption/decryption
+  -m, --mode=mode              Block Mode, Supported [CBC, CFB, CTR, OFB, ECB]
+  -s, --string=string          string to be encrypted/decrypted
+```
+
+_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.1.2/src/commands/crypto.ts)_
+
+## `cdt hash [STRING]`
+
+Hashing functionality for a string/file
+
+```
+USAGE
+  $ cdt hash [STRING]
+
+OPTIONS
+  -f, --file=file      file to be hashed
+  -h, --help           show CLI help
+  -s, --string=string  string to be hashed
+  -t, --type=type      type of hash [SHA1(default), MD5, SHA256, SHA512, RMD160 or RIPEMD160]
+```
+
+_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.1.2/src/commands/hash.ts)_
 
 ## `cdt help [COMMAND]`
 
@@ -50,4 +90,20 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.1/src/commands/help.ts)_
+
+## `cdt minify [FILE]`
+
+File Minifier
+
+```
+USAGE
+  $ cdt minify [FILE]
+
+OPTIONS
+  -f, --file=file  file to be minified
+  -h, --help       show CLI help
+  -t, --type=type  type of file to be minified, it will try to find type with extension
+```
+
+_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.1.2/src/commands/minify.ts)_
 <!-- commandsstop -->
