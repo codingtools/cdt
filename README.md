@@ -37,7 +37,7 @@ USAGE
 
 ## `cdt crypto [STRING]`
 
-Encryption and Decryption functionality
+Encryption and Decryption functionality for File/String
 
 ```
 USAGE
@@ -57,7 +57,7 @@ _See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.0
 
 ## `cdt hash [STRING]`
 
-create hash for a string/file
+Hashing functionality for a string/file
 
 ```
 USAGE
@@ -91,16 +91,16 @@ _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.1
 
 ## `cdt minify [FILE]`
 
-describe the command here
+File Minifier
 
 ```
 USAGE
   $ cdt minify [FILE]
 
 OPTIONS
-  -f, --force
+  -f, --file=file  file to be minified
   -h, --help       show CLI help
-  -n, --name=name  name to print
+  -t, --type=type  type of file to be minified, it will try to find type with extension
 ```
 
 _See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.0.1/src/commands/minify.ts)_
