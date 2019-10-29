@@ -21,7 +21,7 @@ $ npm install -g cdt
 $ cdt COMMAND
 running command...
 $ cdt (-v|--version|version)
-cdt/0.0.1 darwin-x64 node-v12.9.0
+cdt/0.1.0 darwin-x64 node-v12.9.0
 $ cdt --help [COMMAND]
 USAGE
   $ cdt COMMAND
@@ -53,7 +53,7 @@ OPTIONS
   -s, --string=string          string to be encrypted/decrypted
 ```
 
-_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.0.1/src/commands/crypto.ts)_
+_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.1.0/src/commands/crypto.ts)_
 
 ## `cdt hash [STRING]`
 
@@ -70,7 +70,7 @@ OPTIONS
   -t, --type=type      type of hash [SHA1(default), MD5, SHA256, SHA512, RMD160 or RIPEMD160]
 ```
 
-_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.0.1/src/commands/hash.ts)_
+_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.1.0/src/commands/hash.ts)_
 
 ## `cdt help [COMMAND]`
 
@@ -103,5 +103,5 @@ OPTIONS
   -t, --type=type  type of file to be minified, it will try to find type with extension
 ```
 
-_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.0.1/src/commands/minify.ts)_
+_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.1.0/src/commands/minify.ts)_
 <!-- commandsstop -->
