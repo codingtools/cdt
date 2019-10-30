@@ -5,7 +5,7 @@ CLI for Developers
 
 [![CircleCI](https://circleci.com/gh/codingtools/cdt/tree/release%2Frelease-v0.1.svg?style=shield)](https://circleci.com/gh/codingtools/cdt/tree/release%2Frelease-v0.1)
 [![Version](https://img.shields.io/npm/v/@codingtools/cdt)](https://npmjs.org/package/@codingtools/cdt)
-![npm](https://img.shields.io/npm/dt/@codingtools/cdt)
+![npm](https://img.shields.io/npm/dm/@codingtools/cdt)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/codingtools/cdt)](https://github.com/codingtools/cdt/graphs/commit-activity)
 [![GitHub contributors](https://img.shields.io/github/contributors/codingtools/cdt)](https://github.com/codingtools/cdt/graphs/contributors)
 [![License](https://img.shields.io/npm/l/@codingtools/cdt)](https://github.com/codingtools/cdt/blob/master/package.json) 
