@@ -1,6 +1,5 @@
 @codingtools/cdt
 ===
-
 CLI for Developers
 
 [![CircleCI](https://circleci.com/gh/codingtools/cdt/tree/release%2Frelease-v0.1.svg?style=shield)](https://circleci.com/gh/codingtools/cdt/tree/release%2Frelease-v0.1)
@@ -13,11 +12,25 @@ CLI for Developers
 <!--  ![Node](https://img.shields.io/node/v/@codingtools/cdt) -->
 <!-- [![Downloads](https://img.shields.io/npm/dm/@codingtools/cdt)](https://npmjs.org/package/@codingtools/cdt) -->
 
+
+## Introduction
+
+**cdt** is a command line utililty for developers.
+It is focused on facilitating the development of applications by helping devs to do required tasks through utilities provided to enhance efficienty.
+
+## Support the project ⭐
+
+If you feel awesome and want to support us in a small way, please consider starring and sharing the repo! This helps us getting known and grow the community. 🙏
+
+<img src="https://raw.githubusercontent.com/lusaxweb/vuesax/master/public/github-vuesax-star.gif" alt="vuesax-star" />
+
+
+
 <!-- toc -->
-* [Usage](#usage)
+* [Installation](#installation)
 * [Commands](#commands)
 <!-- tocstop -->
-# Usage
+# Installation
 <!-- usage -->
 ```sh-session
 $ npm install -g @codingtools/cdt
@@ -108,3 +121,18 @@ OPTIONS
 
 _See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.1.2/src/commands/minify.ts)_
 <!-- commandsstop -->
+
+
+## Contribution
+
+Please Contribute to this project by forking [cdt](https://github.com/codingtools/cdt/)
+
+Please feel free to provide any suggestion for new utility in [Issues](https://github.com/codingtools/cdt/issues)
+
+## @codingtools/cdt
+
+This Project is created and supported by [Ashish Patel](http://ashish.live/)
+
+## License
+
+[MIT](https://raw.githubusercontent.com/codingtools/cdt/master/LICENSE)
