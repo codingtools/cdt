@@ -1,4 +1,5 @@
 import {Command, flags} from '@oclif/command'
+import axios from 'axios'
 
 import Logger from '../utilities/logger'
 
@@ -50,6 +51,12 @@ export default class Bundlephobia extends Command {
 
   private bundlePhobia(p: string) {
     this.log('called for ' + p)
-
+    let url = `https://bundlephobia.com/api/size?package=${p}`
+    this.log('calling '+url)
+    axios
+      .get(url)
+      .then(response => this.log(response.data))
+      .catch(response => this.log(response))
+      .finally(() => this.log(`done for ${p}`))
   }
 }
