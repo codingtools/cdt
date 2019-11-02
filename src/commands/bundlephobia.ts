@@ -1,6 +1,7 @@
 import {Command, flags} from '@oclif/command'
 import axios from 'axios'
 import chalk from 'chalk'
+import {gzip} from 'zlib'
 
 import Logger from '../utilities/logger'
 
@@ -35,27 +36,21 @@ export default class Bundlephobia extends Command {
     let gzip = 0
     let dependencyCount = 0
 
-    let promiseList = args.packages.map(
+    let urlList = args.packages.map(
       (pkg: string) => this.bundlePhobia(pkg)
     )
 
-    // @ts-ignore
-    axios.all(promiseList).then(
-      axios.spread((...responses) => {
-        responses.map((successResponse: any) => {
-          size += successResponse.data.size
-          gzip += successResponse.data.gzip
-          dependencyCount += successResponse.data.dependencyCount
-          Logger.progressStop(this, this.getSuccessMessage(successResponse.data))
-        })
+    axios.all(urlList.map((url: string) => {
+      return axios.get(url).then(successResponse => {
+        size += successResponse.data.size
+        gzip += successResponse.data.gzip
+        dependencyCount += successResponse.data.dependencyCount
+        Logger.progressStop(this, this.getSuccessMessage(successResponse.data))
+      }).catch(errorResponse => {
+        Logger.progressStopError(this, this.getErrorMessage('pkg', errorResponse.response.data.error.message))
       })
-    )
-      .catch((...errors) => {
-        errors.map(errorResponse => {
-          Logger.progressStopError(this, this.getErrorMessage('pkg', errorResponse.response.data.error.message))
-        })
-      })
-      .finally(() => {
+    }))
+      . finally(() => {
         Logger.success(this, '\n' + this.getFinalMessage({
           count: args.packages.length,
           dependencyCount,
@@ -86,10 +81,7 @@ export default class Bundlephobia extends Command {
 
   private bundlePhobia(pkg: string) {
     let url = `https://bundlephobia.com/api/size?package=${pkg}`
-    return axios
-      .get(url, {
-        headers: {'User-Agent': '@codingtools/cdt', 'X-Bundlephobia-User': '@codingtools/cdt'}
-      })
+    return url
   }
 
   private getFinalMessage(data: any) {
