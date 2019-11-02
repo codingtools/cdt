@@ -14,7 +14,7 @@ export default class Bundlephobia extends Command {
     help: flags.help({char: 'h'}),
     packages: flags.string({
       char: 'p',
-      description: 'packages for which cost is required, pass more than one separated by space',
+      description: 'packages for which cost is required, can pass more than one separated by space',
       multiple: true // can get multiple package names
     }),
   }

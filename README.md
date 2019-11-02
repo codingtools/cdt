@@ -62,7 +62,7 @@ USAGE
 
 OPTIONS
   -h, --help               show CLI help
-  -p, --packages=packages  packages for which cost is required, pass more than one separated by space
+  -p, --packages=packages  packages for which cost is required, can pass more than one separated by space
 ```
 
 _See code: [src/commands/bundlephobia.ts](https://github.com/codingtools/cdt/blob/v0.1.3/src/commands/bundlephobia.ts)_
