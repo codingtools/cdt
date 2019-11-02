@@ -3,6 +3,8 @@ import axios from 'axios'
 
 import Logger from '../utilities/logger'
 
+// TODO: add multiple package support
+// ADD package.json support
 export default class Bundlephobia extends Command {
   static description = 'Find cost of adding a npm/yarn package'
 
