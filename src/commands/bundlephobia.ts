@@ -50,13 +50,32 @@ export default class Bundlephobia extends Command {
   }
 
   private bundlePhobia(p: string) {
-    this.log('called for ' + p)
+    Logger.info(this, `running for ${p}`)
+    Logger.progressStart(this, `finding size of ${p}`)
     let url = `https://bundlephobia.com/api/size?package=${p}`
-    this.log('calling '+url)
+
+    // this.log('calling: ' + url)
     axios
       .get(url)
-      .then(response => this.log(response.data))
-      .catch(response => this.log(response))
-      .finally(() => this.log(`done for ${p}`))
+      .then(successResponse => {
+        // this.showDependencyData(successResponse.data)
+        Logger.progressStop(this, this.showDependencyData(successResponse.data))
+      })
+      .catch(errorResponse => {
+        // Logger.warn(this, )
+        Logger.progressStopError(this, `[${p}] : ${errorResponse.response.data.error.message}`)
+      })
+
+    return true
+  }
+
+  private showDependencyData(data: any) {
+    // Logger.info(this, `${data.name}@${data.version} minified:${this.getKB(data.size)} gzip:${this.getKB(data.gzip)}`)
+    return `[${data.name}@${data.version}] minified:${this.getSize(data.size)} gzip:${this.getSize(data.gzip)}`
+  }
+
+  private getSize(byteSize: number) {
+    if (byteSize < 1024) return `${byteSize.toFixed(1)} B`
+    else if (byteSize > 1024) return `${(byteSize / 1024).toFixed(1)} kB`
   }
 }
