@@ -46,10 +46,27 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`cdt bundlephobia [FILE]`](#cdt-bundlephobia-file)
 * [`cdt crypto [STRING]`](#cdt-crypto-string)
 * [`cdt hash [STRING]`](#cdt-hash-string)
 * [`cdt help [COMMAND]`](#cdt-help-command)
 * [`cdt minify [FILE]`](#cdt-minify-file)
+
+## `cdt bundlephobia [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ cdt bundlephobia [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/bundlephobia.ts](https://github.com/codingtools/cdt/blob/v0.1.2/src/commands/bundlephobia.ts)_
 
 ## `cdt crypto [STRING]`
 
