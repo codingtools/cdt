@@ -1,4 +1,8 @@
 import {expect, test} from '@oclif/test'
+// @ts-ignore
+import jest from 'jest-mock'
+
+import Crypto from '../../src/commands/crypto'
 
 describe('crypto', () => {
  // // TODO: its not possible to predict the encription for a message so we can't write this,however decription is predictible
@@ -105,6 +109,5 @@ describe('crypto', () => {
     .it('Neither encryption nor decryption method passed', ctx => {
       expect(ctx.stdout).to.contain('Neither encryption or decryption methods passed')
     })
-
 
 })
