@@ -1,10 +1,12 @@
 import {Command, flags} from '@oclif/command'
 import axios from 'axios'
+import chalk from 'chalk'
 
 import Logger from '../utilities/logger'
 
 // TODO: add multiple package support
 // ADD package.json support
+// ADD VALID tests ( for now they just ignoring )
 export default class Bundlephobia extends Command {
   static description = 'Find cost of adding a npm/yarn package'
 
@@ -73,11 +75,15 @@ export default class Bundlephobia extends Command {
 
   private showDependencyData(data: any) {
     // Logger.info(this, `${data.name}@${data.version} minified:${this.getKB(data.size)} gzip:${this.getKB(data.gzip)}`)
-    return `[${data.name}@${data.version}] minified:${this.getSize(data.size)} gzip:${this.getSize(data.gzip)}`
+    return `${chalk.magenta(data.name)}@${chalk.cyan(data.version)} has ${data.dependencyCount} dependencies with size of ${this.getSize(data.size)}(${this.getSize(data.gzip)} gzipped)`
   }
 
   private getSize(byteSize: number) {
-    if (byteSize < 1024) return `${byteSize.toFixed(1)} B`
-    else if (byteSize > 1024) return `${(byteSize / 1024).toFixed(1)} kB`
+    if (byteSize >= 1024 * 1024)
+      return `${chalk.red((byteSize / (1024 * 1024)).toFixed(1) + 'MB')}`
+    else if (byteSize >= 1024)
+      return `${chalk.blue((byteSize / (1024)).toFixed(1) + 'KB')}`
+    else //if (byteSize < 1024)
+       return `${chalk.green(byteSize.toFixed(1) + 'B')}`
   }
 }
