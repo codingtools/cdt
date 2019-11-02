@@ -29,10 +29,30 @@ export default class Bundlephobia extends Command {
 
     this.checkParameters(flags, args)
 
-    args.packages.map(
-      (p: string) => this.bundlePhobia(p)
+    Logger.progressStart(this, 'finding size...')
+
+    let size = 0
+    let gzip = 0
+    let dependencyCount = 0
+
+    let responseList = await args.packages.map(
+      (pkg: string) => this.bundlePhobia(pkg)
     )
 
+    // return `${chalk.magenta('Total')} [${chalk.cyan(data.count)}] has ${data.dependencyCount} dependencies with size of ${this.getSize(data.size)}(${this.getSize(data.gzip)} gzipped)`
+
+    responseList.map((response: any) => {
+      size += response.size
+      gzip += response.gzipSize
+      dependencyCount += response.dependencyCount
+    })
+
+    Logger.success(this, this.getFinalMessage({
+      count: args.packages.length,
+      dependencyCount,
+      size,
+      gzip
+    }))
   }
 
   private getPackages(flags: any, args: any) {
@@ -53,29 +73,48 @@ export default class Bundlephobia extends Command {
       Logger.error(this, 'At least one package must be passed')
   }
 
-  private bundlePhobia(p: string) {
-    Logger.info(this, `running for ${p}`)
-    Logger.progressStart(this, `finding size of ${p}`)
-    let url = `https://bundlephobia.com/api/size?package=${p}`
+  private bundlePhobia(pkg: string) {
+    let url = `https://bundlephobia.com/api/size?package=${pkg}`
 
-    // this.log('calling: ' + url)
+    let size = 0
+    let gzipSize = 0
+    let dependencyCount = 0
     axios
-      .get(url)
+      .get(url, {
+        headers: {'User-Agent': '@codingtools/cdt', 'X-Bundlephobia-User': '@codingtools/cdt'}
+      })
       .then(successResponse => {
-        // this.showDependencyData(successResponse.data)
-        Logger.progressStop(this, this.showDependencyData(successResponse.data))
+        size = successResponse.data.size
+        gzipSize = successResponse.data.gzip
+        dependencyCount = successResponse.data.dependencyCount
+        Logger.progressStop(this, this.getSuccessMessage(successResponse.data))
       })
       .catch(errorResponse => {
-        // Logger.warn(this, )
-        Logger.progressStopError(this, `[${p}] : ${errorResponse.response.data.error.message}`)
+        Logger.progressStopError(this, this.getErrorMessage(pkg, errorResponse.response.data.error.message))
       })
 
-    return true
+    return {size , gzipSize, dependencyCount}
   }
 
-  private showDependencyData(data: any) {
-    // Logger.info(this, `${data.name}@${data.version} minified:${this.getKB(data.size)} gzip:${this.getKB(data.gzip)}`)
+  private getFinalMessage(data: any) {
+    return `${chalk.magenta('Total')} [${chalk.cyan(data.count)}] has ${data.dependencyCount} dependencies with size of ${this.getSize(data.size)}(${this.getSize(data.gzip)} gzipped)`
+  }
+
+  private getSuccessMessage(data: any) {
     return `${chalk.magenta(data.name)}@${chalk.cyan(data.version)} has ${data.dependencyCount} dependencies with size of ${this.getSize(data.size)}(${this.getSize(data.gzip)} gzipped)`
+  }
+
+  private getErrorMessage(pkg: string, message: string) {
+    // replacing will be useful when we do not have specific version
+    // output will be like below
+/*
+    ⚠ @codingtools/cdt@1.2.3 This package has not been published with this particular version.
+                     Valid versions - `<code>latest</code>`, `<code>0.1.1</code>` and `<code>0.1.2</code>`
+*/
+    if (message.includes('This package has not been published with this particular version.'))
+      message = message.replace(/`<code>|<\/code>`/g, '')
+
+    return `${chalk.magenta(pkg)} ${message}`
   }
 
   private getSize(byteSize: number) {
@@ -86,4 +125,5 @@ export default class Bundlephobia extends Command {
     else //if (byteSize < 1024)
        return `${chalk.green(byteSize.toFixed(1) + 'B')}`
   }
+
 }
