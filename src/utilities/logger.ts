@@ -33,13 +33,6 @@ export default class Logger {
   }
 
   // tslint:disable-next-line:no-unused
-  public static progressStart1(thisRef: any, message: string) {
-    // signale.watch(`${message}`)
-    Logger.spinner = Ora()
-    Logger.spinner.start()
-  }
-
-  // tslint:disable-next-line:no-unused
   public static progressStop(thisRef: any, message: string) {
     Logger.spinner.succeed(message)
   }
