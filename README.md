@@ -37,7 +37,7 @@ $ npm install -g @codingtools/cdt
 $ cdt COMMAND
 running command...
 $ cdt (-v|--version|version)
-@codingtools/cdt/0.1.2 darwin-x64 node-v12.9.0
+@codingtools/cdt/0.1.3 darwin-x64 node-v12.9.0
 $ cdt --help [COMMAND]
 USAGE
   $ cdt COMMAND
@@ -46,27 +46,26 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`cdt bundlephobia [FILE]`](#cdt-bundlephobia-file)
+* [`cdt bundlephobia [PACKAGE]`](#cdt-bundlephobia-package)
 * [`cdt crypto [STRING]`](#cdt-crypto-string)
 * [`cdt hash [STRING]`](#cdt-hash-string)
 * [`cdt help [COMMAND]`](#cdt-help-command)
 * [`cdt minify [FILE]`](#cdt-minify-file)
 
-## `cdt bundlephobia [FILE]`
+## `cdt bundlephobia [PACKAGE]`
 
-describe the command here
+Find cost of adding a npm/yarn package
 
 ```
 USAGE
-  $ cdt bundlephobia [FILE]
+  $ cdt bundlephobia [PACKAGE]
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  -h, --help               show CLI help
+  -p, --packages=packages  packages for which cost is required, pass more than one separated by space
 ```
 
-_See code: [src/commands/bundlephobia.ts](https://github.com/codingtools/cdt/blob/v0.1.2/src/commands/bundlephobia.ts)_
+_See code: [src/commands/bundlephobia.ts](https://github.com/codingtools/cdt/blob/v0.1.3/src/commands/bundlephobia.ts)_
 
 ## `cdt crypto [STRING]`
 
@@ -86,7 +85,7 @@ OPTIONS
   -s, --string=string          string to be encrypted/decrypted
 ```
 
-_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.1.2/src/commands/crypto.ts)_
+_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.1.3/src/commands/crypto.ts)_
 
 ## `cdt hash [STRING]`
 
@@ -103,7 +102,7 @@ OPTIONS
   -t, --type=type      type of hash [SHA1(default), MD5, SHA256, SHA512, RMD160 or RIPEMD160]
 ```
 
-_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.1.2/src/commands/hash.ts)_
+_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.1.3/src/commands/hash.ts)_
 
 ## `cdt help [COMMAND]`
 
@@ -133,10 +132,10 @@ USAGE
 OPTIONS
   -f, --file=file  file to be minified
   -h, --help       show CLI help
-  -t, --type=type  type of file to be minified, it will try to find type with extension
+  -t, --type=type  type of file to be minified, it will try to find type with extension supported: JS, HTML/HTM, CSS
 ```
 
-_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.1.2/src/commands/minify.ts)_
+_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.1.3/src/commands/minify.ts)_
 <!-- commandsstop -->
 
 
