@@ -10,7 +10,7 @@ export default class Minify extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
-    type: flags.string({char: 't' , description: 'type of file to be minified, it will try to find type with extension'}),
+    type: flags.string({char: 't' , description: 'type of file to be minified, it will try to find type with extension supported: JS, HTML/HTM, CSS'}),
     file: flags.string({char: 'f' , description: 'file to be minified'}),
   }
 
