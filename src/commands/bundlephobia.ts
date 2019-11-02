@@ -87,7 +87,8 @@ export default class Bundlephobia extends Command {
       }
     )
 
-    axios.all(packagesInfo.map((packageInfo: any) => {
+    // tslint:disable-next-line:no-unsafe-any no-unused
+    let x = axios.all(packagesInfo.map((packageInfo: any) => { // have to use x for removing TSLintError: promises must be handled appropriately
       return axios.get(packageInfo.url).then(successResponse => {
         packagesResolved ++
         size += successResponse.data.size
@@ -97,9 +98,11 @@ export default class Bundlephobia extends Command {
       }).catch(errorResponse => {
         Logger.progressStopError(this, Bundlephobia.getErrorMessage(packageInfo.pkg, errorResponse.response.data.error.message))
       })
+      // tslint:disable-next-line:no-unused
     }))
+      .then(() => {}).catch(() => {})
       . finally(() => {
-        Logger.success(this, '\n' + this.getFinalMessage({
+        Logger.success(this, this.getFinalMessage({
           count: packagesResolved,
           dependencyCount,
           size,
@@ -110,7 +113,7 @@ export default class Bundlephobia extends Command {
   }
 
   private getFinalMessage(data: any) {
-    return `${chalk.magenta('Total')} [${chalk.cyan(data.count + ' packages')}] resolved has ${data.dependencyCount} dependencies with size of ${Bundlephobia.getSize(data.size)}(${Bundlephobia.getSize(data.gzip)} gzipped)`
+    return `${chalk.magenta('Total')} [${chalk.cyan(data.count + ' packages resolved')}]  has ${data.dependencyCount} dependencies with size of ${Bundlephobia.getSize(data.size)}(${Bundlephobia.getSize(data.gzip)} gzipped)`
   }
 
   private getSuccessMessage(data: any) {
