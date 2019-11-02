@@ -35,24 +35,35 @@ export default class Bundlephobia extends Command {
     let gzip = 0
     let dependencyCount = 0
 
-    let responseList = await args.packages.map(
+    let promiseList = args.packages.map(
       (pkg: string) => this.bundlePhobia(pkg)
     )
 
-    // return `${chalk.magenta('Total')} [${chalk.cyan(data.count)}] has ${data.dependencyCount} dependencies with size of ${this.getSize(data.size)}(${this.getSize(data.gzip)} gzipped)`
+    // @ts-ignore
+    axios.all(promiseList).then(
+      axios.spread((...responses) => {
+        responses.map((successResponse: any) => {
+          size += successResponse.data.size
+          gzip += successResponse.data.gzip
+          dependencyCount += successResponse.data.dependencyCount
+          Logger.progressStop(this, this.getSuccessMessage(successResponse.data))
+        })
+      })
+    )
+      .catch((...errors) => {
+        errors.map(errorResponse => {
+          Logger.progressStopError(this, this.getErrorMessage('pkg', errorResponse.response.data.error.message))
+        })
+      })
+      .finally(() => {
+        Logger.success(this, '\n' + this.getFinalMessage({
+          count: args.packages.length,
+          dependencyCount,
+          size,
+          gzip
+        }))
+      })
 
-    responseList.map((response: any) => {
-      size += response.size
-      gzip += response.gzipSize
-      dependencyCount += response.dependencyCount
-    })
-
-    Logger.success(this, this.getFinalMessage({
-      count: args.packages.length,
-      dependencyCount,
-      size,
-      gzip
-    }))
   }
 
   private getPackages(flags: any, args: any) {
@@ -75,29 +86,14 @@ export default class Bundlephobia extends Command {
 
   private bundlePhobia(pkg: string) {
     let url = `https://bundlephobia.com/api/size?package=${pkg}`
-
-    let size = 0
-    let gzipSize = 0
-    let dependencyCount = 0
-    axios
+    return axios
       .get(url, {
         headers: {'User-Agent': '@codingtools/cdt', 'X-Bundlephobia-User': '@codingtools/cdt'}
       })
-      .then(successResponse => {
-        size = successResponse.data.size
-        gzipSize = successResponse.data.gzip
-        dependencyCount = successResponse.data.dependencyCount
-        Logger.progressStop(this, this.getSuccessMessage(successResponse.data))
-      })
-      .catch(errorResponse => {
-        Logger.progressStopError(this, this.getErrorMessage(pkg, errorResponse.response.data.error.message))
-      })
-
-    return {size , gzipSize, dependencyCount}
   }
 
   private getFinalMessage(data: any) {
-    return `${chalk.magenta('Total')} [${chalk.cyan(data.count)}] has ${data.dependencyCount} dependencies with size of ${this.getSize(data.size)}(${this.getSize(data.gzip)} gzipped)`
+    return `${chalk.magenta('Total')} [${chalk.cyan(data.count + ' packages')}] has ${data.dependencyCount} dependencies with size of ${this.getSize(data.size)}(${this.getSize(data.gzip)} gzipped)`
   }
 
   private getSuccessMessage(data: any) {
