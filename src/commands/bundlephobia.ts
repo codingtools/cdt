@@ -1,11 +1,10 @@
 import {Command, flags} from '@oclif/command'
 import axios from 'axios'
 import chalk from 'chalk'
-import {gzip} from 'zlib'
 
 import Logger from '../utilities/logger'
 
-// TODO: add multiple package support
+// TODO:
 // ADD package.json support
 // ADD VALID tests ( for now they just ignoring )
 export default class Bundlephobia extends Command {
@@ -22,77 +21,17 @@ export default class Bundlephobia extends Command {
 
   static args = [{name: 'package'}] // only one can be passed club which one passed through flag and arg
 
-  // values needed package
-  async run() {
-    const {args, flags} = this.parse(Bundlephobia)
-
-    args.packages = this.getPackages(flags, args) // get a list
-
-    this.checkParameters(flags, args)
-
-    Logger.progressStart(this, 'finding size...')
-
-    let size = 0
-    let gzip = 0
-    let dependencyCount = 0
-
-    let urlList = args.packages.map(
-      (pkg: string) => this.bundlePhobia(pkg)
-    )
-
-    axios.all(urlList.map((url: string) => {
-      return axios.get(url).then(successResponse => {
-        size += successResponse.data.size
-        gzip += successResponse.data.gzip
-        dependencyCount += successResponse.data.dependencyCount
-        Logger.progressStop(this, this.getSuccessMessage(successResponse.data))
-      }).catch(errorResponse => {
-        Logger.progressStopError(this, this.getErrorMessage('pkg', errorResponse.response.data.error.message))
-      })
-    }))
-      . finally(() => {
-        Logger.success(this, '\n' + this.getFinalMessage({
-          count: args.packages.length,
-          dependencyCount,
-          size,
-          gzip
-        }))
-      })
-
-  }
-
-  private getPackages(flags: any, args: any) {
+  private static getPackages(flags: any, args: any) {
     let packages = []
 
     if (args.package)
       packages.push(args.package)
-
     if (flags.packages)
       packages = packages.concat(flags.packages) // not inplace operation
-
     return packages
   }
 
-  // tslint:disable-next-line:no-unused
-  private checkParameters(flags: unknown, args: any) {
-    if (args.packages.length === 0)
-      Logger.error(this, 'At least one package must be passed')
-  }
-
-  private bundlePhobia(pkg: string) {
-    let url = `https://bundlephobia.com/api/size?package=${pkg}`
-    return url
-  }
-
-  private getFinalMessage(data: any) {
-    return `${chalk.magenta('Total')} [${chalk.cyan(data.count + ' packages')}] has ${data.dependencyCount} dependencies with size of ${this.getSize(data.size)}(${this.getSize(data.gzip)} gzipped)`
-  }
-
-  private getSuccessMessage(data: any) {
-    return `${chalk.magenta(data.name)}@${chalk.cyan(data.version)} has ${data.dependencyCount} dependencies with size of ${this.getSize(data.size)}(${this.getSize(data.gzip)} gzipped)`
-  }
-
-  private getErrorMessage(pkg: string, message: string) {
+  private static getErrorMessage(pkg: string, message: string) {
     // replacing will be useful when we do not have specific version
     // output will be like below
 /*
@@ -102,16 +41,80 @@ export default class Bundlephobia extends Command {
     if (message.includes('This package has not been published with this particular version.'))
       message = message.replace(/`<code>|<\/code>`/g, '')
 
-    return `${chalk.magenta(pkg)} ${message}`
+    return `${chalk.red(pkg)} ${message}`
   }
 
-  private getSize(byteSize: number) {
+  private static getSize(byteSize: number) {
     if (byteSize >= 1024 * 1024)
       return `${chalk.red((byteSize / (1024 * 1024)).toFixed(1) + 'MB')}`
     else if (byteSize >= 1024)
       return `${chalk.blue((byteSize / (1024)).toFixed(1) + 'KB')}`
     else //if (byteSize < 1024)
        return `${chalk.green(byteSize.toFixed(1) + 'B')}`
+  }
+
+  // values needed package
+  async run() {
+    const {args, flags} = this.parse(Bundlephobia)
+
+    args.packages = Bundlephobia.getPackages(flags, args) // get a list
+
+    this.checkParameters(flags, args)
+    this.bundlePhobia(flags, args)
+  }
+
+  // tslint:disable-next-line:no-unused
+  private checkParameters(flags: unknown, args: any) {
+    if (args.packages.length === 0)
+      Logger.error(this, 'At least one package must be passed')
+  }
+
+  // tslint:disable-next-line:no-unused
+  private bundlePhobia(flags: any, args: any) {
+    Logger.progressStart(this, 'finding size...')
+
+    let size = 0
+    let gzip = 0
+    let dependencyCount = 0
+    let packagesResolved = 0
+
+    let packagesInfo: any[] = args.packages.map(
+      (pkg: string) => {
+        return {
+          url: `https://bundlephobia.com/api/size?package=${pkg}`,
+          pkg
+        }
+      }
+    )
+
+    axios.all(packagesInfo.map((packageInfo: any) => {
+      return axios.get(packageInfo.url).then(successResponse => {
+        packagesResolved ++
+        size += successResponse.data.size
+        gzip += successResponse.data.gzip
+        dependencyCount += successResponse.data.dependencyCount
+        Logger.progressStop(this, this.getSuccessMessage(successResponse.data))
+      }).catch(errorResponse => {
+        Logger.progressStopError(this, Bundlephobia.getErrorMessage(packageInfo.pkg, errorResponse.response.data.error.message))
+      })
+    }))
+      . finally(() => {
+        Logger.success(this, '\n' + this.getFinalMessage({
+          count: packagesResolved,
+          dependencyCount,
+          size,
+          gzip
+        }))
+      })
+
+  }
+
+  private getFinalMessage(data: any) {
+    return `${chalk.magenta('Total')} [${chalk.cyan(data.count + ' packages')}] resolved has ${data.dependencyCount} dependencies with size of ${Bundlephobia.getSize(data.size)}(${Bundlephobia.getSize(data.gzip)} gzipped)`
+  }
+
+  private getSuccessMessage(data: any) {
+    return `${chalk.magenta(data.name)}@${chalk.cyan(data.version)} has ${data.dependencyCount} dependencies with size of ${Bundlephobia.getSize(data.size)}(${Bundlephobia.getSize(data.gzip)} gzipped)`
   }
 
 }
