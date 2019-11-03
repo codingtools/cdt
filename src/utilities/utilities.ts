@@ -18,4 +18,17 @@ export default class Utilities {
     }
     return fileStr
   }
+  public static getJsonObjectFromFile(thisRef: any, filePath: string) {
+    if (!fs.existsSync(filePath)) {
+      Logger.error(thisRef, `Could not find file: ${filePath}`) // this will output error and exit command
+    } else {
+      let jsonString = fs.readFileSync(filePath, 'utf8')
+      try {
+        return JSON.parse(jsonString)
+      } catch (err) {
+        Logger.error(this, 'Error parsing JSON string:' + err)
+      }
+    }
+  }
+
 }

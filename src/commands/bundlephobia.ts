@@ -3,6 +3,7 @@ import axios from 'axios'
 import chalk from 'chalk'
 
 import Logger from '../utilities/logger'
+import Utilities from '../utilities/utilities'
 
 // TODO:
 // ADD package.json support
@@ -17,19 +18,10 @@ export default class Bundlephobia extends Command {
       description: 'packages for which cost is required, can pass more than one separated by space',
       multiple: true // can get multiple package names
     }),
+    file: flags.string({char: 'f', description: 'path for package.json file'}),
   }
 
   static args = [{name: 'package'}] // only one can be passed club which one passed through flag and arg
-
-  private static getPackages(flags: any, args: any) {
-    let packages = []
-
-    if (args.package)
-      packages.push(args.package)
-    if (flags.packages)
-      packages = packages.concat(flags.packages) // not inplace operation
-    return packages
-  }
 
   private static getErrorMessage(pkg: string, message: string) {
     // replacing will be useful when we do not have specific version
@@ -57,10 +49,27 @@ export default class Bundlephobia extends Command {
   async run() {
     const {args, flags} = this.parse(Bundlephobia)
 
-    args.packages = Bundlephobia.getPackages(flags, args) // get a list
+    args.packages = this.getPackages(flags, args) // get a list
 
+    Logger.info(this, `running bundlephobia for ${args.packages.length} packages`)
     this.checkParameters(flags, args)
     this.bundlePhobia(flags, args)
+  }
+
+  private getPackages(flags: any, args: any) {
+    let packages = []
+
+    if (args.package)
+      packages.push(args.package)
+    if (flags.packages)
+      packages = packages.concat(flags.packages) // not inplace operation
+
+    // package.json file passed
+    if (flags.file) {
+      let jsonObject = Utilities.getJsonObjectFromFile(this, flags.file)
+      packages = packages.concat(this.convertObjectToArray(jsonObject.dependencies))
+    }
+    return packages
   }
 
   // tslint:disable-next-line:no-unused
@@ -113,11 +122,16 @@ export default class Bundlephobia extends Command {
   }
 
   private getFinalMessage(data: any) {
-    return `${chalk.magenta('Total')} [${chalk.cyan(data.count + ' packages resolved')}]  has ${data.dependencyCount} dependencies with size of ${Bundlephobia.getSize(data.size)}(${Bundlephobia.getSize(data.gzip)} gzipped)`
+    return `\n${chalk.magenta('Total')} [${chalk.cyan(data.count + ' packages resolved')}]  has ${data.dependencyCount} dependencies with size of ${Bundlephobia.getSize(data.size)}(${Bundlephobia.getSize(data.gzip)} gzipped)`
   }
 
   private getSuccessMessage(data: any) {
     return `${chalk.magenta(data.name)}@${chalk.cyan(data.version)} has ${data.dependencyCount} dependencies with size of ${Bundlephobia.getSize(data.size)}(${Bundlephobia.getSize(data.gzip)} gzipped)`
   }
 
+  private convertObjectToArray(jsobObject: any) {
+    return Object.keys(jsobObject).map(key => {
+      return `${key}@${jsobObject[key]}`
+    })
+  }
 }
