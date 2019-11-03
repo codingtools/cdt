@@ -46,21 +46,46 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`cdt autocomplete [SHELL]`](#cdt-autocomplete-shell)
 * [`cdt bundlephobia [PACKAGE]`](#cdt-bundlephobia-package)
 * [`cdt crypto [STRING]`](#cdt-crypto-string)
 * [`cdt hash [STRING]`](#cdt-hash-string)
 * [`cdt help [COMMAND]`](#cdt-help-command)
 * [`cdt minify [FILE]`](#cdt-minify-file)
 
+## `cdt autocomplete [SHELL]`
+
+display autocomplete installation instructions
+
+```
+USAGE
+  $ cdt autocomplete [SHELL]
+
+ARGUMENTS
+  SHELL  shell type
+
+OPTIONS
+  -r, --refresh-cache  Refresh cache (ignores displaying instructions)
+
+EXAMPLES
+  $ cdt autocomplete
+  $ cdt autocomplete bash
+  $ cdt autocomplete zsh
+  $ cdt autocomplete --refresh-cache
+```
+
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.1.4/src/commands/autocomplete/index.ts)_
+
 ## `cdt bundlephobia [PACKAGE]`
 
-Find cost of adding a npm/yarn package
+Find cost of adding a npm/yarn packages or all dependencies in package.json file
 
 ```
 USAGE
   $ cdt bundlephobia [PACKAGE]
 
 OPTIONS
+  -f, --file=file          path for package.json file
   -h, --help               show CLI help
   -p, --packages=packages  packages for which cost is required, can pass more than one separated by space
 ```
