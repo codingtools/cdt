@@ -77,9 +77,9 @@ export default class Datetime extends Command {
     let date: moment.Moment
 
     if (args.date)
-      date = moment(args.date)
+      date = moment.tz(args.date, args.timezone)
     else
-      date = moment([]) // return now() if args.date is undefined
+      date = moment.tz([], args.timezone) // return now() if args.date is undefined
 
     // set locale
     date.locale(flags.locale)

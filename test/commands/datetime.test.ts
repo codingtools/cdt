@@ -1,23 +1,24 @@
 import {expect, test} from '@oclif/test'
+import * as moment from 'moment-timezone' //has both momentjs and timezone support
 
 describe('datetime', () => {
   test
     .stdout()
-    .command(['datetime', '01-Jul-2019'])
+    .command(['datetime', '2019-07-01 00:00:00'])
     .it('If locale is not given, default - en', ctx => {
-      expect(ctx.stdout).to.contain('1st July 2019, 12:0:0 AM, +05:30 UTC')
+      expect(ctx.stdout).to.contain(`1st July 2019, 12:0:0 AM, ${moment('01-Jul-2019').format('Z')} UTC`)
     })
 
   test
     .stdout()
-    .command(['datetime', '01-Jul-2019', '-l', 'fr'])
+    .command(['datetime', '2019-07-01 00:00:00', '-l', 'fr'])
     .it('If locale is given for french', ctx => {
-      expect(ctx.stdout).to.contain('1er juillet 2019, 12:0:0 AM, +05:30 UTC')
+      expect(ctx.stdout).to.contain(`1er juillet 2019, 12:0:0 AM, ${moment('01-Jul-2019').format('Z')} UTC`)
     })
 
   test
     .stdout()
-    .command(['datetime', '01-Jul-2019', '-l', 'hi'])
+    .command(['datetime', '2019-07-01 00:00:00', '-l', 'hi'])
     .it('If locale is given for hindi', ctx => {
       expect(ctx.stdout).to.contain('१ जुलाई २०१९, १२:०:० रात, +०५:३० UTC')
     })
