@@ -49,6 +49,7 @@ USAGE
 * [`cdt autocomplete [SHELL]`](#cdt-autocomplete-shell)
 * [`cdt bundlephobia [PACKAGE]`](#cdt-bundlephobia-package)
 * [`cdt crypto [STRING]`](#cdt-crypto-string)
+* [`cdt date [FILE]`](#cdt-date-file)
 * [`cdt hash [STRING]`](#cdt-hash-string)
 * [`cdt help [COMMAND]`](#cdt-help-command)
 * [`cdt minify [FILE]`](#cdt-minify-file)
@@ -111,6 +112,22 @@ OPTIONS
 ```
 
 _See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.1.4/src/commands/crypto.ts)_
+
+## `cdt date [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ cdt date [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/date.ts](https://github.com/codingtools/cdt/blob/v0.1.4/src/commands/date.ts)_
 
 ## `cdt hash [STRING]`
 
