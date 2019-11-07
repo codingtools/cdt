@@ -127,7 +127,7 @@ OPTIONS
   -n, --name=name  name to print
 ```
 
-_See code: [src/commands/date.ts](https://github.com/codingtools/cdt/blob/v0.1.4/src/commands/date.ts)_
+_See code: [src/commands/datetime.ts](https://github.com/codingtools/cdt/blob/v0.1.4/src/commands/date.ts)_
 
 ## `cdt hash [STRING]`
 
