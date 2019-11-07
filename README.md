@@ -37,7 +37,7 @@ $ npm install -g @codingtools/cdt
 $ cdt COMMAND
 running command...
 $ cdt (-v|--version|version)
-@codingtools/cdt/0.1.4 darwin-x64 node-v12.9.0
+@codingtools/cdt/0.1.5 darwin-x64 node-v12.9.0
 $ cdt --help [COMMAND]
 USAGE
   $ cdt COMMAND
@@ -91,7 +91,7 @@ OPTIONS
   -p, --packages=packages  packages for which cost is required, can pass more than one separated by space
 ```
 
-_See code: [src/commands/bundlephobia.ts](https://github.com/codingtools/cdt/blob/v0.1.4/src/commands/bundlephobia.ts)_
+_See code: [src/commands/bundlephobia.ts](https://github.com/codingtools/cdt/blob/v0.1.5/src/commands/bundlephobia.ts)_
 
 ## `cdt crypto [STRING]`
 
@@ -111,7 +111,7 @@ OPTIONS
   -s, --string=string          string to be encrypted/decrypted
 ```
 
-_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.1.4/src/commands/crypto.ts)_
+_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.1.5/src/commands/crypto.ts)_
 
 ## `cdt datetime [DATE]`
 
@@ -122,14 +122,14 @@ USAGE
   $ cdt datetime [DATE]
 
 OPTIONS
-  -d, --date=date          Datetime input string, could also be passed through argument
-  -f, --format=format      Datetime format
+  -d, --date=date          Datetime input string, default: Current Datetime, could also be passed through argument
+  -f, --format=format      Datetime format, default: Do MMMM YYYY, h:m:s A, Z UTC
   -h, --help               show CLI help
   -l, --locale=locale      Locale, default: en
-  -z, --timezone=timezone  Timezone for Datetime
+  -z, --timezone=timezone  Timezone for Datetime parsing, default: Your timezone
 ```
 
-_See code: [src/commands/datetime.ts](https://github.com/codingtools/cdt/blob/v0.1.4/src/commands/datetime.ts)_
+_See code: [src/commands/datetime.ts](https://github.com/codingtools/cdt/blob/v0.1.5/src/commands/datetime.ts)_
 
 ## `cdt hash [STRING]`
 
@@ -146,7 +146,7 @@ OPTIONS
   -t, --type=type      type of hash [SHA1(default), MD5, SHA256, SHA512, RMD160 or RIPEMD160]
 ```
 
-_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.1.4/src/commands/hash.ts)_
+_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.1.5/src/commands/hash.ts)_
 
 ## `cdt help [COMMAND]`
 
@@ -179,7 +179,7 @@ OPTIONS
   -t, --type=type  type of file to be minified, it will try to find type with extension supported: JS, HTML/HTM, CSS
 ```
 
-_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.1.4/src/commands/minify.ts)_
+_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.1.5/src/commands/minify.ts)_
 <!-- commandsstop -->
 
 
