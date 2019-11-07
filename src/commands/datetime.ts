@@ -1,13 +1,13 @@
 import {Command, flags} from '@oclif/command'
 import chalk from 'chalk'
-import * as moment from 'moment'
+import * as moment from 'moment-timezone' //has both momentjs and timezone support
 
 // @ts-ignore
 moment.suppressDeprecationWarnings = true
 
 import Logger from '../utilities/logger'
 
-// TODO: add timezone support
+// TODO: add timezone support for input and output
 export default class Datetime extends Command {
   static description = 'Date and Time utility'
 
@@ -15,9 +15,9 @@ export default class Datetime extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
-    date: flags.string({char: 'd', description: 'Datetime input string, default: Now(), could also be passed through argument'}),
+    date: flags.string({char: 'd', description: 'Datetime input string, default: Current Datetime, could also be passed through argument'}),
     format: flags.string({char: 'f', description: `Datetime format, default: ${Datetime.defaultFormat}`}),
-    timezone: flags.string({char: 'z', description: 'Timezone for Datetime'}),
+    timezone: flags.string({char: 'z', description: 'Timezone for Datetime parsing, default: Your timezone'}),
     locale: flags.string({char: 'l', description: 'Locale, default: en'}),
   }
 
@@ -30,16 +30,26 @@ export default class Datetime extends Command {
     args.date = this.getDateString(flags, args) // getting date object
     args.locale = this.getLocale(flags, args) // getting date object
     args.format = this.getFormat(flags, args) // getting date object
+    args.timezone = this.getTimezone(flags, args) // getting date object
 
-    Logger.info(this, `Input String: ${ args.date ? args.date : chalk.magenta('Not Provided, using Now()') }`)
+    Logger.info(this, `Input String: ${ args.date ? args.date : chalk.magenta('Not Provided, using Current timestamp') }`)
     Logger.info(this, `Locale: ${chalk.magenta(args.locale)}`)
     Logger.info(this, `Format: ${chalk.magenta(args.format)}`)
+    Logger.info(this, `Timezone: ${chalk.magenta(args.timezone)}`) // true - do not used cached timezone, find every time
 
     args.momentDate = this.getMomentDate(flags, args)
     this.checkParameters(flags, args)
 
-    Logger.success(this, `${args.momentDate.format(args.format)}`)
+    Logger.success(this, `${args.momentDate.tz(args.timezone).format(args.format)}`)
 
+  }
+
+  // tslint:disable-next-line:no-unused
+  private getTimezone(flags: any, args: any) {
+    if (flags.timezone)
+      return flags.timezone
+    else
+      return moment.tz.guess(true)
   }
 
   // tslint:disable-next-line:no-unused
