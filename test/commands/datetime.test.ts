@@ -27,7 +27,15 @@ describe('datetime', () => {
     .command(['datetime', 'not a real date'])
     .exit(0)
     .it('Invalid Datetime or Datetime format with args', ctx => {
-      expect(ctx.stdout).to.contain('Invalid Datetime or Datetime format')
+      expect(ctx.stdout).to.contain('Invalid Date String Passed')
+    })
+
+  test
+    .stdout()
+    .command(['datetime', '-d', 'not a real date'])
+    .exit(0)
+    .it('Invalid Datetime or Datetime format with flags', ctx => {
+      expect(ctx.stdout).to.contain('Invalid Date String Passed')
     })
 
   test
@@ -45,11 +53,4 @@ describe('datetime', () => {
       expect(ctx.stdout).to.contain('Invalid Date String Passed')
     })
 
-  test
-    .stdout()
-    .command(['datetime', '-d', 'not a real date'])
-    .exit(0)
-    .it('Invalid Datetime or Datetime format with flags', ctx => {
-      expect(ctx.stdout).to.contain('Invalid Datetime or Datetime format')
-    })
 })

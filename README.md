@@ -49,7 +49,7 @@ USAGE
 * [`cdt autocomplete [SHELL]`](#cdt-autocomplete-shell)
 * [`cdt bundlephobia [PACKAGE]`](#cdt-bundlephobia-package)
 * [`cdt crypto [STRING]`](#cdt-crypto-string)
-* [`cdt date [FILE]`](#cdt-date-file)
+* [`cdt datetime [DATE]`](#cdt-datetime-date)
 * [`cdt hash [STRING]`](#cdt-hash-string)
 * [`cdt help [COMMAND]`](#cdt-help-command)
 * [`cdt minify [FILE]`](#cdt-minify-file)
@@ -113,21 +113,23 @@ OPTIONS
 
 _See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.1.4/src/commands/crypto.ts)_
 
-## `cdt date [FILE]`
+## `cdt datetime [DATE]`
 
-describe the command here
+Date and Time utility
 
 ```
 USAGE
-  $ cdt date [FILE]
+  $ cdt datetime [DATE]
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  -d, --date=date          Datetime input string, could also be passed through argument
+  -f, --format=format      Datetime format
+  -h, --help               show CLI help
+  -l, --locale=locale      Locale, default: en
+  -z, --timezone=timezone  Timezone for Datetime
 ```
 
-_See code: [src/commands/datetime.ts](https://github.com/codingtools/cdt/blob/v0.1.4/src/commands/date.ts)_
+_See code: [src/commands/datetime.ts](https://github.com/codingtools/cdt/blob/v0.1.4/src/commands/datetime.ts)_
 
 ## `cdt hash [STRING]`
 

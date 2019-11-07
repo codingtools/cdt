@@ -63,6 +63,9 @@
   "oclif": {
     "commands": "./lib/commands",
     "bin": "cdt",
+    "macos": {
+      "identifier": "@codingtools/cdt"
+    },
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-not-found",

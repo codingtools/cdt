@@ -1,4 +1,5 @@
 import {Command, flags} from '@oclif/command'
+import chalk from 'chalk'
 import * as moment from 'moment'
 
 // @ts-ignore
@@ -6,6 +7,7 @@ moment.suppressDeprecationWarnings = true
 
 import Logger from '../utilities/logger'
 
+// TODO: add timezone support
 export default class Datetime extends Command {
   static description = 'Date and Time utility'
 
@@ -13,8 +15,8 @@ export default class Datetime extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
-    date: flags.string({char: 'd', description: 'Datetime provided, could also be passed without -d flag'}),
-    format: flags.string({char: 'f', description: 'Datetime format'}),
+    date: flags.string({char: 'd', description: 'Datetime input string, default: Now(), could also be passed through argument'}),
+    format: flags.string({char: 'f', description: `Datetime format, default: ${Datetime.defaultFormat}`}),
     timezone: flags.string({char: 'z', description: 'Timezone for Datetime'}),
     locale: flags.string({char: 'l', description: 'Locale, default: en'}),
   }
@@ -29,9 +31,9 @@ export default class Datetime extends Command {
     args.locale = this.getLocale(flags, args) // getting date object
     args.format = this.getFormat(flags, args) // getting date object
 
-    Logger.info(this, `Input String: ${args.date}`)
-    Logger.info(this, `Locale: ${args.locale}`)
-    Logger.info(this, `Format: ${args.format}`)
+    Logger.info(this, `Input String: ${ args.date ? args.date : chalk.magenta('Not Provided, using Now()') }`)
+    Logger.info(this, `Locale: ${chalk.magenta(args.locale)}`)
+    Logger.info(this, `Format: ${chalk.magenta(args.format)}`)
 
     args.momentDate = this.getMomentDate(flags, args)
     this.checkParameters(flags, args)
