@@ -11,10 +11,6 @@ export default class Utilities {
     } else {
       fileStr = fs.readFileSync(filePath, 'utf8')
 
-      // TODO: fix this Issue #3
-      if (fileStr.charAt(fileStr.length - 1) === '\n') {
-        fileStr = fileStr.substring(0, fileStr.length - 1)
-      }
     }
     return fileStr
   }
