@@ -34,10 +34,6 @@ export default class Utilities {
 
       thisRef.log(fileStr.length)
 
-      // TODO: fix this Issue #3
-      if (fileStr.charAt(fileStr.length - 1) === '\n') {
-        fileStr = fileStr.substring(0, fileStr.length - 1)
-      }
     }
     return fileStr
   }

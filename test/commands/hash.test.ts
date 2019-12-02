@@ -87,7 +87,15 @@ describe('hash', () => {
     .stdout()
     .command(['hash', '-f', 'test/resources/test.txt'])
     .it("File Hashing -> cdt hash -f 'test/resources/test.txt'", ctx => {
-      expect(ctx.stdout).to.contain('97ee6255ffc855e79e2324d5495b6538e29034f9')
+      expect(ctx.stdout).to.contain('d246b69fd991a1256f9e00f6914c8bd2d52b432e')
+    })
+
+  //file input sha512
+  test
+    .stdout()
+    .command(['hash', '-f', 'test/resources/test.txt', '-t', 'sha512'])
+    .it("File Hashing -> cdt hash -t sha512 -f 'test/resources/test.txt'", ctx => {
+      expect(ctx.stdout).to.contain('4493b97b4a0d21fc561070c48d4a62a9bfbeb78c5d9b3c59abf6d41f70da2e9bd45af63d8c62812cf41e50e352ec41b4f407f71d5778b575c503b70081e7a151')
     })
 
   //file input - file not found
