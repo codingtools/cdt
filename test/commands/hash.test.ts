@@ -90,6 +90,14 @@ describe('hash', () => {
       expect(ctx.stdout).to.contain('d246b69fd991a1256f9e00f6914c8bd2d52b432e')
     })
 
+  //Big file input
+  test
+    .stdout()
+    .command(['hash', '-t', 'sha512', '-f', 'test/resources/react.js']) //75KB
+    .it("File Hashing -> cdt hash -f 'test/resources/react.js' -t 'sha512'", ctx => {
+      expect(ctx.stdout).to.contain('74886dc316093bad0732f29dba9117cff013ad4488c6fa15bae44b9d0cbb2e5e9e12a3af1a112f3027629a9224b324ba882e4d0c1286f9d5d0ded1d44ebb65cb')
+    })
+
   //file input sha512
   test
     .stdout()
