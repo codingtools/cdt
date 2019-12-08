@@ -106,7 +106,15 @@ describe('hash', () => {
     .it("If File not found ->cdt hash -f 'test/resources/filenotfound.txt'", ctx => {
       expect(ctx.stdout).to.contain('Could not find file')
     })
-  //installer file - checksum check
+  //installer file - checksum check sha1
+  test
+    .stdout()
+    .command(['hash', '-t', 'sha1', '-f', 'test/resources/apache-maven-3.6.3-src.tar.gz'])
+    .it('Installer checksum validation', ctx => {
+      expect(ctx.stdout).to.contain('ccf441f3bf7f477301ebc80742cbda1da73c30a2')
+    })
+
+  //installer file - checksum check sha512
   test
     .stdout()
     .command(['hash', '-t', 'sha512', '-f', 'test/resources/apache-maven-3.6.3-src.tar.gz'])
