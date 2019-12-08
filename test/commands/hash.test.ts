@@ -22,10 +22,9 @@ describe('hash', () => {
     .stdout()
     .command(['hash', '-t', 'md5'])
     .exit(0)
-    .it("Empty Input String -> cdt hash -t md5", ctx => {
+    .it('Empty Input String -> cdt hash -t md5', ctx => {
       expect(ctx.stdout).to.contain('Input string is empty or undefined')
     })
-
 
   // passing sha1 as option
   test
@@ -107,4 +106,22 @@ describe('hash', () => {
     .it("If File not found ->cdt hash -f 'test/resources/filenotfound.txt'", ctx => {
       expect(ctx.stdout).to.contain('Could not find file')
     })
+
+  // TODO: fix this issue
+  // //installer file - checksum check sha1
+  // test
+  //   .stdout()
+  //   .command(['hash', '-t', 'sha1', '-f', 'test/resources/apache-maven-3.6.3-src.tar.gz'])
+  //   .it('Installer checksum validation', ctx => {
+  //     expect(ctx.stdout).to.contain('ccf441f3bf7f477301ebc80742cbda1da73c30a2')
+  //   })
+
+  // //installer file - checksum check sha512
+  // test
+  //   .stdout()
+  //   .command(['hash', '-t', 'sha512', '-f', 'test/resources/apache-maven-3.6.3-src.tar.gz'])
+  //   .it('Installer checksum validation', ctx => {
+  //     expect(ctx.stdout).to.contain('14eef64ad13c1f689f2ab0d2b2b66c9273bf336e557d81d5c22ddb001c47cf51f03bb1465d6059ce9fdc2e43180ceb0638ce914af1f53af9c2398f5d429f114c')
+  //   })
+
 })

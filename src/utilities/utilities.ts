@@ -9,8 +9,8 @@ export default class Utilities {
     if (!fs.existsSync(filePath)) {
       Logger.error(thisRef, `Could not find file: ${filePath}`) // this will output error and exit command
     } else {
-      fileStr = fs.readFileSync(filePath, 'utf8')
-
+      let fileBuffer = fs.readFileSync(filePath)
+      fileStr = fileBuffer.toString() // by default utf8
     }
     return fileStr
   }
