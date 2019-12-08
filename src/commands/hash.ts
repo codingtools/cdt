@@ -1,6 +1,6 @@
 import {Command, flags} from '@oclif/command'
 import * as CryptoJS from 'crypto-js'
-// @ts-ignore
+// import * as Hashes from 'jshashes'
 
 import Logger from '../utilities/logger'
 import Utilities from '../utilities/utilities'
@@ -57,19 +57,19 @@ export default class Hash extends Command {
     Logger.success(this, `[${flags.type.toUpperCase()}] ${hashed}`)
   }
 
-  // import * as Hashes from 'jshashes'
-  // private getHashObjectBCK(flags: any) {
+  // BACKUP function
+  // private getHashObject2(flags: any) {
   //   switch (flags.type.toUpperCase()) {
   //   case 'SHA1':
-  //     return new Hashes.SHA1()
+  //     return new Hashes.SHA1().hex
   //   case 'SHA256':
-  //     return new Hashes.SHA256()
+  //     return new Hashes.SHA256().hex
   //   case 'SHA512':
-  //     return new Hashes.SHA512()
+  //     return new Hashes.SHA512().hex
   //   case 'MD5':
-  //     return new Hashes.MD5()
+  //     return new Hashes.MD5().hex
   //   case 'RMD160':
-  //     return new Hashes.RMD160()
+  //     return new Hashes.RMD160().hex
   //   default:
   //     Logger.error(this, 'Invalid Or Unsupported hash type')
   //   }
