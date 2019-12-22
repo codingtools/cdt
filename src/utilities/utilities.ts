@@ -38,5 +38,12 @@ export default class Utilities {
       return args.string
   }
 
-
+  public static writeStringToFile(thisRef: any, filePath: string, string: string) {
+    if (!fs.existsSync(filePath)) {
+      Logger.error(thisRef, `Could not find file: ${filePath}`) // this will output error and exit command
+    } else {
+      fs.writeFileSync(filePath, string)
+      Logger.success(thisRef, `Hash written to file: ${filePath}`) // this will output error and exit command
+    }
+  }
 }
