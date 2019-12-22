@@ -8,4 +8,4 @@
 node_modules
 /.idea
 cdt.iml
-.DS_Store
+**/.DS_Store
