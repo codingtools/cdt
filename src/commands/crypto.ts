@@ -2,7 +2,6 @@ import {Command, flags} from '@oclif/command'
 import * as CryptoJS from 'crypto-js'
 
 import Logger from '../utilities/logger'
-
 import Utilities from '../utilities/utilities'
 
 export default class Crypto extends Command {
