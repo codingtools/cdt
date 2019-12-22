@@ -39,11 +39,13 @@ export default class Utilities {
   }
 
   public static writeStringToFile(thisRef: any, filePath: string, string: string) {
-    if (!fs.existsSync(filePath)) {
-      Logger.error(thisRef, `Could not find file: ${filePath}`) // this will output error and exit command
-    } else {
-      fs.writeFileSync(filePath, string)
-      Logger.success(thisRef, `Hash written to file: ${filePath}`) // this will output error and exit command
-    }
+    if (!fs.existsSync(filePath))
+      Logger.info(thisRef, `Could not find file: ${filePath}, creating new one`) // this will output error and exit command
+    else
+      Logger.info(thisRef, `File already exists: ${filePath}, overriding content`) // this will output error and exit command
+
+    fs.writeFileSync(filePath, string)
+    Logger.success(thisRef, `Hash written to file: ${filePath}`) // this will output error and exit command
+
   }
 }
