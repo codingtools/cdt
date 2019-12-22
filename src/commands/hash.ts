@@ -30,11 +30,7 @@ export default class Hash extends Command {
 
     //check params after evaluating all
     this.checkParameters(flags, args)
-    let hashedString = this.calculateHash(flags, args)
-
-    if (flags.outputFile) { // if output path is provided then write to file also
-      Utilities.writeStringToFile(this, flags.outputFile, hashedString)
-    }
+    this.calculateHash(flags, args)
   }
 
   // to check required parameters passed or not
@@ -50,7 +46,10 @@ export default class Hash extends Command {
     // @ts-ignore
     let hashed: string = hashObject(args.string)
     Logger.success(this, `[${flags.type.toUpperCase()}] ${hashed}`)
-    return hashed
+
+    if (flags.outputFile) { // if output path is provided then write to file also
+      Utilities.writeStringToFile(this, flags.outputFile, hashed)
+    }
   }
 
   // BACKUP function
