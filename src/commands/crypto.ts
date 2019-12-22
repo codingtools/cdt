@@ -3,7 +3,7 @@ import * as CryptoJS from 'crypto-js'
 
 import Logger from '../utilities/logger'
 
-import Hash from './hash'
+import Utilities from '../utilities/utilities'
 
 export default class Crypto extends Command {
   static ENCRYPTION = 'encryption'
@@ -25,7 +25,7 @@ export default class Crypto extends Command {
   async run() {
     const {args, flags} = this.parse(Crypto)
 
-    args.string = Hash.getInputString(this, flags, args) //always add input to args
+    args.string = Utilities.getInputString(this, flags, args) //always add input to args
     args.type = flags.encryption ? flags.encryption : flags.decryption //type like AES,DES
 
     this.checkParameters(flags, args)
