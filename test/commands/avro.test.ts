@@ -16,6 +16,6 @@ describe('avro', () => {
     .command(['avro', '-f' ,'test/resources/avro/test-tabular.avro'])
     .exit(0)
     .it('if command not passed', ctx => {
-      expect(ctx.stdout).to.contain('Input is empty or not provided')
+      expect(ctx.stdout).to.contain('command is empty or not provided')
     })
 })
