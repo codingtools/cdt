@@ -1,6 +1,8 @@
 import {Command, flags} from '@oclif/command'
+import {createFileEncoder} from 'avsc'
 import * as avro from 'avsc'
-import * as chalk from 'chalk' // includes all from avro-js and some more
+import * as chalk from 'chalk'
+import * as fs from 'fs' // includes all from avro-js and some more
 
 import Logger from '../utilities/logger'
 import Utilities from '../utilities/utilities'
@@ -12,7 +14,7 @@ export default class Avro extends Command {
     help: flags.help({char: 'h'}),
     file: flags.string({char: 'f' , description: 'input file path'}),
     output: flags.string({char: 'o' , description: 'output file path'}),
-    schema: flags.string({char: 't' , description: 'schema type file path'}),
+    schemaType: flags.string({char: 't' , description: 'schema type file path'}),
 
   }
 
@@ -55,7 +57,7 @@ export default class Avro extends Command {
     avro.createFileDecoder(flags.file)
       .on('metadata', function (type) {
         let output = type.schema()
-        let schemaStr = JSON.stringify(output, null, '\t')
+        let schemaStr = JSON.stringify(output)
         Utilities.writeStringToFile(this, flags.output, schemaStr)
       })
 
@@ -64,20 +66,35 @@ export default class Avro extends Command {
     Utilities.truncateFile(this, flags.output)
     avro.createFileDecoder(flags.file)
       .on('data', function (recordStr) {
-        Utilities.appendStringToFile(this, flags.output, JSON.stringify(recordStr, null, '\t'))
+        Utilities.appendStringToFile(this, flags.output, JSON.stringify(recordStr))
       })
     Logger.success(this, `output written to file: ${chalk.green(flags.output)}`) // this will output error and exit command
   }
-  private toAvro(flags: any, args: any) {
-    if (!flags.schema)
-      Logger.error(this, 'Schema file is not provided')
-    this.checkValidSchema(flags, args)
-  }
 
-  private checkValidSchema(flags: any, args: any) {
-    let avroFile = avro.parse(flags.file)
-    // var schemaFile = {name: 'Bob', address: {city: 'Cambridge', zip: '02139'}}
-    // var status = type.isValid(person); // Boolean status.
-    console.log(avroFile)
+  private toAvro(flags: any, args: any) {
+    if (!flags.schemaType)
+      Logger.error(this, 'Schema file is not provided')
+
+    let schema = avro.parse(flags.schemaType)
+    let avroEncoder = new avro.streams.BlockEncoder(schema)
+
+    avroEncoder.pipe(fs.createWriteStream(flags.output))
+
+// We write the records to the block encoder, which will take care of serializing them
+// into an object container file.
+
+    let jsonStr = '[' + Utilities.getInputString(this, flags, args) + ']'
+    jsonStr = jsonStr.replace(/[\s\n]+/mg, '')
+    jsonStr = jsonStr.replace(/\}\{/mg, '},{')
+    let jsonObjects = JSON.parse(jsonStr)
+
+    jsonObjects.forEach( function(data){
+      if (schema.isValid(data)) {
+        avroEncoder.write(data)
+      } else {
+        Logger.warn(this, `${chalk.yellow('[SKIPPING RECORD]')} schema is invalid: ${chalk.yellowBright(JSON.stringify(data))}`)
+      }
+    })
+    avroEncoder.end()
   }
 }
