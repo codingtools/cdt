@@ -32,7 +32,7 @@ export default class Utilities {
     // if -s or -f is not passed we will take it from args
     if (flags.string) //if -s given
       return flags.string
-    else if (flags.file) {
+    else if (flags.file) { // if -f given
       Logger.info(thisRef, `reading file: ${chalk.green(flags.file)}`)
       return Utilities.getStringFromFile(thisRef, flags.file)
     } else
