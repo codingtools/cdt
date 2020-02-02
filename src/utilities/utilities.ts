@@ -50,4 +50,16 @@ export default class Utilities {
     // return `${chalk.red(pkg)} ${message}`
 
   }
+
+  public static appendStringToFile(thisRef: any, filePath: string, string: string) {
+    if (!fs.existsSync(filePath))
+      Logger.info(thisRef, `Could not find file: ${chalk.yellow(filePath + ', creating new one')}`) // this will output error and exit command
+    fs.appendFileSync(filePath, string)
+  }
+
+  public static truncateFile(thisRef: any, filePath: string) {
+    if (fs.existsSync(filePath))
+      Logger.info(thisRef, `file found: ${chalk.yellow(filePath + ', truncating')}`) // this will output error and exit command
+    Utilities.writeStringToFile(thisRef, filePath, '') // write nothing
+  }
 }

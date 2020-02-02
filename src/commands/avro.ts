@@ -1,5 +1,6 @@
 import {Command, flags} from '@oclif/command'
-import * as avro from 'avsc' // includes all from avro-js and some more
+import * as avro from 'avsc'
+import * as chalk from 'chalk' // includes all from avro-js and some more
 
 import Logger from '../utilities/logger'
 import Utilities from '../utilities/utilities'
@@ -60,14 +61,21 @@ export default class Avro extends Command {
 
   }
   private toJson(flags: any, args: any) {
+    Utilities.truncateFile(this, flags.output)
     avro.createFileDecoder(flags.file)
-      .on('data', function (data) {
-        return data
+      .on('data', function (recordStr) {
+        Utilities.appendStringToFile(this, flags.output, JSON.stringify(recordStr, null, '\t'))
       })
-
+    Logger.success(this, `output written to file: ${chalk.green(flags.output)}`) // this will output error and exit command
   }
   private toAvro(flags: any, args: any) {
 
   }
 
+  // private checkValidAvsc(){
+  //   // Or we can specify a path to a schema file (not in the browser):
+  //   var type = avro.parse('./Person.avsc');
+  //   var person = {name: 'Bob', address: {city: 'Cambridge', zip: '02139'}};
+  //   var status = type.isValid(person); // Boolean status.
+  // }
 }
