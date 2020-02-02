@@ -69,13 +69,15 @@ export default class Avro extends Command {
     Logger.success(this, `output written to file: ${chalk.green(flags.output)}`) // this will output error and exit command
   }
   private toAvro(flags: any, args: any) {
-
+    if (!flags.schema)
+      Logger.error(this, 'Schema file is not provided')
+    this.checkValidSchema(flags, args)
   }
 
-  // private checkValidAvsc(){
-  //   // Or we can specify a path to a schema file (not in the browser):
-  //   var type = avro.parse('./Person.avsc');
-  //   var person = {name: 'Bob', address: {city: 'Cambridge', zip: '02139'}};
-  //   var status = type.isValid(person); // Boolean status.
-  // }
+  private checkValidSchema(flags: any, args: any) {
+    let avroFile = avro.parse(flags.file)
+    // var schemaFile = {name: 'Bob', address: {city: 'Cambridge', zip: '02139'}}
+    // var status = type.isValid(person); // Boolean status.
+    console.log(avroFile)
+  }
 }
