@@ -5,6 +5,7 @@ import {expect, test} from '@oclif/test'
 describe('avro', () => {
   //todo if file is invalid
   test
+    .timeout(10000) // added timeout to remove timeout problem
     .stdout()
     .command(['avro'])
     .exit(0)
@@ -49,4 +50,9 @@ describe('avro', () => {
     .it('if schema file path is not passed for to_avro', ctx => {
       expect(ctx.stdout).to.contain('Schema file is not provided')
     })
+
+  // positive cases
+  // 1 - get schema
+  // 2 - to json
+  // 3 - to avro
 })
