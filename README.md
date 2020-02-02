@@ -187,6 +187,13 @@ OPTIONS
 _See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.1.5/src/commands/minify.ts)_
 <!-- commandsstop -->
 
+## Acknowledgement
+ * this cli uses following opensource libraries/services
+    * [bundlephobia](https://bundlephobia.com/)
+    * [avro-js](https://openbase.io/js/avro-js) 
+    * [avsc](https://github.com/mtth/avsc)
+    
+    And many others, great thanks to all the people involved in developnment and support :)
 
 ## Contribution
 
