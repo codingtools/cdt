@@ -1,11 +1,11 @@
 // tslint:disable-next-line:file-name-casing
+import {Command} from '@oclif/command'
 import * as chalk from 'chalk'
 import * as fs from 'fs'
-
 import Logger from './logger'
 // tslint:disable-next-line:no-unnecessary-class
 export default class Utilities {
-  public static getStringFromFile(thisRef: any, filePath: string) {
+  public static getStringFromFile(thisRef: Command, filePath: string) {
     let fileStr = ''
     if (!fs.existsSync(filePath)) {
       Logger.error(thisRef, `Could not find file: ${chalk.red(filePath)}`) // this will output error and exit command
@@ -15,7 +15,7 @@ export default class Utilities {
     }
     return fileStr
   }
-  public static getJsonObjectFromFile(thisRef: any, filePath: string) {
+  public static getJsonObjectFromFile(thisRef: Command, filePath: string) {
     if (!fs.existsSync(filePath)) {
       Logger.error(thisRef, `Could not find file: ${chalk.red(filePath)}`) // this will output error and exit command
     } else {
@@ -28,7 +28,7 @@ export default class Utilities {
     }
   }
 
-  public static getInputString(thisRef: any , flags: any, args: any) { //need to make it static so Crypto can use this
+  public static getInputString(thisRef: Command , flags: any, args: any) { //need to make it static so Crypto can use this
     // if -s or -f is not passed we will take it from args
     if (flags.string) //if -s given
       return flags.string
@@ -39,7 +39,7 @@ export default class Utilities {
       return args.string
   }
 
-  public static writeStringToFile(thisRef: any, filePath: string, string: string) {
+  public static writeStringToFile(thisRef: Command, filePath: string, string: string) {
     if (!fs.existsSync(filePath))
       Logger.info(thisRef, `Could not find file: ${chalk.yellow(filePath + ', creating new one')}`) // this will output error and exit command
     else
@@ -53,13 +53,13 @@ export default class Utilities {
 
   }
 
-  public static appendStringToFile(thisRef: any, filePath: string, string: string) {
+  public static appendStringToFile(thisRef: Command, filePath: string, string: string) {
     if (!fs.existsSync(filePath))
       Logger.info(thisRef, `Could not find file: ${chalk.yellow(filePath + ', creating new one')}`) // this will output error and exit command
     fs.appendFileSync(filePath, string)
   }
 
-  public static truncateFile(thisRef: any, filePath: string) {
+  public static truncateFile(thisRef: Command, filePath: string) {
     if (fs.existsSync(filePath))
       Logger.info(thisRef, `file found: ${chalk.yellow(filePath + ', truncating')}`) // this will output error and exit command
     Utilities.writeStringToFile(thisRef, filePath, '') // write nothing
