@@ -49,6 +49,7 @@ USAGE
 # Commands
 <!-- commands -->
 * [`cdt autocomplete [SHELL]`](#cdt-autocomplete-shell)
+* [`cdt avro [COMMAND]`](#cdt-avro-command)
 * [`cdt bundlephobia [PACKAGE]`](#cdt-bundlephobia-package)
 * [`cdt crypto [STRING]`](#cdt-crypto-string)
 * [`cdt datetime [DATE]`](#cdt-datetime-date)
@@ -78,6 +79,23 @@ EXAMPLES
 ```
 
 _See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.1.4/src/commands/autocomplete/index.ts)_
+
+## `cdt avro [COMMAND]`
+
+Avro Utility command
+
+```
+USAGE
+  $ cdt avro [COMMAND]
+
+OPTIONS
+  -f, --file=file              input file path
+  -h, --help                   show CLI help
+  -o, --output=output          output file path
+  -t, --schemaType=schemaType  schema type file path
+```
+
+_See code: [src/commands/avro.ts](https://github.com/codingtools/cdt/blob/v0.1.5/src/commands/avro.ts)_
 
 ## `cdt bundlephobia [PACKAGE]`
 
