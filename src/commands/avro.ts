@@ -69,13 +69,18 @@ export default class Avro extends Command {
       .on('metadata', function (type) {
         let output = type.schema()
         let schemaStr = JSON.stringify(output)
+        if (flags.output) {
           // @ts-ignore
-        Logger.info(this,
-          `Printing Schema, can find same in  ${chalk.yellow(flags.output)}\n${JSON.stringify(output, null, '  ')}`
-        )
-        Utilities.writeStringToFile(this , flags.output, schemaStr)
+          Utilities.writeStringToFile(this, flags.output, schemaStr)
+        } else {
+          // @ts-ignore
+          Logger.success(this,
+            `${chalk.yellow('Avro Schema')}\n${JSON.stringify(output, null, '  ')}`
+          )
+        }
       })
   }
+
   // tslint:disable-next-line:no-unused
   private toJson(flags: any, args: any) {
     Utilities.truncateFile(this, flags.output)
