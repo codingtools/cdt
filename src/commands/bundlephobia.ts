@@ -6,7 +6,6 @@ import Logger from '../utilities/logger'
 import Utilities from '../utilities/utilities'
 
 // TODO:
-// ADD package.json support
 // ADD VALID tests ( for now they just ignoring )
 export default class Bundlephobia extends Command {
   static description = 'Find cost of adding a npm/yarn packages or all dependencies in package.json file'
