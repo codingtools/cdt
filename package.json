@@ -1,7 +1,7 @@
 {
   "name": "@codingtools/cdt",
   "description": "CLI for Developers",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "author": "Ashish Patel @ashishpatel0720",
   "bin": {
     "cdt": "./bin/run"
@@ -16,6 +16,7 @@
     "@oclif/plugin-help": "^2.2.1",
     "@oclif/plugin-not-found": "^1.2.3",
     "@oclif/plugin-warn-if-update-available": "^1.7.0",
+    "avsc": "^5.4.18",
     "axios": "^0.19.0",
     "chalk": "^3.0.0",
     "crypto-js": "^3.1.9-1",
@@ -76,7 +77,7 @@
       "@oclif/plugin-autocomplete"
     ],
     "warn-if-update-available": {
-      "timeoutInDays": 1,
+      "timeoutInDays": 7,
       "message": "<%= chalk.blue(config.name) %> update available from <%= chalk.greenBright(config.version) %> to <%= chalk.greenBright(latest) %>."
     }
   },

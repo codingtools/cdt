@@ -39,7 +39,7 @@ $ npm install -g @codingtools/cdt
 $ cdt COMMAND
 running command...
 $ cdt (-v|--version|version)
-@codingtools/cdt/0.1.5 darwin-x64 node-v12.9.0
+@codingtools/cdt/0.1.6 darwin-x64 node-v12.9.0
 $ cdt --help [COMMAND]
 USAGE
   $ cdt COMMAND
@@ -49,6 +49,7 @@ USAGE
 # Commands
 <!-- commands -->
 * [`cdt autocomplete [SHELL]`](#cdt-autocomplete-shell)
+* [`cdt avro [COMMAND]`](#cdt-avro-command)
 * [`cdt bundlephobia [PACKAGE]`](#cdt-bundlephobia-package)
 * [`cdt crypto [STRING]`](#cdt-crypto-string)
 * [`cdt datetime [DATE]`](#cdt-datetime-date)
@@ -79,6 +80,23 @@ EXAMPLES
 
 _See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.1.4/src/commands/autocomplete/index.ts)_
 
+## `cdt avro [COMMAND]`
+
+Avro Utility command
+
+```
+USAGE
+  $ cdt avro [COMMAND]
+
+OPTIONS
+  -f, --file=file              input file path
+  -h, --help                   show CLI help
+  -o, --output=output          output file path
+  -t, --schemaType=schemaType  schema type file path
+```
+
+_See code: [src/commands/avro.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/avro.ts)_
+
 ## `cdt bundlephobia [PACKAGE]`
 
 Find cost of adding a npm/yarn packages or all dependencies in package.json file
@@ -93,7 +111,7 @@ OPTIONS
   -p, --packages=packages  packages for which cost is required, can pass more than one separated by space
 ```
 
-_See code: [src/commands/bundlephobia.ts](https://github.com/codingtools/cdt/blob/v0.1.5/src/commands/bundlephobia.ts)_
+_See code: [src/commands/bundlephobia.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/bundlephobia.ts)_
 
 ## `cdt crypto [STRING]`
 
@@ -113,7 +131,7 @@ OPTIONS
   -s, --string=string          string to be encrypted/decrypted
 ```
 
-_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.1.5/src/commands/crypto.ts)_
+_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/crypto.ts)_
 
 ## `cdt datetime [DATE]`
 
@@ -131,7 +149,7 @@ OPTIONS
   -z, --timezone=timezone  Timezone for Datetime parsing, default: Your timezone
 ```
 
-_See code: [src/commands/datetime.ts](https://github.com/codingtools/cdt/blob/v0.1.5/src/commands/datetime.ts)_
+_See code: [src/commands/datetime.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/datetime.ts)_
 
 ## `cdt hash [STRING]`
 
@@ -149,7 +167,7 @@ OPTIONS
   -t, --type=type              type of hash [SHA1(default), MD5, SHA256, SHA512, RMD160 or RIPEMD160]
 ```
 
-_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.1.5/src/commands/hash.ts)_
+_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/hash.ts)_
 
 ## `cdt help [COMMAND]`
 
@@ -185,9 +203,16 @@ OPTIONS
                                HTML/HTM, CSS
 ```
 
-_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.1.5/src/commands/minify.ts)_
+_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/minify.ts)_
 <!-- commandsstop -->
 
+## Acknowledgement
+ * this cli uses following opensource libraries/services
+    * [bundlephobia](https://bundlephobia.com/)
+    * [avro-js](https://openbase.io/js/avro-js) 
+    * [avsc](https://github.com/mtth/avsc)
+    
+    And many others, great thanks to all the people involved in developnment and support :)
 
 ## Contribution
 
@@ -198,6 +223,18 @@ Please feel free to provide any suggestion for new utility in [Issues](https://g
 ## @codingtools/cdt
 
 This Project is created and supported by [Ashish Patel](http://ashish.live/)
+
+## Releasing Version
+* this needs to be done from release* branch
+```bash
+npm version patch 
+```
+it will update readme.md and update package.json, also will create tag and commit.
+
+```bash
+npm publish --access public
+```
+this will publish package to **npm**
 
 ## License
 
