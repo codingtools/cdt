@@ -2,6 +2,7 @@ import {expect, test} from '@oclif/test'
 
 describe('hash', () => {
   test
+    .timeout(10000) // added timeout to resolve timeout problem
     .stdout()
     .command(['hash', 'ashish'])
     .it("Check default type -> cdt hash 'ashish'", ctx => {

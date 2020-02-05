@@ -8,7 +8,13 @@ import Utilities from '../utilities/utilities'
 
 export default class Avro extends Command {
   static description = 'Avro Utility command'
-  static SupportedCommands = ['get_schema', 'to_json', 'to_avro']
+
+  static GET_SCHEMA = 'get_schema'
+  static TO_JSON = 'to_json'
+  static TO_AVRO = 'to_avro'
+
+  // do not change order otherwise we need to change order in getCommand() also
+  static SupportedCommands = [Avro.GET_SCHEMA, Avro.TO_JSON, Avro.TO_AVRO]
   static flags = {
     help: flags.help({char: 'h'}),
     file: flags.string({char: 'f' , description: 'input file path'}),
@@ -30,16 +36,22 @@ export default class Avro extends Command {
 
   // to check required parameters passed or not
   private checkParameters(flags: any, args: any) {
-    if (flags.file === undefined || flags.file === '')
+    if (!flags.file)
       Logger.error(this, 'Input file is not provided')
-    if (flags.output === undefined || args.output === '')
-      Logger.error(this, 'Output file is not provided')
-    if (args.command === undefined || args.command === '')
+    if (!args.command)
       Logger.error(this, 'Command is empty or not provided, supported:' + Avro.SupportedCommands)
+
+    // if exists then make it upperCase
+    args.command = args.command.toLowerCase()
+
+    // output is not mendatory for 'get_schema' command
+    if (args.command !== Avro.GET_SCHEMA && !flags.output)
+      Logger.error(this, 'Output file is not provided')
+
   }
 
   private executeCommand(flags: any, args: any) {
-    switch (args.command.toLowerCase()) {
+    switch (args.command) {
     case Avro.SupportedCommands[0]:
       return this.getSchema(flags, args)
     case Avro.SupportedCommands[1]:
