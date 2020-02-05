@@ -89,7 +89,7 @@ export default class Avro extends Command {
         // @ts-ignore
         Utilities.appendStringToFile(this, flags.output, JSON.stringify(recordStr))
       })
-    Logger.success(this, `output written to file: ${chalk.green(flags.output)}`) // this will output error and exit command
+    Logger.success(this, `${chalk.blue('Json')} written to file: ${chalk.green(flags.output)}`) // this will output error and exit command
   }
 
   private toAvro(flags: any, args: any) {
@@ -117,6 +117,7 @@ export default class Avro extends Command {
         Logger.warn(this, `${chalk.yellow('[SKIPPING RECORD]')} schema is invalid: ${chalk.yellowBright(JSON.stringify(data))}`)
       }
     })
+    Logger.success(this, `${chalk.blue('Avro')} written to file: ${chalk.green(flags.output)}`) // this will output error and exit command
     avroEncoder.end()
   }
 }

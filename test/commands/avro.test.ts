@@ -19,14 +19,14 @@ describe('avro', () => {
     })
   test
     .stdout()
-    .command(['avro', '-f', 'test/resources/avro/person.avro', '-o', 'output_file.example'])
+    .command(['avro', '-f', 'test/resources/avro/person.avro', '-o', 'test/resources/avro/output/person.json'])
     .exit(0)
     .it('if command not passed', ctx => {
       expect(ctx.stdout).to.contain('Command is empty or not provided')
     })
   test
     .stdout()
-    .command(['avro', '-f', 'test/resources/avro/person.avro', '-o', 'output_file.example', 'unsupported_command'])
+    .command(['avro', '-f', 'test/resources/avro/person.avro', '-o', 'test/resources/avro/output/person.json', 'unsupported_command'])
     .exit(0)
     .it('if command is invalid', ctx => {
       expect(ctx.stdout).to.contain('Unsupported Command')
@@ -43,16 +43,11 @@ describe('avro', () => {
 
   test
     .stdout()
-    .command(['avro', '-f', 'test/resources/avro/person.avro', '-o', 'output_file.example', 'to_avro'])
+    .command(['avro', '-f', 'test/resources/avro/person.json', '-o', 'test/resources/avro/output/person.avro', 'to_avro'])
     .exit(0)
     .it('if schema file path is not passed for to_avro', ctx => {
       expect(ctx.stdout).to.contain('Schema file is not provided')
     })
-
-  // positive cases
-  // 1 - get schema
-  // 2 - to json
-  // 3 - to avro
 
   /* TODO: why this tests is breaking */
   // test
@@ -62,5 +57,22 @@ describe('avro', () => {
   //     expect(ctx.stdout).to.contain('success')
   //   })
 
+  //      setTimeout(() => // TODO: can we remove it and check if we can resolve promise here
+  //         expect(ctx.stdout).to.contain(' [react@16.10.2] minified:6.5 kB gzip:2.6 kB')
+  //       , 5000) // proving 5 seconds just to be safe
 
+  test
+    .stdout()
+    .command(['avro', '-f', 'test/resources/avro/person.avro', '-o', 'test/resources/avro/output/person.json','to_json'])
+    .it('if to_json commands run with success', ctx => {
+      expect(ctx.stdout).to.contain('success')
+    })
+
+  test
+    .timeout(20000) // added timeout to resolve timeout problem
+    .stdout()
+    .command(['avro', '-f', 'test/resources/avro/person.json', '-o', 'test/resources/avro/output/person.avro', '-t', 'test/resources/avro/person.avsc', 'to_avro'])
+    .it('if to_avro commands run with success', ctx => {
+      expect(ctx.stdout).to.contain('success')
+    })
 })
