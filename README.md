@@ -234,7 +234,7 @@ it will update readme.md and update package.json, also will create tag and commi
 ```bash
 npm publish --access public
 ```
-this will publish package to **npm**
+this will publish package to **npm** starting with updating README and publishing tarballs
 
 ## License
 
