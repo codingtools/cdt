@@ -224,6 +224,18 @@ Please feel free to provide any suggestion for new utility in [Issues](https://g
 
 This Project is created and supported by [Ashish Patel](http://ashish.live/)
 
+## Releasing Version
+* this needs to be done from release* branch
+```bash
+npm version patch 
+```
+it will update readme.md and update package.json, also will create tag and commit.
+
+```bash
+npm publish --access public
+```
+this will publish package to **npm**
+
 ## License
 
 [MIT](https://raw.githubusercontent.com/codingtools/cdt/master/LICENSE)
