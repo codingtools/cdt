@@ -2,6 +2,7 @@
 ===
 CLI for Developers
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/82d29e2a902a4c338228d636f290d9cd)](https://app.codacy.com/gh/codingtools/cdt?utm_source=github.com&utm_medium=referral&utm_content=codingtools/cdt&utm_campaign=Badge_Grade_Dashboard)
 [![CircleCI](https://circleci.com/gh/codingtools/cdt/tree/release%2Frelease-v0.1.svg?style=shield)](https://circleci.com/gh/codingtools/cdt/tree/release%2Frelease-v0.1)
 [![Version](https://img.shields.io/npm/v/@codingtools/cdt)](https://npmjs.org/package/@codingtools/cdt)
 ![npm](https://img.shields.io/npm/dt/@codingtools/cdt)
