@@ -58,7 +58,10 @@ export default class Avro extends Command {
         let output = type.schema()
         let schemaStr = JSON.stringify(output)
           // @ts-ignore
-        Utilities.writeStringToFile(this, flags.output, schemaStr)
+        Logger.info(this,
+          `Printing Schema, can find same in  ${chalk.yellow(flags.output)}\n${JSON.stringify(output, null, '  ')}`
+        )
+        Utilities.writeStringToFile(this , flags.output, schemaStr)
       })
   }
   // tslint:disable-next-line:no-unused

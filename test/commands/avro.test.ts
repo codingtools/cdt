@@ -34,7 +34,7 @@ describe('avro', () => {
       expect(ctx.stdout).to.contain('Unsupported Command')
     })
 
-  // not able to write test, as we are not getting exit(0), as we are not able to catch error using try-catch
+  /* not able to write test, as we are not getting exit(0), as we are not able to catch error using try-catch */
   // test
   //   .stdout()
   //   .command(['avro', '-f' ,'test/resources/avro/file_not_exists.avro', '-o', 'output_file.example', 'get_schema'])
