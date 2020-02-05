@@ -49,17 +49,15 @@ describe('avro', () => {
       expect(ctx.stdout).to.contain('Schema file is not provided')
     })
 
-  /* TODO: why this tests is breaking */
-  // test
-  //   .stdout()
-  //   .command(['avro', '-f', 'test/resources/avro/person.avro', 'get_schema'])
-  //   .it('if get_schema outputs to console', ctx => {
-  //     expect(ctx.stdout).to.contain('success')
-  //   })
+  test
+    .stdout()
+    .command(['avro', '-f', 'test/resources/avro/person.avro', 'get_schema'])
+    .it('if get_schema outputs to console', ctx => {
+      setTimeout(() =>
+          expect(ctx.stdout).to.contain('success')
+        , 5000) //  wait for it to write stuff on console
+    })
 
-  //      setTimeout(() => // TODO: can we remove it and check if we can resolve promise here
-  //         expect(ctx.stdout).to.contain(' [react@16.10.2] minified:6.5 kB gzip:2.6 kB')
-  //       , 5000) // proving 5 seconds just to be safe
 
   test
     .stdout()
