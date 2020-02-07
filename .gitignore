@@ -9,3 +9,5 @@ node_modules
 /.idea
 cdt.iml
 **/.DS_Store
+output/*
+!output/.gitkeep

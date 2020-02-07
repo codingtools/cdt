@@ -12,7 +12,7 @@ export default class Minify extends Command {
     help: flags.help({char: 'h'}),
     type: flags.string({char: 't' , description: 'type of file to be minified, it will try to find type with extension supported: JS, HTML/HTM, CSS'}),
     file: flags.string({char: 'f' , description: 'file to be minified'}),
-    outputFile: flags.string({char: 'o' , description: 'output file path'}),
+    output: flags.string({char: 'o' , description: 'output file path'}),
   }
 
   static args = [{name: 'file'}]
@@ -100,8 +100,8 @@ export default class Minify extends Command {
     Logger.progressStop(this, `file: ${flags.file} minified`)
     // }, 1000)
 
-    if (flags.outputFile) { // if output path is provided then write to file also
-      Utilities.writeStringToFile(this, flags.outputFile, output)
+    if (flags.output) { // if output path is provided then write to file also
+      Utilities.writeStringToFile(this, flags.output, output)
     } else
       Logger.success(this, `minified output: \n${output}`)
   }
