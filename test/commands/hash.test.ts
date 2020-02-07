@@ -2,7 +2,7 @@ import {expect, test} from '@oclif/test'
 
 describe('hash', () => {
   test
-    .timeout(10000) // added timeout to resolve timeout problem
+    .timeout(20000) // added timeout to resolve timeout problem
     .stdout()
     .command(['hash', 'ashish'])
     .it("Check default type -> cdt hash 'ashish'", ctx => {
@@ -105,6 +105,13 @@ describe('hash', () => {
     .command(['hash', '-f', 'test/resources/test.txt', '-t', 'sha512'])
     .it("File Hashing -> cdt hash -t sha512 -f 'test/resources/test.txt'", ctx => {
       expect(ctx.stdout).to.contain('4493b97b4a0d21fc561070c48d4a62a9bfbeb78c5d9b3c59abf6d41f70da2e9bd45af63d8c62812cf41e50e352ec41b4f407f71d5778b575c503b70081e7a151')
+    })
+
+  test
+    .stdout()
+    .command(['hash', '-f', 'test/resources/test.txt', '-t', 'sha512', '--output', 'test/resources/out.txt'])
+    .it("File Hashing, output to a file", ctx => {
+      expect(ctx.stdout).to.contain('✔  success   output written to file')
     })
 
   //file input - file not found
