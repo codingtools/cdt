@@ -109,7 +109,7 @@ describe('hash', () => {
 
   test
     .stdout()
-    .command(['hash', '-f', 'test/resources/test.txt', '-t', 'sha512', '--output', 'test/resources/out.txt'])
+    .command(['hash', '-f', 'test/resources/test.txt', '-t', 'sha512', '--output', 'test/resources/output/out.txt'])
     .it("File Hashing, output to a file", ctx => {
       expect(ctx.stdout).to.contain('✔  success   output written to file')
     })

@@ -49,7 +49,7 @@ describe('minify', () => {
 
   test
     .stdout()
-    .command(['minify', '-f', 'test/resources/test.css', '--output', 'test/resources/ouput.css'])
+    .command(['minify', '-f', 'test/resources/test.css', '--output', 'test/resources/output/ouput.css'])
     .it('Minify CSS, output to a file', ctx => {
       expect(ctx.stdout).to.contain('✔  success   output written to file')
     })
