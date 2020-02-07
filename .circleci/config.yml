@@ -26,12 +26,6 @@ jobs:
       - run:
           name: Generate code coverage
           command: './node_modules/.bin/nyc report --reporter=json > coverage/coverage.json'
-      - store_artifacts:
-          path: test-results.xml
-          prefix: tests
-      - store_artifacts:
-          path: coverage
-          prefix: coverage
       - run:
           name: send code coverage to codecov
           command: ./node_modules/.bin/codecov
