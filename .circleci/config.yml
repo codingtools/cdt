@@ -33,11 +33,8 @@ jobs:
           path: coverage
           prefix: coverage
       - run:
-          name: Install codecov
-          command: npm install codecov -g
-      - run:
           name: send code coverage to codecov
-          command: codecov
+          command: ./node_modules/.bin/codecov
 
 workflows:
   version: 2
