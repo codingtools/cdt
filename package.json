@@ -29,6 +29,7 @@
     "nyc": "^15.0.0",
     "ora": "^4.0.2",
     "signale": "^1.4.0",
+    "test": "^0.6.0",
     "tslib": "^1.10.0"
   },
   "devDependencies": {

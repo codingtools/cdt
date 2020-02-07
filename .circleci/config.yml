@@ -25,13 +25,19 @@ jobs:
           command: npm test
       - run:
           name: Generate code coverage
-          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+          command: './node_modules/.bin/nyc report --reporter=json > coverage/coverage.json'
       - store_artifacts:
           path: test-results.xml
           prefix: tests
       - store_artifacts:
           path: coverage
           prefix: coverage
+      - run:
+          name: Install codecov
+          command: npm install codecov -g
+      - run:
+          name: send code coverage to codecov
+          command: codecov
 
 workflows:
   version: 2
