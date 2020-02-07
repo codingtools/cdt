@@ -25,7 +25,7 @@ jobs:
           command: npm test
       - run:
           name: Generate code coverage
-          command: './node_modules/.bin/nyc report --reporter=json > coverage/coverage.json'
+          command: ./node_modules/.bin/nyc report --reporter=json
       - run:
           name: send code coverage to codecov
           command: ./node_modules/.bin/codecov
