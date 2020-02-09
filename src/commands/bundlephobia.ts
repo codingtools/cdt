@@ -22,7 +22,7 @@ export default class Bundlephobia extends Command {
 
   static args = [{name: 'package'}] // only one can be passed club which one passed through flag and arg
 
-  private static getErrorMessage(pkg: string, message: string) {
+  private getErrorMessage(pkg: string, message: string) {
     // replacing will be useful when we do not have specific version
     // output will be like below
 /*
@@ -104,7 +104,7 @@ export default class Bundlephobia extends Command {
         dependencyCount += successResponse.data.dependencyCount
         Logger.progressStop(this, this.getSuccessMessage(successResponse.data))
       }).catch(errorResponse => {
-        Logger.progressStopError(this, Bundlephobia.getErrorMessage(packageInfo.pkg, errorResponse.response.data.error.message))
+        Logger.progressStopError(this, this.getErrorMessage(packageInfo.pkg, errorResponse.response.data.error.message))
       })
       // tslint:disable-next-line:no-unused
     }))

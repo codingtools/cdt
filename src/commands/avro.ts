@@ -2,6 +2,7 @@ import {Command, flags} from '@oclif/command'
 import * as avro from 'avsc'
 import * as chalk from 'chalk'
 import * as fs from 'fs' // includes all from avro-js and some more
+import * as Json2Csv from 'json-2-csv'
 
 import Logger from '../utilities/logger'
 import Utilities from '../utilities/utilities'
@@ -59,8 +60,8 @@ export default class Avro extends Command {
       return this.toJson(flags, args)
     case Avro.TO_AVRO:
       return this.toAvro(flags, args)
-    // case Avro.TO_CSV:
-    //   return this.toCsv(flags, args)
+    case Avro.TO_CSV:
+      return this.toCsv(flags, args)
     default:
       Logger.error(this, 'Unsupported Command, supported: ' + Avro.SupportedCommands)
     }
@@ -96,26 +97,27 @@ export default class Avro extends Command {
   }
 
 //   // tslint:disable-next-line:no-unused
-//   private toCsv(flags: any, args: any) {
-//     var json2Csv = require("json-2-csv")
-//
-//     let json=`
-// {
-// "created_at": "Thu May 10 15:24:15 +0000 2018",
-//  "id_str": "850006245121695744",
-//  "text": "Here is the Tweet message.",
-//  "user": {
-//  },
-//  "place": {
-//  },
-//  "entities": {
-//  },
-//  "extended_entities": {
-//  }
-// }
-// `
-//
-//   }
+  private toCsv(flags: any, args: any) {
+    Logger.progressStart(this, '')
+    Utilities.truncateFile(this, flags.output)
+
+    let prependHeader = true // only write on the first line
+
+    avro.createFileDecoder(flags.file)
+      .on('data', function (recordStr) {
+        // @ts-ignore
+        let json = JSON.parse(JSON.stringify(recordStr))
+        Json2Csv.json2csv(json, (err?: Error, csv?: string) => {
+          if (csv)
+            Utilities.appendStringToFile(this, flags.output, csv + '\n')
+          if (err)
+            Logger.error(this, err)
+        }, {prependHeader})
+        prependHeader = false
+      })
+    Logger.progressStop(this, "done")
+    Logger.success(this, `${chalk.blue('Csv')} written to file: ${chalk.green(flags.output)}`) // this will output error and exit command
+  }
 
   private toAvro(flags: any, args: any) {
     if (!flags.schemaType)
@@ -129,9 +131,9 @@ export default class Avro extends Command {
 // We write the records to the block encoder, which will take care of serializing them
 // into an object container file.
 
-    let jsonStr = '[' + Utilities.getInputString(this, flags, args) + ']'
-    jsonStr = jsonStr.replace(/[\s\n]+/mg, '')
-    jsonStr = jsonStr.replace(/\}\{/mg, '},{')
+    let inputString = Utilities.getInputString(this, flags, args)
+    let jsonStr = this.convertAvroJsonToValidJson(inputString)
+
     let jsonObjects = JSON.parse(jsonStr)
 
     jsonObjects.forEach(function (data: any) {
@@ -144,5 +146,12 @@ export default class Avro extends Command {
     })
     Logger.success(this, `${chalk.blue('Avro')} written to file: ${chalk.green(flags.output)}`) // this will output error and exit command
     avroEncoder.end()
+  }
+
+  private convertAvroJsonToValidJson(json: string) {
+    let jsonStr = '[' + json + ']'
+    jsonStr = jsonStr.replace(/[\s\n]+/mg, '')
+    jsonStr = jsonStr.replace(/\}\{/mg, '},{')
+    return jsonStr
   }
 }
