@@ -1,8 +1,10 @@
 name: GithubPublish
 
 on:
-  release:
-    types: [created]
+  push:
+    tags:
+      - v0.1.*
+      - v0.2.*
 
 jobs:
   build:
