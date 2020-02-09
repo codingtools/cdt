@@ -240,14 +240,20 @@ npm publish --access public
 ```
 this will publish package to **npm** starting with updating README and publishing tarballs
 
-### Creating Standalone Installers
+### Creating Standalone Tarbalss
 
 ```bash
 oclif-dev pack
+```
+this will release standalone tarballs for linux, macos and windows which we can extract and uses.
+
+### Creating Installers
+
+```bash 
 oclif-dev pack:macos 
 oclif-dev pack:win 
 ```
-this will release standalone tarballs for linux, macos and windows, respectively
+these will create installers for macos and windows
 
 ## License
 
