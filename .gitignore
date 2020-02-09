@@ -10,9 +10,10 @@ node_modules
 cdt.iml
 **/.DS_Store
 
-output/*.json
-output/*.avro
-output/*.avsc
+output
+output/**.json
+output/**.avro
+output/**.avsc
 
 coverage/*.json
 
