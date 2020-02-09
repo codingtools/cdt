@@ -240,7 +240,9 @@ npm publish --access public
 ```
 this will publish package to **npm** starting with updating README and publishing tarballs
 
-### Creating Standalone Tarbalss
+> Already a Github Action is there to publish on pushing a tag.
+
+### Creating Standalone Tarballs
 
 ```bash
 oclif-dev pack
