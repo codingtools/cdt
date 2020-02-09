@@ -16,7 +16,7 @@ export default class Hash extends Command {
     type: flags.string({char: 't' , description: 'type of hash [SHA1(default), MD5, SHA256, SHA512, RMD160 or RIPEMD160]'}),
     string: flags.string({char: 's' , description: 'string to be hashed'}),
     file: flags.string({char: 'f' , description: 'file to be hashed'}),
-    outputFile: flags.string({char: 'o' , description: 'output file path'}),
+    output: flags.string({char: 'o' , description: 'output file path'}),
   }
 
   static args = [{name: 'string'}]
@@ -47,8 +47,8 @@ export default class Hash extends Command {
     let hashed: string = hashObject(args.string)
     Logger.success(this, `[${flags.type.toUpperCase()}] ${hashed}`)
 
-    if (flags.outputFile) { // if output path is provided then write to file also
-      Utilities.writeStringToFile(this, flags.outputFile, hashed)
+    if (flags.output) { // if output path is provided then write to file also
+      Utilities.writeStringToFile(this, flags.output, hashed)
     }
   }
 
