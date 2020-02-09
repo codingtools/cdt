@@ -12,9 +12,10 @@ export default class Avro extends Command {
   static GET_SCHEMA = 'get_schema'
   static TO_JSON = 'to_json'
   static TO_AVRO = 'to_avro'
+  static TO_CSV = 'to_csv'
 
   // do not change order otherwise we need to change order in getCommand() also
-  static SupportedCommands = [Avro.GET_SCHEMA, Avro.TO_JSON, Avro.TO_AVRO]
+  static SupportedCommands = [Avro.GET_SCHEMA, Avro.TO_JSON, Avro.TO_AVRO, Avro.TO_CSV]
   static flags = {
     help: flags.help({char: 'h'}),
     file: flags.string({char: 'f' , description: 'input file path'}),
@@ -52,12 +53,14 @@ export default class Avro extends Command {
 
   private executeCommand(flags: any, args: any) {
     switch (args.command) {
-    case Avro.SupportedCommands[0]:
+    case Avro.GET_SCHEMA:
       return this.getSchema(flags, args)
-    case Avro.SupportedCommands[1]:
+    case Avro.TO_JSON:
       return this.toJson(flags, args)
-    case Avro.SupportedCommands[2]:
+    case Avro.TO_AVRO:
       return this.toAvro(flags, args)
+    // case Avro.TO_CSV:
+    //   return this.toCsv(flags, args)
     default:
       Logger.error(this, 'Unsupported Command, supported: ' + Avro.SupportedCommands)
     }
@@ -91,6 +94,28 @@ export default class Avro extends Command {
       })
     Logger.success(this, `${chalk.blue('Json')} written to file: ${chalk.green(flags.output)}`) // this will output error and exit command
   }
+
+//   // tslint:disable-next-line:no-unused
+//   private toCsv(flags: any, args: any) {
+//     var json2Csv = require("json-2-csv")
+//
+//     let json=`
+// {
+// "created_at": "Thu May 10 15:24:15 +0000 2018",
+//  "id_str": "850006245121695744",
+//  "text": "Here is the Tweet message.",
+//  "user": {
+//  },
+//  "place": {
+//  },
+//  "entities": {
+//  },
+//  "extended_entities": {
+//  }
+// }
+// `
+//
+//   }
 
   private toAvro(flags: any, args: any) {
     if (!flags.schemaType)

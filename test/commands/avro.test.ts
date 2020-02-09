@@ -1,4 +1,5 @@
 import {expect, test} from '@oclif/test'
+import {readFileSync} from 'fs'
 
 describe('avro', () => {
   //todo if file is invalid
@@ -59,15 +60,16 @@ describe('avro', () => {
     })
 
 
-  test
-    .stdout()
-    .command(['avro', '-f', 'test/resources/avro/person.avro', '-o', 'test/resources/avro/output/person.json','to_json'])
-    .it('if to_json commands run with success', ctx => {
-      expect(ctx.stdout).to.contain('success')
-    })
+  // test
+  //   .stdout()
+  //   .command(['avro', '-f', 'test/resources/avro/person.avro', '-o', 'test/resources/avro/output/person.json','to_json'])
+  //   .it('if to_json commands run with success', ctx => {
+  //     expect(ctx.stdout).to.contain('success')
+  //     let buffer = readFileSync("test/resources/avro/output/person.json")
+  //     expect(buffer.toJSON()).to.contain()
+  //   })
 
   test
-    .timeout(20000) // added timeout to resolve timeout problem
     .stdout()
     .command(['avro', '-f', 'test/resources/avro/person.json', '-o', 'test/resources/avro/output/person.avro', '-t', 'test/resources/avro/person.avsc', 'to_avro'])
     .it('if to_avro commands run with success', ctx => {
