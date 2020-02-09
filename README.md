@@ -161,11 +161,11 @@ USAGE
   $ cdt hash [STRING]
 
 OPTIONS
-  -f, --file=file              file to be hashed
-  -h, --help                   show CLI help
-  -o, --outputFile=outputFile  output file path
-  -s, --string=string          string to be hashed
-  -t, --type=type              type of hash [SHA1(default), MD5, SHA256, SHA512, RMD160 or RIPEMD160]
+  -f, --file=file      file to be hashed
+  -h, --help           show CLI help
+  -o, --output=output  output file path
+  -s, --string=string  string to be hashed
+  -t, --type=type      type of hash [SHA1(default), MD5, SHA256, SHA512, RMD160 or RIPEMD160]
 ```
 
 _See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/hash.ts)_
@@ -196,12 +196,10 @@ USAGE
   $ cdt minify [FILE]
 
 OPTIONS
-  -f, --file=file              file to be minified
-  -h, --help                   show CLI help
-  -o, --outputFile=outputFile  output file path
-
-  -t, --type=type              type of file to be minified, it will try to find type with extension supported: JS,
-                               HTML/HTM, CSS
+  -f, --file=file      file to be minified
+  -h, --help           show CLI help
+  -o, --output=output  output file path
+  -t, --type=type      type of file to be minified, it will try to find type with extension supported: JS, HTML/HTM, CSS
 ```
 
 _See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/minify.ts)_
