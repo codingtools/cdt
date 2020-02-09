@@ -88,44 +88,44 @@ export default class Avro extends Command {
   // tslint:disable-next-line:no-unused
   private toJson(flags: any, args: any) {
     Logger.progressStart(this, 'Converting Avro To Json')
-    setTimeout(() => {
-      Logger.progressStop(this, ' Done')
-      Utilities.truncateFile(this, flags.output)
-      avro.createFileDecoder(flags.file)
-        .on('data', function (recordStr) {
+    // setTimeout(() => {
+    Logger.progressStop(this, ' Converting Avro To Json')
+    Utilities.truncateFile(this, flags.output)
+    avro.createFileDecoder(flags.file)
+      .on('data', function (recordStr) {
         // @ts-ignore
-          Utilities.appendStringToFile(this, flags.output, JSON.stringify(recordStr))
-        })
-      Logger.success(this, `${chalk.blue('Json')} written to file: ${chalk.green(flags.output)}`) // this will output error and exit command
-    }, 1000)
+        Utilities.appendStringToFile(this, flags.output, JSON.stringify(recordStr))
+      })
+    Logger.success(this, `${chalk.blue('Json')} written to file: ${chalk.green(flags.output)}`) // this will output error and exit command
+    // }, 1000)
   }
 
 // tslint:disable-next-line:no-unused
   private toCsv(flags: any, args: any) {
     Logger.progressStart(this, 'Converting Avro To Csv')
 
-    setTimeout(() => {
-      Logger.progressStop(this, ' Done')
-      Utilities.truncateFile(this, flags.output)
-      let prependHeader = true // only write on the first line
-      avro.createFileDecoder(flags.file)
-        .on('data', function (recordStr) {
+    // setTimeout(() => {
+    Logger.progressStop(this, ' Converting Avro To Csv')
+    Utilities.truncateFile(this, flags.output)
+    let prependHeader = true // only write on the first line
+    avro.createFileDecoder(flags.file)
+      .on('data', function (recordStr) {
           // @ts-ignore
-          let json = JSON.parse(JSON.stringify(recordStr))
-          Json2Csv.json2csv(json, (err?: Error, csv?: string) => {
-            if (csv) {
+        let json = JSON.parse(JSON.stringify(recordStr))
+        Json2Csv.json2csv(json, (err?: Error, csv?: string) => {
+          if (csv) {
               // @ts-ignore
-              Utilities.appendStringToFile(this, flags.output, csv + '\n')
-            }
-            if (err) {
+            Utilities.appendStringToFile(this, flags.output, csv + '\n')
+          }
+          if (err) {
               // @ts-ignore
-              Logger.error(this, err.toString())
-            }
-          }, {prependHeader})
-          prependHeader = false
-        })
-      Logger.success(this, `${chalk.blue('Csv')} written to file: ${chalk.green(flags.output)}`) // this will output error and exit command
-    }, 1000)
+            Logger.error(this, err.toString())
+          }
+        }, {prependHeader})
+        prependHeader = false
+      })
+    Logger.success(this, `${chalk.blue('Csv')} written to file: ${chalk.green(flags.output)}`) // this will output error and exit command
+    // }, 300)
   }
 
   private toAvro(flags: any, args: any) {
@@ -133,33 +133,33 @@ export default class Avro extends Command {
       Logger.error(this, 'Schema file is not provided')
 
     Logger.progressStart(this, 'Generating Avro')
-    setTimeout(() => {
-      Logger.progressStop(this, ' Done')
+    // setTimeout(() => {
+    Logger.progressStop(this, ' Generating Avro')
 
-      let schema = avro.parse(flags.schemaType)
-      let avroEncoder = new avro.streams.BlockEncoder(schema)
+    let schema = avro.parse(flags.schemaType)
+    let avroEncoder = new avro.streams.BlockEncoder(schema)
 
-      avroEncoder.pipe(fs.createWriteStream(flags.output))
+    avroEncoder.pipe(fs.createWriteStream(flags.output))
 
 // We write the records to the block encoder, which will take care of serializing them
 // into an object container file.
 
-      let inputString = Utilities.getInputString(this, flags, args)
-      let jsonStr = this.convertAvroJsonToValidJson(inputString)
+    let inputString = Utilities.getInputString(this, flags, args)
+    let jsonStr = this.convertAvroJsonToValidJson(inputString)
 
-      let jsonObjects = JSON.parse(jsonStr)
+    let jsonObjects = JSON.parse(jsonStr)
 
-      jsonObjects.forEach(function (data: any) {
-        if (schema.isValid(data)) {
-          avroEncoder.write(data)
-        } else {
+    jsonObjects.forEach(function (data: any) {
+      if (schema.isValid(data)) {
+        avroEncoder.write(data)
+      } else {
         // @ts-ignore
-          Logger.warn(this, `${chalk.yellow('[SKIPPING RECORD]')} schema is invalid: ${chalk.yellowBright(JSON.stringify(data))}`)
-        }
-      })
-      Logger.success(this, `${chalk.blue('Avro')} written to file: ${chalk.green(flags.output)}`) // this will output error and exit command
-      avroEncoder.end()
-    }, 1000)
+        Logger.warn(this, `${chalk.yellow('[SKIPPING RECORD]')} schema is invalid: ${chalk.yellowBright(JSON.stringify(data))}`)
+      }
+    })
+    Logger.success(this, `${chalk.blue('Avro')} written to file: ${chalk.green(flags.output)}`) // this will output error and exit command
+    avroEncoder.end()
+    // }, 300)
 
   }
 
