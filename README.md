@@ -225,15 +225,29 @@ This Project is created and supported by [Ashish Patel](http://ashish.live/)
 
 ## Releasing Version
 * this needs to be done from release* branch
+
+### Increasing Version
+
 ```bash
 npm version patch 
 ```
 it will update readme.md and update package.json, also will create tag and commit.
 
+### Publishing to NPM
+
 ```bash
 npm publish --access public
 ```
 this will publish package to **npm** starting with updating README and publishing tarballs
+
+### Creating Standalone Installers
+
+```bash
+oclif-dev pack
+oclif-dev pack:macos 
+oclif-dev pack:win 
+```
+this will release standalone tarballs for linux, macos and windows, respectively
 
 ## License
 
