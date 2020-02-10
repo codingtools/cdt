@@ -9,6 +9,12 @@ node_modules
 /.idea
 cdt.iml
 **/.DS_Store
-output/*
-!output/.gitkeep
+
+output
+output/**.json
+output/**.avro
+output/**.avsc
+
 coverage/*.json
+
+

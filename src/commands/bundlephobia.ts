@@ -22,19 +22,6 @@ export default class Bundlephobia extends Command {
 
   static args = [{name: 'package'}] // only one can be passed club which one passed through flag and arg
 
-  private static getErrorMessage(pkg: string, message: string) {
-    // replacing will be useful when we do not have specific version
-    // output will be like below
-/*
-    ⚠ @codingtools/cdt@1.2.3 This package has not been published with this particular version.
-                     Valid versions - `<code>latest</code>`, `<code>0.1.1</code>` and `<code>0.1.2</code>`
-*/
-    if (message.includes('This package has not been published with this particular version.'))
-      message = message.replace(/`<code>|<\/code>`/g, '')
-
-    return `${chalk.red(pkg)} ${message}`
-  }
-
   private static getSize(byteSize: number) {
     if (byteSize >= 1024 * 1024)
       return `${chalk.red((byteSize / (1024 * 1024)).toFixed(1) + 'MB')}`
@@ -53,6 +40,19 @@ export default class Bundlephobia extends Command {
     Logger.info(this, `running bundlephobia for ${args.packages.length} packages`)
     this.checkParameters(flags, args)
     this.bundlePhobia(flags, args)
+  }
+
+  private getErrorMessage(pkg: string, message: string) {
+    // replacing will be useful when we do not have specific version
+    // output will be like below
+/*
+    ⚠ @codingtools/cdt@1.2.3 This package has not been published with this particular version.
+                     Valid versions - `<code>latest</code>`, `<code>0.1.1</code>` and `<code>0.1.2</code>`
+*/
+    if (message.includes('This package has not been published with this particular version.'))
+      message = message.replace(/`<code>|<\/code>`/g, '')
+
+    return `${chalk.red(pkg)} ${message}`
   }
 
   private getPackages(flags: any, args: any) {
@@ -104,7 +104,7 @@ export default class Bundlephobia extends Command {
         dependencyCount += successResponse.data.dependencyCount
         Logger.progressStop(this, this.getSuccessMessage(successResponse.data))
       }).catch(errorResponse => {
-        Logger.progressStopError(this, Bundlephobia.getErrorMessage(packageInfo.pkg, errorResponse.response.data.error.message))
+        Logger.progressStopError(this, this.getErrorMessage(packageInfo.pkg, errorResponse.response.data.error.message))
       })
       // tslint:disable-next-line:no-unused
     }))
