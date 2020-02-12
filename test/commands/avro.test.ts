@@ -4,7 +4,6 @@ import {readFileSync} from 'fs'
 describe('avro', () => {
   //todo if file is invalid
   test
-    .timeout(20000) // added timeout to resolve timeout problem
     .stdout()
     .command(['avro'])
     .exit(0)
@@ -74,11 +73,13 @@ describe('avro', () => {
     .it('if to_json commands run with success', ctx => {
       expect(ctx.stdout).to.contain('success')
     })
+
+  test
+    .stdout()
+    .command(['avro', '-f', 'test/resources/avro/person.avro', '-o', 'test/resources/avro/output/person.csv','to_csv'])
+    .it('if to_csv commands run with success', ctx => {
+      expect(ctx.stdout).to.contain('success')
+    })
+
 })
 
-test
-  .stdout()
-  .command(['avro', '-f', 'test/resources/avro/person.avro', '-o', 'test/resources/avro/output/person.csv','to_csv'])
-  .it('if to_csv commands run with success', ctx => {
-    expect(ctx.stdout).to.contain('success')
-  })
