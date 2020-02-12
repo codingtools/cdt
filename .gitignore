@@ -6,6 +6,7 @@
 /tmp
 /yarn.lock
 node_modules
+.idea/
 cdt.iml
 **/.DS_Store
 
