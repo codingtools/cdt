@@ -2,7 +2,6 @@ import {expect, test} from '@oclif/test'
 
 describe('minify', () => {
   test
-    .timeout(20000) // added timeout to resolve timeout problem
     .stdout()
     .command(['minify', '-t', 'js'])
     .exit(0)

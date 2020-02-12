@@ -4,7 +4,6 @@ import {readFileSync} from 'fs'
 describe('avro', () => {
   //todo if file is invalid
   test
-    .timeout(20000) // added timeout to resolve timeout problem
     .stdout()
     .command(['avro'])
     .exit(0)
