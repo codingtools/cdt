@@ -41,7 +41,7 @@
     "@types/chai": "^4.2.9",
     "@types/mocha": "^7.0.0",
     "@types/moment-timezone": "^0.5.12",
-    "@types/node": "^13.1.0",
+    "@types/node": "13.7.0",
     "@types/crypto-js": "^3.1.43",
     "@types/signale": "^1.2.1",
     "chai": "^4.2.0",
