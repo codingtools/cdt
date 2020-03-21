@@ -229,7 +229,7 @@ This Project is created and managed by [Ashish Patel](http://ashish.live/)
 ### Increasing Version
 
 ```bash
-npm version patch 
+npm version [patch|minor|major] 
 ```
 it will update readme.md and update package.json, also will create tag and commit.
 
