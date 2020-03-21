@@ -1,18 +1,7 @@
 import {expect, test} from '@oclif/test'
-// @ts-ignore
-import jest from 'jest-mock'
-
 import Crypto from '../../src/commands/crypto'
 
 describe('crypto', () => {
- // // TODO: its not possible to predict the encription for a message so we can't write this,however decription is predictible
- //  test
- //    .stdout()
- //    .command(['crypto', '-e', 'aes', '-s', 'Message', '-k', 'Secret Passphrase'])
- //    .it('runs hello', ctx => {
- //      expect(ctx.stdout).to.contain('73e54154a15d1beeb509d9e12f1e462a0')
- //    })
- //
 
   test
     .stdout()
@@ -109,5 +98,54 @@ describe('crypto', () => {
     .it('Neither encryption nor decryption method passed', ctx => {
       expect(ctx.stdout).to.contain('Neither encryption or decryption methods passed')
     })
+
+
+  test
+    .stdout()
+    .it('AES encryption and decryption Integration Test', async(ctx) => {
+      let encrypt =  await Crypto.run(['crypto', '-e', 'aes', '-s', 'Message', '-k', 'secret']);
+      let decrypt = await Crypto.run(['crypto', '-d', 'aes', '-s', encrypt, '-k', 'secret']);
+      expect(decrypt).to.contain('Message');
+    });
+
+  test
+    .stdout()
+    .it('DES encryption and decryption Integration Test', async(ctx) => {
+      let encrypt =  await Crypto.run(['crypto', '-e', 'DES', '-s', 'Message', '-k', 'secret']);
+      let decrypt = await Crypto.run(['crypto', '-d', 'DES', '-s', encrypt, '-k', 'secret']);
+      expect(decrypt).to.contain('Message');
+    });
+
+  test
+    .stdout()
+    .it('3DES encryption and decryption Integration Test', async(ctx) => {
+      let encrypt =  await Crypto.run(['crypto', '-e', '3DES', '-s', 'Message', '-k', 'secret']);
+      let decrypt = await Crypto.run(['crypto', '-d', '3DES', '-s', encrypt, '-k', 'secret']);
+      expect(decrypt).to.contain('Message');
+    });
+
+  test
+    .stdout()
+    .it('Rabbit encryption and decryption Integration Test', async(ctx) => {
+      let encrypt =  await Crypto.run(['crypto', '-e', 'Rabbit', '-s', 'Message', '-k', 'secret']);
+      let decrypt = await Crypto.run(['crypto', '-d', 'Rabbit', '-s', encrypt, '-k', 'secret']);
+      expect(decrypt).to.contain('Message');
+    });
+
+  test
+    .stdout()
+    .it('RC4 encryption and decryption Integration Test', async(ctx) => {
+      let encrypt =  await Crypto.run(['crypto', '-e', 'RC4', '-s', 'Message', '-k', 'secret']);
+      let decrypt = await Crypto.run(['crypto', '-d', 'RC4', '-s', encrypt, '-k', 'secret']);
+      expect(decrypt).to.contain('Message');
+    });
+
+  test
+    .stdout()
+    .it('RC4Drop encryption and decryption Integration Test', async(ctx) => {
+      let encrypt =  await Crypto.run(['crypto', '-e', 'RC4Drop', '-s', 'Message', '-k', 'secret']);
+      let decrypt = await Crypto.run(['crypto', '-d', 'RC4Drop', '-s', encrypt, '-k', 'secret']);
+      expect(decrypt).to.contain('Message');
+    });
 
 })

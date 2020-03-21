@@ -221,7 +221,7 @@ Please feel free to provide any suggestion for new utility in [Issues](https://g
 
 ## @codingtools/cdt
 
-This Project is created and supported by [Ashish Patel](http://ashish.live/)
+This Project is created and managed by [Ashish Patel](http://ashish.live/)
 
 ## Releasing Version
 * this needs to be done from release* branch
