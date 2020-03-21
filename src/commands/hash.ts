@@ -1,9 +1,10 @@
 import {Command, flags} from '@oclif/command'
 import * as CryptoJS from 'crypto-js'
-// @ts-ignore
 
 import Logger from '../utilities/logger'
 import Utilities from '../utilities/utilities'
+// import * as Hashes from 'jshashes'
+
 // TODO: all are Hexadecimal encoding for now, can also add b64
 
 export default class Hash extends Command {
@@ -15,27 +16,17 @@ export default class Hash extends Command {
     type: flags.string({char: 't' , description: 'type of hash [SHA1(default), MD5, SHA256, SHA512, RMD160 or RIPEMD160]'}),
     string: flags.string({char: 's' , description: 'string to be hashed'}),
     file: flags.string({char: 'f' , description: 'file to be hashed'}),
+    output: flags.string({char: 'o' , description: 'output file path'}),
   }
 
   static args = [{name: 'string'}]
-
-  static getInputString(thisRef: any , flags: any, args: any) { //need to make it static so Crypto can use this
-    // if -s or -f is not passed we will take it from args
-    if (flags.string) //if -s given
-      return flags.string
-    else if (flags.file) {
-      Logger.info(thisRef, `reading file: ${flags.file}`)
-      return Utilities.getStringFromFile(thisRef, flags.file)
-    } else
-      return args.string
-  }
 
   // only 2 parameters required HASH_TYPE and INPUT_STRING
   async run() {
     const {args, flags} = this.parse(Hash)
 
     flags.type = this.getHashType(flags) //by default let it be sha1
-    args.string = Hash.getInputString(this, flags, args) // from either -s,-f or args
+    args.string = Utilities.getInputString(this, flags, args) // from either -s,-f or args
 
     //check params after evaluating all
     this.checkParameters(flags, args)
@@ -55,21 +46,25 @@ export default class Hash extends Command {
     // @ts-ignore
     let hashed: string = hashObject(args.string)
     Logger.success(this, `[${flags.type.toUpperCase()}] ${hashed}`)
+
+    if (flags.output) { // if output path is provided then write to file also
+      Utilities.writeStringToFile(this, flags.output, hashed)
+    }
   }
 
-  // import * as Hashes from 'jshashes'
-  // private getHashObjectBCK(flags: any) {
+  // BACKUP function
+  // private getHashObject2(flags: any) {
   //   switch (flags.type.toUpperCase()) {
   //   case 'SHA1':
-  //     return new Hashes.SHA1()
+  //     return new Hashes.SHA1().hex
   //   case 'SHA256':
-  //     return new Hashes.SHA256()
+  //     return new Hashes.SHA256().hex
   //   case 'SHA512':
-  //     return new Hashes.SHA512()
+  //     return new Hashes.SHA512().hex
   //   case 'MD5':
-  //     return new Hashes.MD5()
+  //     return new Hashes.MD5().hex
   //   case 'RMD160':
-  //     return new Hashes.RMD160()
+  //     return new Hashes.RMD160().hex
   //   default:
   //     Logger.error(this, 'Invalid Or Unsupported hash type')
   //   }

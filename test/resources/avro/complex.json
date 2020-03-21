@@ -1,0 +1,52 @@
+{
+ "stringArray": [
+  "string1",
+  "string2",
+  "string3",
+  "string4",
+  "string5"
+ ],
+ "longArray": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "enumField": "C",
+ "mapOfInts": {
+  "key4": 4,
+  "key3": 3,
+  "key5": 5,
+  "key2": 2,
+  "key1": 1
+ },
+ "unionField": "union value",
+ "fixedField": {
+  "type": "Buffer",
+  "data": [
+   1,
+   2,
+   3,
+   4,
+   1,
+   2,
+   3,
+   4,
+   1,
+   2,
+   3,
+   4,
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ "recordField": {
+  "longRecordField": 1925639126735,
+  "stringRecordField": "I am a test record",
+  "intRecordField": 666,
+  "floatRecordField": 7171.169921875
+ }
+}

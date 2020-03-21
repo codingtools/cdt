@@ -1,7 +1,7 @@
 {
   "name": "@codingtools/cdt",
   "description": "CLI for Developers",
-  "version": "0.1.2",
+  "version": "0.1.6",
   "author": "Ashish Patel @ashishpatel0720",
   "bin": {
     "cdt": "./bin/run"
@@ -12,15 +12,25 @@
   "dependencies": {
     "@oclif/command": "^1.5.19",
     "@oclif/config": "^1.13.3",
+    "@oclif/plugin-autocomplete": "^0.1.4",
     "@oclif/plugin-help": "^2.2.1",
-    "@types/crypto-js": "^3.1.43",
-    "@types/signale": "^1.2.1",
+    "@oclif/plugin-not-found": "^1.2.3",
+    "@oclif/plugin-warn-if-update-available": "^1.7.0",
+    "avsc": "^5.4.18",
+    "axios": "^0.19.0",
+    "chalk": "^3.0.0",
+    "codecov": "^3.6.5",
     "crypto-js": "^3.1.9-1",
+    "detect-character-encoding": "^0.8.0",
+    "encoding-japanese": "^1.0.30",
     "jshashes": "^1.0.7",
-    "minify": "^4.1.3",
-    "nyc": "^14.1.1",
+    "minify": "^5.0.0",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.27",
+    "nyc": "^15.0.0",
     "ora": "^4.0.2",
     "signale": "^1.4.0",
+    "test": "^0.6.0",
     "tslib": "^1.10.0"
   },
   "devDependencies": {
@@ -28,8 +38,11 @@
     "@oclif/test": "^1.2.5",
     "@oclif/tslint": "^3.1.1",
     "@types/chai": "^4.2.3",
-    "@types/mocha": "^5.2.7",
-    "@types/node": "^12.11.2",
+    "@types/mocha": "^7.0.0",
+    "@types/moment-timezone": "^0.5.12",
+    "@types/node": "^13.1.0",
+    "@types/crypto-js": "^3.1.43",
+    "@types/signale": "^1.2.1",
     "chai": "^4.2.0",
     "globby": "^10.0.1",
     "jest": "^24.9.0",
@@ -58,9 +71,19 @@
   "oclif": {
     "commands": "./lib/commands",
     "bin": "cdt",
+    "macos": {
+      "identifier": "@codingtools/cdt"
+    },
     "plugins": [
-      "@oclif/plugin-help"
-    ]
+      "@oclif/plugin-help",
+      "@oclif/plugin-not-found",
+      "@oclif/plugin-warn-if-update-available",
+      "@oclif/plugin-autocomplete"
+    ],
+    "warn-if-update-available": {
+      "timeoutInDays": 7,
+      "message": "<%= chalk.blue(config.name) %> update available from <%= chalk.greenBright(config.version) %> to <%= chalk.greenBright(latest) %>."
+    }
   },
   "repository": {
     "type": "git",

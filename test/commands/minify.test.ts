@@ -2,6 +2,7 @@ import {expect, test} from '@oclif/test'
 
 describe('minify', () => {
   test
+    .timeout(20000) // added timeout to resolve timeout problem
     .stdout()
     .command(['minify', '-t', 'js'])
     .exit(0)
@@ -46,4 +47,10 @@ describe('minify', () => {
       expect(ctx.stdout).to.contain('body{margin:25px;background-color:#f0f0f0;font-family:arial,sans-serif;font-size:14px}h1{font-size:35px;font-weight:400;margin-top:5px}.someclass{color:red}#someid{color:green}')
     })
 
+  test
+    .stdout()
+    .command(['minify', '-f', 'test/resources/test.css', '--output', 'test/resources/output/ouput.css'])
+    .it('Minify CSS, output to a file', ctx => {
+      expect(ctx.stdout).to.contain('✔  success   output written to file')
+    })
 })

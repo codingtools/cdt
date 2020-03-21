@@ -2,10 +2,13 @@
 ===
 CLI for Developers
 
+[![GithubCI](https://github.com/codingtools/cdt/workflows/GithubCI/badge.svg)](https://github.com/codingtools/cdt/actions?query=workflow%3AGithubCI)
 [![CircleCI](https://circleci.com/gh/codingtools/cdt/tree/release%2Frelease-v0.1.svg?style=shield)](https://circleci.com/gh/codingtools/cdt/tree/release%2Frelease-v0.1)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/82d29e2a902a4c338228d636f290d9cd)](https://app.codacy.com/gh/codingtools/cdt?utm_source=github.com&utm_medium=referral&utm_content=codingtools/cdt&utm_campaign=Badge_Grade_Dashboard)
+[![codecov](https://codecov.io/gh/codingtools/cdt/branch/release%2Frelease-v0.1/graph/badge.svg)](https://codecov.io/gh/codingtools/cdt)
 [![Version](https://img.shields.io/npm/v/@codingtools/cdt)](https://npmjs.org/package/@codingtools/cdt)
-![npm](https://img.shields.io/npm/dm/@codingtools/cdt)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/codingtools/cdt)](https://github.com/codingtools/cdt/graphs/commit-activity)
+![npm](https://img.shields.io/npm/dt/@codingtools/cdt)
+![node (scoped)](https://img.shields.io/node/v/@codingtools/cdt)[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/codingtools/cdt)](https://github.com/codingtools/cdt/graphs/commit-activity)
 [![GitHub contributors](https://img.shields.io/github/contributors/codingtools/cdt)](https://github.com/codingtools/cdt/graphs/contributors)
 [![License](https://img.shields.io/npm/l/@codingtools/cdt)](https://github.com/codingtools/cdt/blob/master/package.json) 
 [![Greenkeeper badge](https://badges.greenkeeper.io/codingtools/cdt.svg)](https://greenkeeper.io/)
@@ -37,7 +40,7 @@ $ npm install -g @codingtools/cdt
 $ cdt COMMAND
 running command...
 $ cdt (-v|--version|version)
-@codingtools/cdt/0.1.2 darwin-x64 node-v12.9.0
+@codingtools/cdt/0.1.6 darwin-x64 node-v12.9.0
 $ cdt --help [COMMAND]
 USAGE
   $ cdt COMMAND
@@ -46,10 +49,70 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`cdt autocomplete [SHELL]`](#cdt-autocomplete-shell)
+* [`cdt avro [COMMAND]`](#cdt-avro-command)
+* [`cdt bundlephobia [PACKAGE]`](#cdt-bundlephobia-package)
 * [`cdt crypto [STRING]`](#cdt-crypto-string)
+* [`cdt datetime [DATE]`](#cdt-datetime-date)
 * [`cdt hash [STRING]`](#cdt-hash-string)
 * [`cdt help [COMMAND]`](#cdt-help-command)
 * [`cdt minify [FILE]`](#cdt-minify-file)
+
+## `cdt autocomplete [SHELL]`
+
+display autocomplete installation instructions
+
+```
+USAGE
+  $ cdt autocomplete [SHELL]
+
+ARGUMENTS
+  SHELL  shell type
+
+OPTIONS
+  -r, --refresh-cache  Refresh cache (ignores displaying instructions)
+
+EXAMPLES
+  $ cdt autocomplete
+  $ cdt autocomplete bash
+  $ cdt autocomplete zsh
+  $ cdt autocomplete --refresh-cache
+```
+
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.1.4/src/commands/autocomplete/index.ts)_
+
+## `cdt avro [COMMAND]`
+
+Avro Utility command
+
+```
+USAGE
+  $ cdt avro [COMMAND]
+
+OPTIONS
+  -f, --file=file              input file path
+  -h, --help                   show CLI help
+  -o, --output=output          output file path
+  -t, --schemaType=schemaType  schema type file path
+```
+
+_See code: [src/commands/avro.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/avro.ts)_
+
+## `cdt bundlephobia [PACKAGE]`
+
+Find cost of adding a npm/yarn packages or all dependencies in package.json file
+
+```
+USAGE
+  $ cdt bundlephobia [PACKAGE]
+
+OPTIONS
+  -f, --file=file          path for package.json file
+  -h, --help               show CLI help
+  -p, --packages=packages  packages for which cost is required, can pass more than one separated by space
+```
+
+_See code: [src/commands/bundlephobia.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/bundlephobia.ts)_
 
 ## `cdt crypto [STRING]`
 
@@ -69,7 +132,25 @@ OPTIONS
   -s, --string=string          string to be encrypted/decrypted
 ```
 
-_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.1.2/src/commands/crypto.ts)_
+_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/crypto.ts)_
+
+## `cdt datetime [DATE]`
+
+Date and Time utility
+
+```
+USAGE
+  $ cdt datetime [DATE]
+
+OPTIONS
+  -d, --date=date          Datetime input string, default: Current Datetime, could also be passed through argument
+  -f, --format=format      Datetime format, default: Do MMMM YYYY, h:m:s A, Z UTC
+  -h, --help               show CLI help
+  -l, --locale=locale      Locale, default: en
+  -z, --timezone=timezone  Timezone for Datetime parsing, default: Your timezone
+```
+
+_See code: [src/commands/datetime.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/datetime.ts)_
 
 ## `cdt hash [STRING]`
 
@@ -80,13 +161,14 @@ USAGE
   $ cdt hash [STRING]
 
 OPTIONS
-  -f, --file=file      file to be hashed
-  -h, --help           show CLI help
-  -s, --string=string  string to be hashed
-  -t, --type=type      type of hash [SHA1(default), MD5, SHA256, SHA512, RMD160 or RIPEMD160]
+  -f, --file=file              file to be hashed
+  -h, --help                   show CLI help
+  -o, --outputFile=outputFile  output file path
+  -s, --string=string          string to be hashed
+  -t, --type=type              type of hash [SHA1(default), MD5, SHA256, SHA512, RMD160 or RIPEMD160]
 ```
 
-_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.1.2/src/commands/hash.ts)_
+_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/hash.ts)_
 
 ## `cdt help [COMMAND]`
 
@@ -114,14 +196,24 @@ USAGE
   $ cdt minify [FILE]
 
 OPTIONS
-  -f, --file=file  file to be minified
-  -h, --help       show CLI help
-  -t, --type=type  type of file to be minified, it will try to find type with extension
+  -f, --file=file              file to be minified
+  -h, --help                   show CLI help
+  -o, --outputFile=outputFile  output file path
+
+  -t, --type=type              type of file to be minified, it will try to find type with extension supported: JS,
+                               HTML/HTM, CSS
 ```
 
-_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.1.2/src/commands/minify.ts)_
+_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/minify.ts)_
 <!-- commandsstop -->
 
+## Acknowledgement
+ * this cli uses following opensource libraries/services
+    * [bundlephobia](https://bundlephobia.com/)
+    * [avro-js](https://openbase.io/js/avro-js) 
+    * [avsc](https://github.com/mtth/avsc)
+    
+    And many others, great thanks to all the people involved in developnment and support :)
 
 ## Contribution
 
@@ -132,6 +224,18 @@ Please feel free to provide any suggestion for new utility in [Issues](https://g
 ## @codingtools/cdt
 
 This Project is created and supported by [Ashish Patel](http://ashish.live/)
+
+## Releasing Version
+* this needs to be done from release* branch
+```bash
+npm version patch 
+```
+it will update readme.md and update package.json, also will create tag and commit.
+
+```bash
+npm publish --access public
+```
+this will publish package to **npm** starting with updating README and publishing tarballs
 
 ## License
 

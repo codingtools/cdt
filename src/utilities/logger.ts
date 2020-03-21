@@ -19,6 +19,12 @@ export default class Logger {
     signale.error(`${message}`)
     thisRef.exit(0) //added to exit command
   }
+
+  // tslint:disable-next-line:no-unused
+  public static warn(thisRef: any, message: any) {
+    signale.warn(`${message}`)
+  }
+
   // tslint:disable-next-line:no-unused
   public static progressStart(thisRef: any, message: string) {
     // signale.watch(`${message}`)
@@ -31,6 +37,11 @@ export default class Logger {
     Logger.spinner.succeed(message)
   }
 
+  // tslint:disable-next-line:no-unused
+  public static progressStopError(thisRef: any, message: string) {
+    Logger.spinner.warn(message)
+  }
+
   // public static logSuccess(thisRef: any, message: string) {
   //   thisRef.log(` ›   Success: ${message}`)
   // }
@@ -40,5 +51,4 @@ export default class Logger {
   // public static logError(thisRef: any, message: string) {
   //   thisRef.error(`${message}`)
   // }
-
 }

@@ -10,8 +10,9 @@ export default class Minify extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
-    type: flags.string({char: 't' , description: 'type of file to be minified, it will try to find type with extension'}),
+    type: flags.string({char: 't' , description: 'type of file to be minified, it will try to find type with extension supported: JS, HTML/HTM, CSS'}),
     file: flags.string({char: 'f' , description: 'file to be minified'}),
+    output: flags.string({char: 'o' , description: 'output file path'}),
   }
 
   static args = [{name: 'file'}]
@@ -96,9 +97,12 @@ export default class Minify extends Command {
     default:
       Logger.error(this, 'Invalid Minifier Type')
     }
-    Logger.progressStop(this, 'minified')
+    Logger.progressStop(this, `file: ${flags.file} minified`)
     // }, 1000)
-    Logger.success(this, `\n${output}`)
 
+    if (flags.output) { // if output path is provided then write to file also
+      Utilities.writeStringToFile(this, flags.output, output)
+    } else
+      Logger.success(this, `minified output: \n${output}`)
   }
 }
