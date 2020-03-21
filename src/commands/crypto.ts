@@ -28,7 +28,7 @@ export default class Crypto extends Command {
     args.type = flags.encryption ? flags.encryption : flags.decryption //type like AES,DES
 
     this.checkParameters(flags, args)
-    flags.encryption ? this.Encrypt(flags, args) : this.Decrypt(flags, args)
+    return flags.encryption ? this.Encrypt(flags, args) : this.Decrypt(flags, args)
   }
 
   private Encrypt(flags: any, args: any) {
@@ -39,6 +39,7 @@ export default class Crypto extends Command {
       mode: this.getCryptoMode(flags)
     }).toString()
     Logger.success(this, `${encrypted}`)
+    return encrypted
   }
 
   private Decrypt(flags: any, args: any) {
@@ -49,6 +50,7 @@ export default class Crypto extends Command {
       mode: this.getCryptoMode(flags)
     }).toString(CryptoJS.enc.Utf8)
     Logger.success(this, `${decrypted}`)
+    return decrypted
   }
 
   private getCryptoType(type: string) {
