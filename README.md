@@ -40,7 +40,7 @@ $ npm install -g @codingtools/cdt
 $ cdt COMMAND
 running command...
 $ cdt (-v|--version|version)
-@codingtools/cdt/0.1.6 darwin-x64 node-v12.9.0
+@codingtools/cdt/0.1.8 darwin-x64 node-v12.9.0
 $ cdt --help [COMMAND]
 USAGE
   $ cdt COMMAND
@@ -96,7 +96,7 @@ OPTIONS
   -t, --schemaType=schemaType  schema type file path
 ```
 
-_See code: [src/commands/avro.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/avro.ts)_
+_See code: [src/commands/avro.ts](https://github.com/codingtools/cdt/blob/v0.1.8/src/commands/avro.ts)_
 
 ## `cdt bundlephobia [PACKAGE]`
 
@@ -112,7 +112,7 @@ OPTIONS
   -p, --packages=packages  packages for which cost is required, can pass more than one separated by space
 ```
 
-_See code: [src/commands/bundlephobia.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/bundlephobia.ts)_
+_See code: [src/commands/bundlephobia.ts](https://github.com/codingtools/cdt/blob/v0.1.8/src/commands/bundlephobia.ts)_
 
 ## `cdt crypto [STRING]`
 
@@ -132,7 +132,7 @@ OPTIONS
   -s, --string=string          string to be encrypted/decrypted
 ```
 
-_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/crypto.ts)_
+_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.1.8/src/commands/crypto.ts)_
 
 ## `cdt datetime [DATE]`
 
@@ -150,7 +150,7 @@ OPTIONS
   -z, --timezone=timezone  Timezone for Datetime parsing, default: Your timezone
 ```
 
-_See code: [src/commands/datetime.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/datetime.ts)_
+_See code: [src/commands/datetime.ts](https://github.com/codingtools/cdt/blob/v0.1.8/src/commands/datetime.ts)_
 
 ## `cdt hash [STRING]`
 
@@ -161,14 +161,14 @@ USAGE
   $ cdt hash [STRING]
 
 OPTIONS
-  -f, --file=file              file to be hashed
-  -h, --help                   show CLI help
-  -o, --outputFile=outputFile  output file path
-  -s, --string=string          string to be hashed
-  -t, --type=type              type of hash [SHA1(default), MD5, SHA256, SHA512, RMD160 or RIPEMD160]
+  -f, --file=file      file to be hashed
+  -h, --help           show CLI help
+  -o, --output=output  output file path
+  -s, --string=string  string to be hashed
+  -t, --type=type      type of hash [SHA1(default), MD5, SHA256, SHA512, RMD160 or RIPEMD160]
 ```
 
-_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/hash.ts)_
+_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.1.8/src/commands/hash.ts)_
 
 ## `cdt help [COMMAND]`
 
@@ -196,15 +196,13 @@ USAGE
   $ cdt minify [FILE]
 
 OPTIONS
-  -f, --file=file              file to be minified
-  -h, --help                   show CLI help
-  -o, --outputFile=outputFile  output file path
-
-  -t, --type=type              type of file to be minified, it will try to find type with extension supported: JS,
-                               HTML/HTM, CSS
+  -f, --file=file      file to be minified
+  -h, --help           show CLI help
+  -o, --output=output  output file path
+  -t, --type=type      type of file to be minified, it will try to find type with extension supported: JS, HTML/HTM, CSS
 ```
 
-_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.1.6/src/commands/minify.ts)_
+_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.1.8/src/commands/minify.ts)_
 <!-- commandsstop -->
 
 ## Acknowledgement
@@ -227,15 +225,37 @@ This Project is created and supported by [Ashish Patel](http://ashish.live/)
 
 ## Releasing Version
 * this needs to be done from release* branch
+
+### Increasing Version
+
 ```bash
 npm version patch 
 ```
 it will update readme.md and update package.json, also will create tag and commit.
 
+### Publishing to NPM
+
 ```bash
 npm publish --access public
 ```
 this will publish package to **npm** starting with updating README and publishing tarballs
+
+> Already a Github Action is there to publish on pushing a tag.
+
+### Creating Standalone Tarballs
+
+```bash
+oclif-dev pack
+```
+this will release standalone tarballs for linux, macos and windows which we can extract and uses.
+
+### Creating Installers
+
+```bash 
+oclif-dev pack:macos 
+oclif-dev pack:win 
+```
+these will create installers for macos and windows
 
 ## License
 
