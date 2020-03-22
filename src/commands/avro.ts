@@ -42,15 +42,13 @@ export default class Avro extends Command {
     if (!flags.file)
       Logger.error(this, 'Input file is not provided')
 
-    if(args.command)
-      args.command = args.command
-    else
+    if (flags.command) // if -c flag have value, then override
       args.command = flags.command
 
     if (!args.command)
       Logger.error(this, 'Command is empty or not provided, supported:' + Avro.SupportedCommands)
     else // if exists then make Lower Case
-      args.command= args.command.toLowerCase()
+      args.command = args.command.toLowerCase()
 
     // output is not mendatory for 'get_schema' command
     if (args.command !== Avro.GET_SCHEMA && !flags.output)
@@ -116,15 +114,15 @@ export default class Avro extends Command {
     let prependHeader = true // only write on the first line
     avro.createFileDecoder(flags.file)
       .on('data', function (recordStr) {
-          // @ts-ignore
+        // @ts-ignore
         let json = JSON.parse(JSON.stringify(recordStr))
         Json2Csv.json2csv(json, (err?: Error, csv?: string) => {
           if (csv) {
-              // @ts-ignore
+            // @ts-ignore
             Utilities.appendStringToFile(this, flags.output, csv + '\n')
           }
           if (err) {
-              // @ts-ignore
+            // @ts-ignore
             Logger.error(this, err.toString())
           }
         }, {prependHeader})
