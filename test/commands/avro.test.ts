@@ -81,5 +81,12 @@ describe('avro', () => {
       expect(ctx.stdout).to.contain('success')
     })
 
+  test
+    .stdout()
+    .command(['avro', '-f', 'test/resources/avro/person.avro', '-o', 'test/resources/avro/output/person.csv','-c', 'to_csv'])
+    .it('if to_csv commands run -c flag', ctx => {
+      expect(ctx.stdout).to.contain('success')
+    })
+
 })
 

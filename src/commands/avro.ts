@@ -17,12 +17,13 @@ export default class Avro extends Command {
 
   // do not change order otherwise we need to change order in getCommand() also
   static SupportedCommands = [Avro.GET_SCHEMA, Avro.TO_JSON, Avro.TO_AVRO, Avro.TO_CSV]
+
   static flags = {
     help: flags.help({char: 'h'}),
+    command: flags.string({char: 'c' , description: `commands supported: ${Avro.SupportedCommands}`}),
     file: flags.string({char: 'f' , description: 'input file path'}),
     output: flags.string({char: 'o' , description: 'output file path'}),
     schemaType: flags.string({char: 't' , description: 'schema type file path'}),
-
   }
 
   static args = [{name: 'command'}] // operation type
@@ -40,11 +41,14 @@ export default class Avro extends Command {
   private checkParameters(flags: any, args: any) {
     if (!flags.file)
       Logger.error(this, 'Input file is not provided')
+
+    if (flags.command) // if -c flag have value, then override
+      args.command = flags.command
+
     if (!args.command)
       Logger.error(this, 'Command is empty or not provided, supported:' + Avro.SupportedCommands)
-
-    // if exists then make it upperCase
-    args.command = args.command.toLowerCase()
+    else // if exists then make Lower Case
+      args.command = args.command.toLowerCase()
 
     // output is not mendatory for 'get_schema' command
     if (args.command !== Avro.GET_SCHEMA && !flags.output)
@@ -110,15 +114,15 @@ export default class Avro extends Command {
     let prependHeader = true // only write on the first line
     avro.createFileDecoder(flags.file)
       .on('data', function (recordStr) {
-          // @ts-ignore
+        // @ts-ignore
         let json = JSON.parse(JSON.stringify(recordStr))
         Json2Csv.json2csv(json, (err?: Error, csv?: string) => {
           if (csv) {
-              // @ts-ignore
+            // @ts-ignore
             Utilities.appendStringToFile(this, flags.output, csv + '\n')
           }
           if (err) {
-              // @ts-ignore
+            // @ts-ignore
             Logger.error(this, err.toString())
           }
         }, {prependHeader})

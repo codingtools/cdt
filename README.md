@@ -90,6 +90,7 @@ USAGE
   $ cdt avro [COMMAND]
 
 OPTIONS
+  -c, --command=command        commands supported: get_schema,to_json,to_avro,to_csv
   -f, --file=file              input file path
   -h, --help                   show CLI help
   -o, --output=output          output file path
