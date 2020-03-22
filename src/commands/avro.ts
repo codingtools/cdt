@@ -25,7 +25,7 @@ export default class Avro extends Command {
 
   }
 
-  static args = [{name: 'command'}] // operation type
+  static args = [{name: `${Avro.SupportedCommands.join('|')}`}] // operation type
   /*
   *   input,output, and operation are all must
   * */
