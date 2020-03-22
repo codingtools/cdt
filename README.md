@@ -50,7 +50,7 @@ USAGE
 # Commands
 <!-- commands -->
 * [`cdt autocomplete [SHELL]`](#cdt-autocomplete-shell)
-* [`cdt avro [GET_SCHEMA|TO_JSON|TO_AVRO|TO_CSV]`](#cdt-avro-get_schemato_jsonto_avroto_csv)
+* [`cdt avro [COMMAND]`](#cdt-avro-command)
 * [`cdt bundlephobia [PACKAGE]`](#cdt-bundlephobia-package)
 * [`cdt crypto [STRING]`](#cdt-crypto-string)
 * [`cdt datetime [DATE]`](#cdt-datetime-date)
@@ -81,15 +81,16 @@ EXAMPLES
 
 _See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.1.4/src/commands/autocomplete/index.ts)_
 
-## `cdt avro [GET_SCHEMA|TO_JSON|TO_AVRO|TO_CSV]`
+## `cdt avro [COMMAND]`
 
 Avro Utility command
 
 ```
 USAGE
-  $ cdt avro [GET_SCHEMA|TO_JSON|TO_AVRO|TO_CSV]
+  $ cdt avro [COMMAND]
 
 OPTIONS
+  -c, --command=command        commands supported: get_schema,to_json,to_avro,to_csv
   -f, --file=file              input file path
   -h, --help                   show CLI help
   -o, --output=output          output file path
