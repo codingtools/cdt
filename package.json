@@ -23,7 +23,7 @@
     "crypto-js": "^4.0.0",
     "detect-character-encoding": "^0.8.0",
     "encoding-japanese": "^1.0.30",
-    "jshashes": "^1.0.7",
+    "jshashes": "^1.0.8",
     "json-2-csv": "^3.5.9",
     "minify": "^5.0.0",
     "moment": "^2.24.0",
