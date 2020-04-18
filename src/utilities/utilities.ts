@@ -61,8 +61,8 @@ export default class Utilities {
   }
 
   public static truncateFile(thisRef: Command, filePath: string) {
-    if (fs.existsSync(filePath))
-      Logger.info(thisRef, `file found: ${chalk.yellow(filePath + ', truncating')}`) // this will output error and exit command
+    // if (fs.existsSync(filePath))
+    //   Logger.info(thisRef, `file found: ${chalk.yellow(filePath + ', truncating')}`) // this will output error and exit command
     Utilities.writeStringToFile(thisRef, filePath, '') // write nothing
   }
 }

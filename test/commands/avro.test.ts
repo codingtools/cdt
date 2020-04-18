@@ -1,9 +1,9 @@
 import {expect, test} from '@oclif/test'
+import {readFileSync} from 'fs'
 
 describe('avro', () => {
   //todo if file is invalid
   test
-    .timeout(20000) // added timeout to resolve timeout problem
     .stdout()
     .command(['avro'])
     .exit(0)
@@ -49,6 +49,8 @@ describe('avro', () => {
       expect(ctx.stdout).to.contain('Schema file is not provided')
     })
 
+
+  // TODO: BUG this is just skipping test , find a way to implement wait() etc.
   test
     .stdout()
     .command(['avro', '-f', 'test/resources/avro/person.avro', 'get_schema'])
@@ -58,6 +60,12 @@ describe('avro', () => {
         , 5000) //  wait for it to write stuff on console
     })
 
+  test
+    .stdout()
+    .command(['avro', '-f', 'test/resources/avro/twitter.json', '-o', 'test/resources/avro/output/twitter.avro', '-t', 'test/resources/avro/twitter.avsc', 'to_avro'])
+    .it('if to_avro commands run with success', ctx => {
+      expect(ctx.stdout).to.contain('success')
+    })
 
   test
     .stdout()
@@ -67,10 +75,18 @@ describe('avro', () => {
     })
 
   test
-    .timeout(20000) // added timeout to resolve timeout problem
     .stdout()
-    .command(['avro', '-f', 'test/resources/avro/person.json', '-o', 'test/resources/avro/output/person.avro', '-t', 'test/resources/avro/person.avsc', 'to_avro'])
-    .it('if to_avro commands run with success', ctx => {
+    .command(['avro', '-f', 'test/resources/avro/person.avro', '-o', 'test/resources/avro/output/person.csv','to_csv'])
+    .it('if to_csv commands run with success', ctx => {
       expect(ctx.stdout).to.contain('success')
     })
+
+  test
+    .stdout()
+    .command(['avro', '-f', 'test/resources/avro/person.avro', '-o', 'test/resources/avro/output/person.csv','-c', 'to_csv'])
+    .it('if to_csv commands run -c flag', ctx => {
+      expect(ctx.stdout).to.contain('success')
+    })
+
 })
+
