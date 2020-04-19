@@ -43,6 +43,7 @@ export default class ShowFile extends Command {
   private showFile(args: any) {
 
     let data = Utilities.getStringFromFile(this, args.file)
+
     let rows = data.split('\n')
 
     let widthArray = []
@@ -51,6 +52,10 @@ export default class ShowFile extends Command {
 
     for(let i = 0; i < rows[0].length; i++){
         widthArray[i] = 0
+    }
+
+    if(recordsToShow > rows.length){
+        recordsToShow = rows.length
     }
 
     for(let i = 0; i < recordsToShow; i++){
