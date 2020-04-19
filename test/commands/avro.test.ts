@@ -57,7 +57,7 @@ describe('avro', () => {
     .it('if get_schema outputs to console', ctx => {
       setTimeout(() =>
           expect(ctx.stdout).to.contain('success')
-        , 5000) //  wait for it to write stuff on console
+        , 9000) //  wait for it to write stuff on console
     })
 
   test
