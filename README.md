@@ -40,7 +40,7 @@ $ npm install -g @codingtools/cdt
 $ cdt COMMAND
 running command...
 $ cdt (-v|--version|version)
-@codingtools/cdt/0.2.0 darwin-x64 node-v12.9.0
+@codingtools/cdt/0.3.0 darwin-x64 node-v12.9.0
 $ cdt --help [COMMAND]
 USAGE
   $ cdt COMMAND
@@ -57,6 +57,7 @@ USAGE
 * [`cdt hash [STRING]`](#cdt-hash-string)
 * [`cdt help [COMMAND]`](#cdt-help-command)
 * [`cdt minify [FILE]`](#cdt-minify-file)
+* [`cdt view [FILE]`](#cdt-view-file)
 
 ## `cdt autocomplete [SHELL]`
 
@@ -79,7 +80,7 @@ EXAMPLES
   $ cdt autocomplete --refresh-cache
 ```
 
-_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.1.4/src/commands/autocomplete/index.ts)_
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.1.5/src/commands/autocomplete/index.ts)_
 
 ## `cdt avro [COMMAND]`
 
@@ -97,7 +98,7 @@ OPTIONS
   -t, --schemaType=schemaType  schema type file path
 ```
 
-_See code: [src/commands/avro.ts](https://github.com/codingtools/cdt/blob/v0.2.0/src/commands/avro.ts)_
+_See code: [src/commands/avro.ts](https://github.com/codingtools/cdt/blob/v0.3.0/src/commands/avro.ts)_
 
 ## `cdt bundlephobia [PACKAGE]`
 
@@ -113,7 +114,7 @@ OPTIONS
   -p, --packages=packages  packages for which cost is required, can pass more than one separated by space
 ```
 
-_See code: [src/commands/bundlephobia.ts](https://github.com/codingtools/cdt/blob/v0.2.0/src/commands/bundlephobia.ts)_
+_See code: [src/commands/bundlephobia.ts](https://github.com/codingtools/cdt/blob/v0.3.0/src/commands/bundlephobia.ts)_
 
 ## `cdt crypto [STRING]`
 
@@ -133,7 +134,7 @@ OPTIONS
   -s, --string=string          string to be encrypted/decrypted
 ```
 
-_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.2.0/src/commands/crypto.ts)_
+_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v0.3.0/src/commands/crypto.ts)_
 
 ## `cdt datetime [DATE]`
 
@@ -151,7 +152,7 @@ OPTIONS
   -z, --timezone=timezone  Timezone for Datetime parsing, default: Your timezone
 ```
 
-_See code: [src/commands/datetime.ts](https://github.com/codingtools/cdt/blob/v0.2.0/src/commands/datetime.ts)_
+_See code: [src/commands/datetime.ts](https://github.com/codingtools/cdt/blob/v0.3.0/src/commands/datetime.ts)_
 
 ## `cdt hash [STRING]`
 
@@ -169,7 +170,7 @@ OPTIONS
   -t, --type=type      type of hash [SHA1(default), MD5, SHA256, SHA512, RMD160 or RIPEMD160]
 ```
 
-_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.2.0/src/commands/hash.ts)_
+_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v0.3.0/src/commands/hash.ts)_
 
 ## `cdt help [COMMAND]`
 
@@ -186,7 +187,7 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.1/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.3/src/commands/help.ts)_
 
 ## `cdt minify [FILE]`
 
@@ -203,7 +204,23 @@ OPTIONS
   -t, --type=type      type of file to be minified, it will try to find type with extension supported: JS, HTML/HTM, CSS
 ```
 
-_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.2.0/src/commands/minify.ts)_
+_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v0.3.0/src/commands/minify.ts)_
+
+## `cdt view [FILE]`
+
+View file content and more
+
+```
+USAGE
+  $ cdt view [FILE]
+
+OPTIONS
+  -f, --file=file  formatted file to be shown
+  -h, --help       show CLI help
+  -n, --num=num    no. of rows to show, default:10
+```
+
+_See code: [src/commands/view.ts](https://github.com/codingtools/cdt/blob/v0.3.0/src/commands/view.ts)_
 <!-- commandsstop -->
 
 ## Acknowledgement
