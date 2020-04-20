@@ -33,7 +33,7 @@ describe('view', () => {
     .stdout()
     .command(['view', 'test/resources/csv/test_view.csv', '-n', '900'])
     .it('check if 900 count is used, it shows only total present rows', ctx => {
-      expect(ctx.stdout).to.contain('showing top 892 rows.')
+      expect(ctx.stdout).to.contain('showing top 891 records.')
     })
 
   test
