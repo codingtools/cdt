@@ -49,16 +49,16 @@ describe('avro', () => {
       expect(ctx.stdout).to.contain('Schema file is not provided')
     })
 
-
-  // TODO: BUG this is just skipping test , find a way to implement wait() etc.
-  test
-    .stdout()
-    .command(['avro', '-f', 'test/resources/avro/person.avro', 'get_schema'])
-    .it('if get_schema outputs to console', ctx => {
-      setTimeout(() =>
-          expect(ctx.stdout).to.contain('success')
-        , 9000) //  wait for it to write stuff on console
-    })
+  //
+  // // TODO: this was is just skipping test , find a way to implement wait() etc.
+  // test
+  //   .stdout()
+  //   .command(['avro', '-f', 'test/resources/avro/person.avro', 'get_schema'])
+  //   .it('if get_schema outputs to console', ctx => {
+  //     setTimeout(() =>
+  //         expect(ctx.stdout).to.contain('success')
+  //       , 9000) //  wait for it to write stuff on console
+  //   })
 
   test
     .stdout()
