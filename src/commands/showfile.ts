@@ -7,6 +7,7 @@ import Utilities from '../utilities/utilities'
 export default class ShowFile extends Command {
   static description = 'File Minifier'
 
+  static DEFAULT_COUNT = 10
   static flags = {
     help: flags.help({char: 'h'}),
     file: flags.string({char: 'f' , description: 'formatted file to be shown'}),
@@ -37,7 +38,10 @@ export default class ShowFile extends Command {
   }
 
   private getFileLinesToShow(flags: any) {
-    return flags.num || 10
+    if(flags.num && flags.num>0) // if value available and valid
+      return flags.num;
+    else
+      return ShowFile.DEFAULT_COUNT;
   }
   // tslint:disable-next-line:no-unused
   private checkParameters(flags: unknown, args: { [p: string]: any }) {
