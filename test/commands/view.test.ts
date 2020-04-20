@@ -24,7 +24,7 @@ describe('view', () => {
 
   test
     .stdout()
-    .command (['view', 'test/resources/csv/test_view.csv', '-n', '900'])
+    .command(['view', 'test/resources/csv/test_view.csv', '-n', '900'])
     .it('check if the given number is greater than total lines', ctx => {
       expect(ctx.stdout).to.contain('|0       |3     |0  |32.0             |7.75    |0           |0        |')
     })

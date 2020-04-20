@@ -1,5 +1,6 @@
 // code here to write the tool for csv tool show
 import {Command, flags} from '@oclif/command'
+import * as chalk from 'chalk'
 
 import Logger from '../utilities/logger'
 import Utilities from '../utilities/utilities'
@@ -11,7 +12,7 @@ export default class View extends Command {
   static flags = {
     help: flags.help({char: 'h'}),
     file: flags.string({char: 'f' , description: 'formatted file to be shown'}),
-    num: flags.string({char: 'n' , description: 'rows to show'})
+    num: flags.string({char: 'n' , description: `no. of rows to show, default:${View.DEFAULT_COUNT}`})
   }
 
   static args = [{name: 'file'}]
@@ -74,13 +75,19 @@ export default class View extends Command {
       }
     }
 
+    // -1 need to be done to exclude header
+    // ${chalk.yellow('Avro Schema')
+    Logger.info(this, `Total ${chalk.greenBright(rows.length - 2)} records in file.`)
+    Logger.info(this, `showing top ${chalk.yellow(recordsToShow - 1)} records.`)
+
     this.printRow(rows[0].split(','), widthArray, '+', true)
     for (let i = 0; i < recordsToShow; i++) {
       let row = rows[i]
       this.printRow(row.split(','), widthArray, '|', false)
       this.printRow(row.split(','), widthArray, '+', true)
     }
-    this.log(`showing top ${recordsToShow} rows.`)
+
+    Logger.success(this, 'done.\n')
   }
 
   private printRow(row: any, widthArray: any, seperator: any, isLineSeparator: any) {
