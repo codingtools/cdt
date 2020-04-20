@@ -38,10 +38,10 @@ export default class ShowFile extends Command {
   }
 
   private getFileLinesToShow(flags: any) {
-    if(flags.num && flags.num>0) // if value available and valid
-      return flags.num;
+    if (flags.num && flags.num > 0) // if value available and valid
+      return flags.num
     else
-      return ShowFile.DEFAULT_COUNT;
+      return ShowFile.DEFAULT_COUNT
   }
   // tslint:disable-next-line:no-unused
   private checkParameters(flags: unknown, args: { [p: string]: any }) {
