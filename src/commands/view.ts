@@ -4,8 +4,8 @@ import {Command, flags} from '@oclif/command'
 import Logger from '../utilities/logger'
 import Utilities from '../utilities/utilities'
 
-export default class ShowFile extends Command {
-  static description = 'File Minifier'
+export default class View extends Command {
+  static description = 'View file content and more'
 
   static DEFAULT_COUNT = 10
   static flags = {
@@ -18,7 +18,7 @@ export default class ShowFile extends Command {
 
   // required FILE
   async run() {
-    const {args, flags} = this.parse(ShowFile)
+    const {args, flags} = this.parse(View)
 
     args.file = this.getFilePath(flags, args)
     args.num = this.getFileLinesToShow(flags)
@@ -41,7 +41,7 @@ export default class ShowFile extends Command {
     if (flags.num && flags.num > 0) // if value available and valid
       return flags.num
     else
-      return ShowFile.DEFAULT_COUNT
+      return View.DEFAULT_COUNT
   }
   // tslint:disable-next-line:no-unused
   private checkParameters(flags: unknown, args: { [p: string]: any }) {
