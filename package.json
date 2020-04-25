@@ -11,13 +11,13 @@
   },
   "dependencies": {
     "@oclif/command": "^1.5.19",
-    "@oclif/plugin-help": "^2.2.3",
     "@oclif/config": "^1.14.0",
     "@oclif/plugin-autocomplete": "^0.1.5",
-    "@oclif/plugin-not-found": "^1.2.3",
+    "@oclif/plugin-commands": "^1.2.3",
+    "@oclif/plugin-help": "^2.2.3",
     "@oclif/plugin-warn-if-update-available": "^1.7.0",
-    "axios": "^0.19.2",
     "avsc": "^5.4.19",
+    "axios": "^0.19.2",
     "chalk": "^3.0.0",
     "codecov": "^3.6.5",
     "crypto-js": "^4.0.0",
@@ -75,9 +75,9 @@
     },
     "plugins": [
       "@oclif/plugin-help",
-      "@oclif/plugin-not-found",
       "@oclif/plugin-warn-if-update-available",
-      "@oclif/plugin-autocomplete"
+      "@oclif/plugin-autocomplete",
+      "@oclif/plugin-commands"
     ],
     "warn-if-update-available": {
       "timeoutInDays": 3,
