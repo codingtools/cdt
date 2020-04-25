@@ -80,8 +80,8 @@
       "@oclif/plugin-autocomplete"
     ],
     "warn-if-update-available": {
-      "timeoutInDays": 7,
-      "message": "<%= chalk.blue(config.name) %> update available from <%= chalk.greenBright(config.version) %> to <%= chalk.greenBright(latest) %>."
+      "timeoutInDays": 3,
+      "message": "<%= chalk.green(config.name) %> update available from <%= chalk.greenBright(config.version) %> to <%= chalk.greenBright(latest) %>,\nuse npm install -g @codingtools/cdt to update."
     }
   },
   "repository": {
