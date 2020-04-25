@@ -15,7 +15,6 @@
     "@oclif/plugin-autocomplete": "^0.1.5",
     "@oclif/plugin-commands": "^1.2.3",
     "@oclif/plugin-help": "^2.2.3",
-    "@oclif/plugin-not-found": "^1.2.3",
     "@oclif/plugin-warn-if-update-available": "^1.7.0",
     "@oclif/plugin-which": "^1.0.3",
     "avsc": "^5.4.19",
@@ -77,7 +76,6 @@
     },
     "plugins": [
       "@oclif/plugin-help",
-      "@oclif/plugin-not-found",
       "@oclif/plugin-warn-if-update-available",
       "@oclif/plugin-autocomplete",
       "@oclif/plugin-which",
