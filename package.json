@@ -31,6 +31,7 @@
     "nyc": "^15.0.0",
     "ora": "^4.0.3",
     "signale": "^1.4.0",
+    "snyk": "^1.311.0",
     "test": "^0.6.0",
     "tslib": "^1.11.1"
   },
@@ -92,7 +93,7 @@
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "tslint -p test -t stylish",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "test": "snyk test && nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md"
   },
   "types": "lib/index.d.ts",
