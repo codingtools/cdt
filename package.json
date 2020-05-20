@@ -10,7 +10,7 @@
     "url": "https://github.com/codingtools/cdt/issues"
   },
   "dependencies": {
-    "@oclif/command": "^1.5.19",
+    "@oclif/command": "^1.5.20",
     "@oclif/config": "^1.14.0",
     "@oclif/plugin-autocomplete": "^0.1.5",
     "@oclif/plugin-commands": "^1.2.3",
@@ -24,12 +24,12 @@
     "detect-character-encoding": "^0.8.0",
     "encoding-japanese": "^1.0.30",
     "jshashes": "^1.0.8",
-    "json-2-csv": "^3.5.9",
+    "json-2-csv": "^3.6.2",
     "minify": "^5.1.1",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.28",
     "nyc": "^15.0.0",
-    "ora": "^4.0.3",
+    "ora": "^4.0.4",
     "signale": "^1.4.0",
     "test": "^0.6.0",
     "tslib": "^1.11.1"
