@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@oclif/command": "^1.5.20",
-    "@oclif/config": "^1.15.1",
+    "@oclif/config": "^1.14.0",
     "@oclif/plugin-autocomplete": "^0.1.5",
     "@oclif/plugin-commands": "^1.2.3",
     "@oclif/plugin-help": "^2.2.3",
@@ -28,11 +28,12 @@
     "minify": "^5.1.1",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.28",
-    "nyc": "^15.0.1",
+    "nyc": "^15.0.0",
     "ora": "^4.0.4",
     "signale": "^1.4.0",
     "test": "^0.6.0",
-    "tslib": "^1.11.1"
+    "tslib": "^1.11.1",
+    "snyk": "^1.323.1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
@@ -93,11 +94,14 @@
     "posttest": "tslint -p test -t stylish",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif-dev readme && git add README.md"
+    "version": "oclif-dev readme && git add README.md",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "types": "lib/index.d.ts",
   "directories": {
     "lib": "lib",
     "test": "test"
-  }
+  },
+  "snyk": true
 }
