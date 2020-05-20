@@ -4,9 +4,7 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [10.x, 11.x, 12.x, 13.x]
@@ -20,14 +18,23 @@ jobs:
     - run: npm install
     - run: npm run build --if-present
     - run: npm test
-    - run: ./node_modules/.bin/nyc report --reporter=json
-    - run: mv coverage/coverage-final.json coverage/coverage.json
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        file: coverage/coverage.json
-        name: codecov
-        fail_ci_if_error: true
       env:
         CI: true
+
+  codecov:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm install
+      - run: ./node_modules/.bin/nyc report --reporter=json
+      - run: mv coverage/coverage-final.json coverage/coverage.json
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: coverage/coverage.json
+          name: codecov
+          fail_ci_if_error: true
