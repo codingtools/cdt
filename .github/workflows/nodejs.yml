@@ -30,6 +30,7 @@ jobs:
           node-version: 12
       - run: npm install
       - run: npm run build --if-present
+      - run: npm test
       - run: ./node_modules/.bin/nyc report --reporter=json
       - run: mv coverage/coverage-final.json coverage/coverage.json
       - name: Upload coverage to Codecov
