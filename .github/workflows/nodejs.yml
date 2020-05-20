@@ -22,7 +22,13 @@ jobs:
     - run: npm test
     - run: ./node_modules/.bin/nyc report --reporter=json
     - run: mv coverage/coverage-final.json coverage/coverage.json
-    - run: ./node_modules/.bin/codecov
-
+        pytest --cov=./ --cov-report=xml
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: coverage/coverage.json
+        name: codecov
+        fail_ci_if_error: true
       env:
         CI: true
