@@ -26,7 +26,7 @@
     "jshashes": "^1.0.8",
     "json-2-csv": "^3.6.2",
     "minify": "^5.1.1",
-    "moment": "^2.24.0",
+    "moment": "^2.25.0",
     "moment-timezone": "^0.5.28",
     "nyc": "^15.0.1",
     "ora": "^4.0.4",
