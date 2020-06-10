@@ -291,6 +291,12 @@ oclif-dev pack:win
 ```
 these will create installers for macos and windows
 
+## Sponsors
+> Built using Jetbrains Products
+![Jetbrains](https://www.jetbrains.com/company/brand/img/jetbrains_logo.png)
+
+
 ## License
 
 [MIT](https://raw.githubusercontent.com/codingtools/cdt/master/LICENSE)
+
