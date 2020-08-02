@@ -20,7 +20,7 @@ CLI for Developers
 **cdt** is a command line utililty for developers.
 It is focused on facilitating the development of applications by helping devs to do required tasks through utilities provided to enhance efficienty.
 
-## Support the project ⭐
+## Supporting the project ⭐
 
 If you feel awesome and want to support us in a small way, please consider starring and sharing the repo! This helps us getting known and grow the community. 🙏
 
