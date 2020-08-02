@@ -1,7 +1,7 @@
 {
   "name": "@codingtools/cdt",
   "description": "CLI for Developers",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "author": "Ashish Patel @ashishpatel0720",
   "bin": {
     "cdt": "./bin/run"
