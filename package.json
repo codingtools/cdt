@@ -10,7 +10,7 @@
     "url": "https://github.com/codingtools/cdt/issues"
   },
   "dependencies": {
-    "@oclif/command": "^1.5.20",
+    "@oclif/command": "^1.7.0",
     "@oclif/config": "^1.15.1",
     "@oclif/plugin-autocomplete": "^0.2.0",
     "@oclif/plugin-commands": "^1.2.3",
