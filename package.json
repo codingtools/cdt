@@ -29,10 +29,10 @@
     "moment": "^2.25.0",
     "moment-timezone": "^0.5.28",
     "nyc": "^15.1.0",
-    "snyk": "^1.0.0",
     "ora": "^4.0.4",
     "signale": "^1.4.0",
     "test": "^0.6.0",
+    "snyk": "^1.316.1",
     "tslib": "^1.11.2"
   },
   "devDependencies": {
