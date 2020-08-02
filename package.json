@@ -24,7 +24,7 @@
     "detect-character-encoding": "^0.8.0",
     "encoding-japanese": "^1.0.30",
     "jshashes": "^1.0.8",
-    "json-2-csv": "^3.6.2",
+    "json-2-csv": "^3.7.0",
     "minify": "^5.1.1",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.29",
