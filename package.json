@@ -32,6 +32,7 @@
     "ora": "^4.0.4",
     "signale": "^1.4.0",
     "test": "^0.6.0",
+    "snyk": "^1.316.1",
     "tslib": "^1.11.2"
   },
   "devDependencies": {
@@ -93,11 +94,14 @@
     "posttest": "tslint -p test -t stylish",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif-dev readme && git add README.md"
+    "version": "oclif-dev readme && git add README.md",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "types": "lib/index.d.ts",
   "directories": {
     "lib": "lib",
     "test": "test"
-  }
+  },
+  "snyk": true
 }
