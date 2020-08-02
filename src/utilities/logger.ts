@@ -1,6 +1,6 @@
 // tslint:disable-next-line:file-name-casing
-import * as Ora from 'ora'
-import * as signale from 'signale'
+import Ora from 'ora'
+import signale from 'signale'
 
 // tslint:disable-next-line:no-unnecessary-class
 export default class Logger {

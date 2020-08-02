@@ -1,8 +1,8 @@
 import {Command, flags} from '@oclif/command'
-import * as avro from 'avsc'
-import * as chalk from 'chalk'
-import * as fs from 'fs' // includes all from avro-js and some more
-import * as Json2Csv from 'json-2-csv'
+import avro from 'avsc'
+import chalk from 'chalk'
+import fs from 'fs' // includes all from avro-js and some more
+import Json2Csv from 'json-2-csv'
 
 import Logger from '../utilities/logger'
 import Utilities from '../utilities/utilities'

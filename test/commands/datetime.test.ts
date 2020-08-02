@@ -1,5 +1,5 @@
 import {expect, test} from '@oclif/test'
-import * as moment from 'moment-timezone' //has both momentjs and timezone support
+import moment from 'moment-timezone' //has both momentjs and timezone support
 
 describe('datetime', () => {
   test
