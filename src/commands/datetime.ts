@@ -49,7 +49,7 @@ export default class Datetime extends Command {
     if (flags.timezone)
       return flags.timezone
     else
-      return moment.tz.guess(true)
+      return moment.tz.guess()
   }
 
   // tslint:disable-next-line:no-unused
