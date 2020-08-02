@@ -1,6 +1,6 @@
 // code here to write the tool for csv tool show
 import {Command, flags} from '@oclif/command'
-import * as chalk from 'chalk'
+import chalk from 'chalk'
 
 import Logger from '../utilities/logger'
 import Utilities from '../utilities/utilities'

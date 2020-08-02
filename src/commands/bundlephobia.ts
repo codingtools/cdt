@@ -1,6 +1,6 @@
 import {Command, flags} from '@oclif/command'
 import axios from 'axios'
-import * as chalk from 'chalk'
+import chalk from 'chalk'
 
 import Logger from '../utilities/logger'
 import Utilities from '../utilities/utilities'

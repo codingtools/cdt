@@ -1,9 +1,9 @@
 import {Command, flags} from '@oclif/command'
-import * as CryptoJS from 'crypto-js'
+import CryptoJS from 'crypto-js'
 
 import Logger from '../utilities/logger'
 import Utilities from '../utilities/utilities'
-// import * as Hashes from 'jshashes'
+// import Hashes from 'jshashes'
 
 // TODO: all are Hexadecimal encoding for now, can also add b64
 

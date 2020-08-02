@@ -1,6 +1,6 @@
 import {Command, flags} from '@oclif/command'
-import * as chalk from 'chalk'
-import * as moment from 'moment-timezone' //has both momentjs and timezone support
+import chalk from 'chalk'
+import moment from 'moment-timezone' //has both momentjs and timezone support
 
 // @ts-ignore
 moment.suppressDeprecationWarnings = true
