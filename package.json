@@ -27,7 +27,7 @@
     "json-2-csv": "^3.7.0",
     "minify": "^5.1.1",
     "moment": "^2.25.0",
-    "moment-timezone": "^0.5.28",
+    "moment-timezone": "^0.5.29",
     "nyc": "^15.1.0",
     "ora": "^4.0.4",
     "signale": "^1.4.0",
