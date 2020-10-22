@@ -17,7 +17,7 @@
     "@oclif/plugin-help": "^2.2.3",
     "@oclif/plugin-warn-if-update-available": "^1.7.0",
     "avsc": "^5.4.21",
-    "axios": "^0.19.2",
+    "axios": "^0.20.0",
     "chalk": "^3.0.0",
     "codecov": "^3.7.2",
     "crypto-js": "^4.0.0",
