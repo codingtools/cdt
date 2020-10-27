@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@oclif/command": "^1.8.0",
-    "@oclif/config": "^1.16.0",
+    "@oclif/config": "^1.17.0",
     "@oclif/plugin-autocomplete": "^0.2.0",
     "@oclif/plugin-commands": "^1.3.0",
     "@oclif/plugin-help": "^2.2.3",
