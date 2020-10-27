@@ -19,7 +19,7 @@
     "avsc": "^5.4.22",
     "axios": "^0.20.0",
     "chalk": "^3.0.0",
-    "codecov": "^3.7.2",
+    "codecov": "^3.8.0",
     "crypto-js": "^4.0.0",
     "detect-character-encoding": "^0.8.0",
     "encoding-japanese": "^1.0.30",
