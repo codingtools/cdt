@@ -2,8 +2,9 @@
 documentation: README.md
 
 # Add 'label2' to any file changes within 'example2' folder
-test:
+test-changes:
   - test/**/*
+
 
 github-actions:
   - .github/**/*

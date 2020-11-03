@@ -41,6 +41,7 @@ describe('avro', () => {
   //     expect(ctx.stdout).to.contain('no such file or directory, open \'test/resources/avro/file_not_exists.avro\'')
   //   })
 
+
   test
     .stdout()
     .command(['avro', '-f', 'test/resources/avro/person.json', '-o', 'test/resources/avro/output/person.avro', 'to_avro'])
