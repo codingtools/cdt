@@ -1,6 +1,6 @@
 @codingtools/cdt
 ===
-CLI for Developers :sunglasses:
+CLI for Developers :sunglasses: 
 
 [![GithubCI](https://github.com/codingtools/cdt/workflows/GithubCI/badge.svg)](https://github.com/codingtools/cdt/actions?query=workflow%3AGithubCI)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/82d29e2a902a4c338228d636f290d9cd)](https://app.codacy.com/gh/codingtools/cdt?utm_source=github.com&utm_medium=referral&utm_content=codingtools/cdt&utm_campaign=Badge_Grade_Dashboard)
