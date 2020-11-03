@@ -8,3 +8,9 @@ test-changes:
 
 github-actions:
   - .github/**/*
+
+circleci-actions:
+  - .circleci/**/*
+
+enhancement:
+  - src/**/*
