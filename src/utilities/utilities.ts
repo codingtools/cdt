@@ -46,7 +46,7 @@ export default class Utilities {
     else
       Logger.warn(thisRef, `File already exists: ${chalk.green(filePath)}, ${chalk.yellow('overriding content')}`) // this will output error and exit command
 
-    fs.writeFileSync(filePath, string)
+    fs.writeFileSync(filePath, string.toString())
 
     if (string !== '') // this condition comes for truncating
       Logger.success(thisRef, `output written to file: ${chalk.green(filePath)}`) // this will output error and exit command
