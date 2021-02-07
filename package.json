@@ -1,10 +1,10 @@
 {
   "name": "@codingtools/cdt",
   "description": "CLI for Developers",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "author": "Ashish Patel @ashishpatel0720",
   "bin": {
-    "cdt": "./bin/run"
+    "cdt": "bin/run"
   },
   "bugs": {
     "url": "https://github.com/codingtools/cdt/issues"
