@@ -8,6 +8,7 @@ git pull origin release/release-v0.x
 npm install
 
 #COMMIT
+npm test
 
 git push
 # GIT PUSH and then checks ( validate )
@@ -26,3 +27,4 @@ gh pr checks $PR | grep -o fail | wc -w;
 ";
 #MERGE PR
 gh pr merge $PR -d -m
+

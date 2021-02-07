@@ -33,7 +33,15 @@ export default class Minify extends Command {
     Logger.info(this, `file type: ${flags.type}`)
 
     this.checkParameters(flags, args)
-    this.minifyString(flags, args)
+    await this.minifyString(flags, args)
+  }
+
+  private async evalJs(args: string) {
+    let output = ''
+    await MinifyJs.js(args)
+      .then((val: string) => output = val) // cdt-168, Minify upgrade not return Promise Object for JS
+
+    return output
   }
 
   // this will get file type either from flags.type or file extension ( if flag is not given)
@@ -82,14 +90,14 @@ export default class Minify extends Command {
 
   //TODO: add image compression also
   //TODO: add error handling also
-  private minifyString(flags: any, args: any) {
+  private async minifyString(flags: any, args: any) {
     Logger.progressStart(this, 'minifying...')
 
     let output = ''
     // setTimeout(() => { //TODO: can add spinner for bigger files using promise
     switch (flags.type) {
     case Minify.JS:
-      output = MinifyJs.js(args.string); break
+      output = await this.evalJs(args.string); break
     case Minify.CSS:
       output = MinifyJs.css(args.string); break
     case Minify.HTML:
@@ -97,7 +105,7 @@ export default class Minify extends Command {
     default:
       Logger.error(this, 'Invalid Minifier Type')
     }
-    Logger.progressStop(this, `file: ${flags.file} minified`)
+    Logger.progressStop(this, `file: ${args.file} minified`)
     // }, 1000)
 
     if (flags.output) { // if output path is provided then write to file also
