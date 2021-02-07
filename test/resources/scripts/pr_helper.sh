@@ -4,16 +4,25 @@ PR=159
 gh pr checkout $PR
 
 git pull origin release/release-v0.x
-
 # npm install
 npm install
-git push
 
+#COMMIT
+
+git push
 # GIT PUSH and then checks ( validate )
 # watching checks running
-watch -n 3 "gh pr checks $PR"
-
-
-#MERGE PR, delete branch and merge in place of other options
+#watch -n 3 "gh pr checks $PR"
+watch -n 3 "
+gh pr checks $PR; echo '---------------';
+echo 'PENDING:'
+gh pr checks $PR | grep -o pend | wc -w;
+echo
+echo 'PASSED:'
+gh pr checks $PR | grep -o pass | wc -w;
+echo
+echo 'FAILED:'
+gh pr checks $PR | grep -o fail | wc -w;
+";
+#MERGE PR
 gh pr merge $PR -d -m
-
