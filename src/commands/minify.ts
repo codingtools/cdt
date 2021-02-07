@@ -33,7 +33,7 @@ export default class Minify extends Command {
     Logger.info(this, `file type: ${flags.type}`)
 
     this.checkParameters(flags, args)
-    this.minifyString(flags, args)
+    await this.minifyString(flags, args)
   }
 
   private async evalJs(args: string) {
