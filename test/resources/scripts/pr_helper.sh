@@ -12,4 +12,6 @@ npm install
 # watching checks running
 watch -n 3 "gh pr checks $PR"
 
+#MERGE PR
+gh pr merge $PR -d -m
 
