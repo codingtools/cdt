@@ -33,7 +33,6 @@
     "signale": "^1.4.0",
     "snyk": "^1.425.4",
     "test": "^0.6.0",
-    "snyk": "^1.409.1",
     "tslib": "^2.0.1"
   },
   "devDependencies": {
