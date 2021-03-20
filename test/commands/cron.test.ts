@@ -30,4 +30,32 @@ describe('cron', () => {
       expect(ctx.stdout).to.contain('At 10:00 PM, Monday through Friday')
     })
 
+  test
+    .stdout()
+    .command(['cron', '-d', '-s', '10 * * * * *'])
+    .it('Seconds functionality Enabled', ctx => {
+      expect(ctx.stdout).to.contain('At 10 seconds past the minute')
+    })
+
+ test
+    .stdout()
+    .command(['cron', '-d', '-s', '0 22 * * 1-5'])
+    .it('Range functionality enabled', ctx => {
+      expect(ctx.stdout).to.contain('At 10:00 PM, Monday through Friday')
+    })
+
+ test
+    .stdout()
+    .command(['cron', '-d', '-s', '0 0 12 1/2 * ? 2020'])
+    .it('Year functionality enabled', ctx => {
+      expect(ctx.stdout).to.contain('At 12:00 PM, every 2 days, only in 2020')
+    })
+
+ test
+    .stdout()
+    .command(['cron', '-d', '-s', '0 0 12 1/2 mon,tue'])
+    .it('Days functionality enabled', ctx => {
+      expect(ctx.stdout).to.contain('At 12:00 AM, on day 12 of the month, and on Monday and Tuesday, every 2 months')
+    })
+
 })

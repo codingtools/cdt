@@ -1,10 +1,13 @@
 import {Command, flags} from '@oclif/command'
 import chalk from 'chalk'
-import {isValidCron} from 'cron-validator'
+import CronValidate from 'cron-validate'
 import cronstrue from 'cronstrue'
+import NodeCron from 'node-cron'
 
 import Logger from '../utilities/logger'
 import Utilities from '../utilities/utilities'
+
+// https://github.com/Airfooox/cron-validate
 /*
 * this Commands add support for cron jobs
 *  */
@@ -13,6 +16,40 @@ export default class Cron extends Command {
 
   static RUN = 'run'
   static DESCRIBE = 'desc'
+
+  static PRESET_DEFAULT = {
+    preset: 'default',
+    override: {
+      useAliases: true, // optional, default to false
+      useBlankDay: true,
+    }
+  }
+
+  static PRESET_DEFAULT_WITH_SECONDS = {
+    preset: 'default',
+    override: {
+      useSeconds: true, // override preset option
+      useAliases: true, // optional, default to false
+      useBlankDay: true,
+    }
+  }
+  static PRESET_DEFAULT_WITH_SECONDS_AND_YEARS = {
+    preset: 'default',
+    override: {
+      useSeconds: true, // override preset option
+      useYears: true,
+      useAliases: true, // optional, default to false
+      useBlankDay: true,
+    }
+  }
+
+  // adding more options to have bit loosen validation rules
+  static VALIDATOR_OPTIONS = {
+    seconds: true,
+    allowBlankDay: true,
+    alias: true ,
+    allowSevenAsSunday: true
+  }
 
   static flags = {
     help: flags.help({char: 'h'}),
@@ -41,9 +78,27 @@ export default class Cron extends Command {
     if (args.string === undefined || args.string === '')
       Logger.error(this, 'Input string is empty or undefined')
 
-    if (!isValidCron(args.string)) {
-      Logger.error(this, `Invalid Cron expression : ${chalk.red(args.string)}`)
+    // for more present settings check - https://github.com/Airfooox/cron-validate
+    let preset = Cron.PRESET_DEFAULT
+
+    // if we have 6 inputs enable seconds as an option
+    let charCount = (args.string.match(/\s+/g) || []).length + 1
+    console.log(charCount)
+    if (charCount === 6) {
+      preset = Cron.PRESET_DEFAULT_WITH_SECONDS
+    } else if (charCount === 7) {
+      preset = Cron.PRESET_DEFAULT_WITH_SECONDS_AND_YEARS
     }
+    const cronResult = CronValidate(args.string, preset)
+
+    if (!cronResult.isValid()) {
+      const errorValue = cronResult.getError()
+      // The error value contains an array of strings, which represent the cron validation errors.
+      Logger.error(this, `Invalid Cron expression : ${chalk.yellow(errorValue)}`)
+    }
+    // if (!isValidCron(args.string, Cron.VALIDATOR_OPTIONS)) {
+    //   Logger.error(this, `Invalid Cron expression : ${chalk.red(args.string)}`)
+    // }
 
     if (args.action === undefined || args.string === '')
       Logger.error(this, 'Action empty or undefined')
@@ -57,6 +112,10 @@ export default class Cron extends Command {
       Logger.success(this, output)
     } else if (args.action === Cron.RUN) {
       Logger.success(this, 'run command, coming soon...')
+      NodeCron.schedule('*/10 * * * * *', function () {
+        // tslint:disable-next-line:no-console
+        console.log('Status Logged!')
+      })
     }
   }
 
