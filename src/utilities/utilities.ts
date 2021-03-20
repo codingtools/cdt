@@ -40,6 +40,7 @@ export default class Utilities {
       return args.string
   }
 
+  // tslint:disable-next-line:no-unused
   public static getInputStringFromCmd(thisRef: Command, flags: any, args: any) { //need to make it static so Crypto can use this
     // if -s is not passed we will take it from args
     if (flags.string) //if -s given

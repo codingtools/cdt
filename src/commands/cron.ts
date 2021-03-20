@@ -1,12 +1,10 @@
 import {Command, flags} from '@oclif/command'
+import chalk from 'chalk'
+import {isValidCron} from 'cron-validator'
 import cronstrue from 'cronstrue'
-import CryptoJS from 'crypto-js'
 
 import Logger from '../utilities/logger'
 import Utilities from '../utilities/utilities'
-
-import { isValidCron } from 'cron-validator'
-import chalk from "chalk";
 /*
 * this Commands add support for cron jobs
 *  */
@@ -34,7 +32,7 @@ export default class Cron extends Command {
 
     //check params after evaluating all
     this.checkParameters(flags, args)
-    this.eval(flags, args)
+    this.evalCron(flags, args)
   }
 
   // to check required parameters passed or not
@@ -51,16 +49,18 @@ export default class Cron extends Command {
       Logger.error(this, 'Action empty or undefined')
   }
 
-  private eval(flags: any, args: any) {
+  // tslint:disable-next-line:no-unused
+  private evalCron(flags: any, args: any) {
     // Logger.success(this, `Action: ${chalk.green(args.action)}`)
     if (args.action === Cron.DESCRIBE) {
       let output = cronstrue.toString(args.string)
       Logger.success(this, output)
-    } else if (args.action === Cron.RUN){
+    } else if (args.action === Cron.RUN) {
       Logger.success(this, 'run command, coming soon...')
     }
   }
 
+  // tslint:disable-next-line:no-unused
   private getAction(flags: any, args: any) {
     if (flags.describe) // find  human readable descriptions for cron
       return Cron.DESCRIBE
