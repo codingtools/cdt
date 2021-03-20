@@ -3,6 +3,7 @@
 CLI for Developers :sunglasses:
 
 [![GithubCI](https://github.com/codingtools/cdt/workflows/GithubCI/badge.svg)](https://github.com/codingtools/cdt/actions?query=workflow%3AGithubCI)
+[![GithubPublish](https://github.com/codingtools/cdt/actions/workflows/npmpublish.yml/badge.svg)](https://github.com/codingtools/cdt/actions/workflows/npmpublish.yml)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/82d29e2a902a4c338228d636f290d9cd)](https://app.codacy.com/gh/codingtools/cdt?utm_source=github.com&utm_medium=referral&utm_content=codingtools/cdt&utm_campaign=Badge_Grade_Dashboard)
 [![codecov](https://codecov.io/gh/codingtools/cdt/branch/release%2Frelease-v0.1/graph/badge.svg)](https://codecov.io/gh/codingtools/cdt)
 [![Version](https://img.shields.io/npm/v/@codingtools/cdt)](https://npmjs.org/package/@codingtools/cdt)
