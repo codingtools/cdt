@@ -3,6 +3,7 @@ import chalk from 'chalk'
 import CronValidate from 'cron-validate'
 import cronstrue from 'cronstrue'
 import NodeCron from 'node-cron'
+import shelljs from 'shelljs'
 
 import Logger from '../utilities/logger'
 import Utilities from '../utilities/utilities'
@@ -56,6 +57,7 @@ export default class Cron extends Command {
     string: flags.string({char: 's' , description: 'Cron expression'}),
     describe: flags.boolean({char: 'd' , description: 'Describe cron expressions into human readable descriptions'}),
     run: flags.boolean({char: 'r' , description: 'run command using cron expression'}),
+    command: flags.string({char: 'c' , description: 'unix command to be executed'}),
   }
 
   static args = [{name: 'string'}]
@@ -66,6 +68,8 @@ export default class Cron extends Command {
 
     args.string = Utilities.getInputStringFromCmd(this, flags, args) // from either -s or args
     args.action = this.getAction(flags, args) //by default let it be sha1
+
+    args.command = this.getCommand(flags, args) //by default let it be sha1
 
     //check params after evaluating all
     this.checkParameters(flags, args)
@@ -95,9 +99,6 @@ export default class Cron extends Command {
       // The error value contains an array of strings, which represent the cron validation errors.
       Logger.error(this, `Invalid Cron expression : ${chalk.yellow(errorValue)}`)
     }
-    // if (!isValidCron(args.string, Cron.VALIDATOR_OPTIONS)) {
-    //   Logger.error(this, `Invalid Cron expression : ${chalk.red(args.string)}`)
-    // }
 
     if (args.action === undefined || args.string === '')
       Logger.error(this, 'Action empty or undefined')
@@ -106,14 +107,14 @@ export default class Cron extends Command {
   // tslint:disable-next-line:no-unused
   private evalCron(flags: any, args: any) {
     // Logger.success(this, `Action: ${chalk.green(args.action)}`)
+    let cronSchedule = cronstrue.toString(args.string)
+
     if (args.action === Cron.DESCRIBE) {
-      let output = cronstrue.toString(args.string)
-      Logger.success(this, output)
+      Logger.success(this, cronSchedule)
     } else if (args.action === Cron.RUN) {
-      Logger.success(this, 'run command, coming soon...')
-      NodeCron.schedule('*/10 * * * * *', function () {
-        // tslint:disable-next-line:no-console
-        console.log('Status Logged!')
+      Logger.success(this, `running command ${chalk.green(cronSchedule)}, use ${chalk.yellow('Ctrl+C')} to exit.`)
+      NodeCron.schedule(args.string, function () {
+        shelljs.exec(args.command)
       })
     }
   }
@@ -125,5 +126,14 @@ export default class Cron extends Command {
     else if (flags.run) // if run is given
       return Cron.RUN
     Logger.error(this, 'Invalid Or Unsupported action')
+  }
+
+  // tslint:disable-next-line:no-unused
+  private getCommand(flags: any, args: any) {
+    // we only need this if actions is run
+    if (flags.command) // find  human readable descriptions for cron
+      return flags.command
+    if (args.action === Cron.RUN)
+      Logger.error(this, 'Invalid Or Unsupported Command')
   }
 }
