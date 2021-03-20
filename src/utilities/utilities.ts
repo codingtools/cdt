@@ -40,6 +40,15 @@ export default class Utilities {
       return args.string
   }
 
+  // tslint:disable-next-line:no-unused
+  public static getInputStringFromCmd(thisRef: Command, flags: any, args: any) { //need to make it static so Crypto can use this
+    // if -s is not passed we will take it from args
+    if (flags.string) //if -s given
+      return flags.string
+    else
+      return args.string
+  }
+
   public static writeStringToFile(thisRef: Command, filePath: string, string: string) {
     if (!fs.existsSync(filePath))
       Logger.info(thisRef, `Could not find file: ${chalk.yellow(filePath + ', creating new one')}`) // this will output error and exit command
