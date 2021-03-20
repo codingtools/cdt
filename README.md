@@ -40,7 +40,7 @@ $ npm install -g @codingtools/cdt
 $ cdt COMMAND
 running command...
 $ cdt (-v|--version|version)
-@codingtools/cdt/1.0.1 darwin-arm64 node-v15.8.0
+@codingtools/cdt/1.0.2 darwin-arm64 node-v15.8.0
 $ cdt --help [COMMAND]
 USAGE
   $ cdt COMMAND
@@ -59,6 +59,7 @@ USAGE
 * [`cdt hash [STRING]`](#cdt-hash-string)
 * [`cdt help [COMMAND]`](#cdt-help-command)
 * [`cdt minify [FILE]`](#cdt-minify-file)
+* [`cdt run [STRING]`](#cdt-run-string)
 * [`cdt view [FILE]`](#cdt-view-file)
 
 ## `cdt autocomplete [SHELL]`
@@ -82,7 +83,7 @@ EXAMPLES
   $ cdt autocomplete --refresh-cache
 ```
 
-_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.2.0/src/commands/autocomplete/index.ts)_
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.3.0/src/commands/autocomplete/index.ts)_
 
 ## `cdt avro [COMMAND]`
 
@@ -100,7 +101,7 @@ OPTIONS
   -t, --schemaType=schemaType  schema type file path
 ```
 
-_See code: [src/commands/avro.ts](https://github.com/codingtools/cdt/blob/v1.0.1/src/commands/avro.ts)_
+_See code: [src/commands/avro.ts](https://github.com/codingtools/cdt/blob/v1.0.2/src/commands/avro.ts)_
 
 ## `cdt bundlephobia [PACKAGE]`
 
@@ -116,7 +117,7 @@ OPTIONS
   -p, --packages=packages  packages for which cost is required, can pass more than one separated by space
 ```
 
-_See code: [src/commands/bundlephobia.ts](https://github.com/codingtools/cdt/blob/v1.0.1/src/commands/bundlephobia.ts)_
+_See code: [src/commands/bundlephobia.ts](https://github.com/codingtools/cdt/blob/v1.0.2/src/commands/bundlephobia.ts)_
 
 ## `cdt commands`
 
@@ -151,13 +152,14 @@ USAGE
   $ cdt cron [STRING]
 
 OPTIONS
-  -d, --describe       Describe cron expressions into human readable descriptions
-  -h, --help           show CLI help
-  -r, --run            run command using cron expression
-  -s, --string=string  Cron expression
+  -c, --command=command  unix command to be executed
+  -d, --describe         Describe cron expressions into human readable descriptions
+  -h, --help             show CLI help
+  -r, --run              run command using cron expression
+  -s, --string=string    Cron expression
 ```
 
-_See code: [src/commands/cron.ts](https://github.com/codingtools/cdt/blob/v1.0.1/src/commands/cron.ts)_
+_See code: [src/commands/cron.ts](https://github.com/codingtools/cdt/blob/v1.0.2/src/commands/cron.ts)_
 
 ## `cdt crypto [STRING]`
 
@@ -177,7 +179,7 @@ OPTIONS
   -s, --string=string          string to be encrypted/decrypted
 ```
 
-_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v1.0.1/src/commands/crypto.ts)_
+_See code: [src/commands/crypto.ts](https://github.com/codingtools/cdt/blob/v1.0.2/src/commands/crypto.ts)_
 
 ## `cdt datetime [DATE]`
 
@@ -195,7 +197,7 @@ OPTIONS
   -z, --timezone=timezone  Timezone for Datetime parsing, default: Your timezone
 ```
 
-_See code: [src/commands/datetime.ts](https://github.com/codingtools/cdt/blob/v1.0.1/src/commands/datetime.ts)_
+_See code: [src/commands/datetime.ts](https://github.com/codingtools/cdt/blob/v1.0.2/src/commands/datetime.ts)_
 
 ## `cdt hash [STRING]`
 
@@ -213,7 +215,7 @@ OPTIONS
   -t, --type=type      type of hash [SHA1(default), MD5, SHA256, SHA512, RMD160 or RIPEMD160]
 ```
 
-_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v1.0.1/src/commands/hash.ts)_
+_See code: [src/commands/hash.ts](https://github.com/codingtools/cdt/blob/v1.0.2/src/commands/hash.ts)_
 
 ## `cdt help [COMMAND]`
 
@@ -247,7 +249,22 @@ OPTIONS
   -t, --type=type      type of file to be minified, it will try to find type with extension supported: JS, HTML/HTM, CSS
 ```
 
-_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v1.0.1/src/commands/minify.ts)_
+_See code: [src/commands/minify.ts](https://github.com/codingtools/cdt/blob/v1.0.2/src/commands/minify.ts)_
+
+## `cdt run [STRING]`
+
+Cron Expressions helper and scheduler
+
+```
+USAGE
+  $ cdt run [STRING]
+
+OPTIONS
+  -h, --help           show CLI help
+  -s, --string=string  unix command
+```
+
+_See code: [src/commands/run.ts](https://github.com/codingtools/cdt/blob/v1.0.2/src/commands/run.ts)_
 
 ## `cdt view [FILE]`
 
@@ -263,7 +280,7 @@ OPTIONS
   -n, --num=num    no. of rows to show, default:10
 ```
 
-_See code: [src/commands/view.ts](https://github.com/codingtools/cdt/blob/v1.0.1/src/commands/view.ts)_
+_See code: [src/commands/view.ts](https://github.com/codingtools/cdt/blob/v1.0.2/src/commands/view.ts)_
 <!-- commandsstop -->
 
 ## Acknowledgement
