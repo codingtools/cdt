@@ -1,10 +1,10 @@
 {
   "name": "@codingtools/cdt",
   "description": "CLI for Developers",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "author": "Ashish Patel @ashishpatel0720",
   "bin": {
-    "cdt": "./bin/run"
+    "cdt": "bin/run"
   },
   "bugs": {
     "url": "https://github.com/codingtools/cdt/issues"
@@ -31,9 +31,9 @@
     "nyc": "^15.1.0",
     "ora": "^5.2.0",
     "signale": "^1.4.0",
-    "snyk": "^1.447.0",
+    "snyk": "^1.425.4",
     "test": "^0.6.0",
-    "tslib": "^2.0.1"
+    "tslib": "^2.1.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
