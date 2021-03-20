@@ -83,7 +83,6 @@ export default class Cron extends Command {
 
     // if we have 6 inputs enable seconds as an option
     let charCount = (args.string.match(/\s+/g) || []).length + 1
-    console.log(charCount)
     if (charCount === 6) {
       preset = Cron.PRESET_DEFAULT_WITH_SECONDS
     } else if (charCount === 7) {
