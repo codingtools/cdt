@@ -1,4 +1,5 @@
 import {expect, test} from '@oclif/test'
+import { exit } from 'process'
 
 describe('cron', () => {
   test
@@ -58,4 +59,11 @@ describe('cron', () => {
       expect(ctx.stdout).to.contain('At 12:00 AM, on day 12 of the month, and on Monday and Tuesday, every 2 months')
     })
 
+  // todo: have to disable it because it runs forever in git actions https://github.com/codingtools/cdt/pull/194/checks?check_run_id=2158543309
+  // test
+  //   .stdout()
+  //   .command(['cron', '-r', 'echo hello', '*/5 * * * * *'])
+  //   .it('Cron scheduling hello every second', ctx => {
+  //     expect(ctx.stdout).to.contain('running echo hello, Every 5 seconds').
+  //   })
 })

@@ -56,8 +56,7 @@ export default class Cron extends Command {
     help: flags.help({char: 'h'}),
     string: flags.string({char: 's' , description: 'Cron expression'}),
     describe: flags.boolean({char: 'd' , description: 'Describe cron expressions into human readable descriptions'}),
-    run: flags.boolean({char: 'r' , description: 'run command using cron expression'}),
-    command: flags.string({char: 'c' , description: 'unix command to be executed'}),
+    run: flags.string({char: 'r' , description: 'run command using cron expression'}),
   }
 
   static args = [{name: 'string'}]
@@ -68,8 +67,6 @@ export default class Cron extends Command {
 
     args.string = Utilities.getInputStringFromCmd(this, flags, args) // from either -s or args
     args.action = this.getAction(flags, args) //by default let it be sha1
-
-    args.command = this.getCommand(flags, args) //by default let it be sha1
 
     //check params after evaluating all
     this.checkParameters(flags, args)
@@ -112,9 +109,9 @@ export default class Cron extends Command {
     if (args.action === Cron.DESCRIBE) {
       Logger.success(this, cronSchedule)
     } else if (args.action === Cron.RUN) {
-      Logger.success(this, `running command ${chalk.green(cronSchedule)}, use ${chalk.yellow('Ctrl+C')} to exit.`)
+      Logger.success(this, `running ${chalk.yellow(flags.run)}, ${chalk.green(cronSchedule)}, use ${chalk.yellow('Ctrl+C')} to exit.`)
       NodeCron.schedule(args.string, function () {
-        shelljs.exec(args.command)
+        shelljs.exec(flags.run)
       })
     }
   }
@@ -128,12 +125,4 @@ export default class Cron extends Command {
     Logger.error(this, 'Invalid Or Unsupported action')
   }
 
-  // tslint:disable-next-line:no-unused
-  private getCommand(flags: any, args: any) {
-    // we only need this if actions is run
-    if (flags.command) // find  human readable descriptions for cron
-      return flags.command
-    if (args.action === Cron.RUN)
-      Logger.error(this, 'Invalid Or Unsupported Command')
-  }
 }
