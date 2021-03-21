@@ -12,7 +12,7 @@ export default class Run extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
-    string: flags.string({char: 's' , description: 'unix command'}),
+    string: flags.string({char: 's' , description: 'command to execute, should be compatible with your shell'}),
   }
 
   static args = [{name: 'string'}]

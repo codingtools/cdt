@@ -58,4 +58,10 @@ describe('cron', () => {
       expect(ctx.stdout).to.contain('At 12:00 AM, on day 12 of the month, and on Monday and Tuesday, every 2 months')
     })
 
+  test
+    .stdout()
+    .command(['cron', '-r', 'echo hello', '*/5 * * * * *'])
+    .it('Cron scheduling hello every second', ctx => {
+      expect(ctx.stdout).to.contain('running echo hello, Every 5 seconds')
+    })
 })
