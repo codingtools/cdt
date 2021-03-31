@@ -652,8 +652,8 @@
         "affectsGlobalScope": false
       },
       "./src/commands/cron.ts": {
-        "version": "fb904735596c8699f5da7c1ce38731fdad7c7bbe8b1dc0a2c3e2825755671c02",
-        "signature": "7ea77db51fadefcd27845da433bad7ad8fa4f95adb331f252725d11c63d64ae3",
+        "version": "2b3832e5f6ddf57aaac8f9bd35846feb2a368b5c7eefc341ed518002f33096de",
+        "signature": "227742903bc5ae1057641f2bfb774369f8d3bc52d0dff15d4f1da9c98ebcd99c",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/crypto-js/index.d.ts": {
@@ -692,7 +692,7 @@
         "affectsGlobalScope": false
       },
       "./src/commands/run.ts": {
-        "version": "ee64828f168487ddb2dab0bf46a69ca972a302aa6adb15eb3f8fe43cddee2de6",
+        "version": "0e8cccc4eaac02491b36f09faf9f05a492175622f3cd2f36f376aa6f9c9cd56f",
         "signature": "c58736b9762ae32c5eb02e72f8f9d1ff653fafe5e1b56694ca4ff7125072737c",
         "affectsGlobalScope": false
       },
