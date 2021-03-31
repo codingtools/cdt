@@ -9,11 +9,9 @@
     "target": "es2017",
     "sourceMap": true,
     "composite": true,
-    "esModuleInterop": true,
-    "skipLibCheck"   : true,
+    "esModuleInterop": true
   },
   "include": [
     "src/**/*"
-  ],
-  "exclude": ["node_modules/**/*"]
+  ]
 }
