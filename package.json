@@ -1,10 +1,10 @@
 {
   "name": "@codingtools/cdt",
   "description": "CLI for Developers",
-  "version": "0.7.0",
+  "version": "1.0.6",
   "author": "Ashish Patel @ashishpatel0720",
   "bin": {
-    "cdt": "./bin/run"
+    "cdt": "bin/run"
   },
   "bugs": {
     "url": "https://github.com/codingtools/cdt/issues"
@@ -20,6 +20,9 @@
     "axios": "^0.21.1",
     "chalk": "^3.0.0",
     "codecov": "^3.8.1",
+    "cron-validate": "^1.4.3",
+    "cron-validator": "^1.2.1",
+    "cronstrue": "^1.110.0",
     "crypto-js": "^4.0.0",
     "detect-character-encoding": "^0.8.0",
     "encoding-japanese": "^1.0.30",
@@ -28,12 +31,14 @@
     "minify": "^6.0.1",
     "moment": "2.29.1",
     "moment-timezone": "^0.5.32",
+    "node-cron": "^3.0.0",
     "nyc": "^15.1.0",
     "ora": "^5.2.0",
+    "shelljs": "^0.8.4",
     "signale": "^1.4.0",
-    "snyk": "^1.447.0",
+    "snyk": "^1.518.0",
     "test": "^0.6.0",
-    "tslib": "^2.0.1"
+    "tslib": "^2.1.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
@@ -43,6 +48,8 @@
     "@types/crypto-js": "^3.1.43",
     "@types/mocha": "^7.0.0",
     "@types/node": "13.9.3",
+    "@types/node-cron": "^2.0.3",
+    "@types/shelljs": "^0.8.8",
     "@types/signale": "^1.2.1",
     "chai": "^4.2.0",
     "globby": "^10.0.1",
