@@ -22,7 +22,7 @@
     "codecov": "^3.8.1",
     "cron-validate": "^1.4.3",
     "cron-validator": "^1.2.1",
-    "cronstrue": "^1.110.0",
+    "cronstrue": "^1.112.0",
     "crypto-js": "^4.0.0",
     "detect-character-encoding": "^0.8.0",
     "encoding-japanese": "^1.0.30",
