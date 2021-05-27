@@ -19,7 +19,7 @@
     "avsc": "^5.6.0",
     "axios": "^0.21.1",
     "chalk": "^3.0.0",
-    "codecov": "^3.8.1",
+    "codecov": "^3.8.2",
     "cron-validate": "^1.4.3",
     "cron-validator": "^1.2.1",
     "cronstrue": "^1.110.0",
