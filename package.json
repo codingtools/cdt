@@ -29,7 +29,7 @@
     "jshashes": "^1.0.8",
     "json-2-csv": "^3.10.3",
     "minify": "^6.0.1",
-    "moment": "2.29.2",
+    "moment": "2.29.4",
     "moment-timezone": "^0.5.32",
     "node-cron": "^3.0.0",
     "nyc": "^15.1.0",
