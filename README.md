@@ -40,7 +40,7 @@ $ npm install -g @codingtools/cdt
 $ cdt COMMAND
 running command...
 $ cdt (-v|--version|version)
-@codingtools/cdt/1.0.6 darwin-arm64 node-v15.8.0
+@codingtools/cdt/1.0.6 darwin-arm64 node-v19.5.0
 $ cdt --help [COMMAND]
 USAGE
   $ cdt COMMAND
