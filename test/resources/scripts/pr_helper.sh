@@ -3,7 +3,7 @@ PR=159
 # checkout pr
 gh pr checkout $PR
 
-git pull origin release/release-v0.x
+git pull origin main
 # npm install
 npm install
 
